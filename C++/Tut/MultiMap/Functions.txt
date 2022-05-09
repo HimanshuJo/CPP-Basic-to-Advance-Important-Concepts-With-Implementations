@@ -1,0 +1,95 @@
+multimap::operator= 
+
+	in C++ STL– It is used to assign new contents to the container by replacing the existing contents.
+
+multimap::crbegin() and multimap::crend() in C++ STL– 
+
+	crbegin() returns a constant reverse iterator referring to the last element in the multimap container. 
+
+	crend() returns a constant reverse iterator pointing to the theoretical element before the first element in the multimap.
+
+multimap::emplace_hint() in C++ STL– 
+
+	Inserts the key and its element in the multimap container with a given hint.
+
+multimap clear() function in C++ STL– 
+
+	Removes all the elements from the multimap.
+
+multimap empty() function in C++ STL– 
+
+	Returns whether the multimap is empty.
+
+multimap maxsize() in C++ STL– 
+
+	Returns the maximum number of elements a multimap container can hold.
+
+multimap value_comp() function in C++ STL–
+
+	Returns the object that determines how the elements in the multimap are ordered (‘<‘ by default)
+
+multimap rend in C++ STL– 
+
+	Returns a reverse iterator pointing to the theoretical element preceding to the first element of the multimap container.
+
+multimap::cbegin() and multimap::cend() in C++ STL– 
+
+	cbegin() returns a constant iterator referring to the first element in the multimap container. 
+
+	cend() returns a constant iterator pointing to the theoretical element that follows last element in the multimap.
+
+multimap::swap() in C++ STL– 
+
+	Swap the contents of one multimap with another multimap of same type and size.
+
+multimap rbegin in C++ STL– 
+
+	Returns an iterator pointing to the last element of the container.
+
+multimap size() function in C++ STL– 
+
+	Returns the number of elements in the multimap container.
+
+multimap::emplace() in C++ STL–
+
+	Inserts the key and its element in the multimap container.
+
+multimap::begin() and multimap::end() in C++ STL– 
+
+	begin() returns an iterator referring to the first element in the multimap container. 
+
+	end() returns an iterator to the theoretical element that follows last element in the multimap.
+
+multimap upper_bound() function in C++ STL– 
+
+	Returns an iterator to the first element that is equivalent to multimapped value with key value ‘g’ or definitely will go after the element with key value ‘g’ in the multimap.
+
+multimap::count() in C++ STL– 
+
+	Returns the number of matches to element with key value ‘g’ in the multimap.
+
+multimap::erase() in C++ STL–
+
+	Removes the key value from the multimap.
+
+multimap::find() in C++ STL–
+
+	Returns an iterator to the element with key value ‘g’ in the multimap if found, else returns the iterator to end.
+
+multimap equal_range() in C++ STL– 
+
+	Returns an iterator of pairs. 
+
+	The pair refers to the bounds of a range that includes all the elements in the container which have a key equivalent to k.
+
+multimap insert() in C++ STL– 
+	
+	Used to insert elements in the multimap container.
+
+multimap lower_bound() function in C++ STL– 
+
+	Returns an iterator to the first element that is equivalent to multimapped value with key value ‘g’ or definitely will not go before the element with key value ‘g’ in the multimap.
+
+multimap key_comp() in C++ STL– 
+
+	Returns the object that determines how the elements in the multimap are ordered (‘<‘ by default).

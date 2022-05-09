@@ -1,0 +1,63 @@
+std :: find_if
+
+	Returns an iterator to the first element in the range [first, last] for which pred(Unary Function) returns true. 
+
+	If no such element is found, the function returns last.
+
+-------
+
+Function Template :
+
+	InputIterator find_if (InputIterator first, InputIterator last, UnaryPredicate pred);
+
+	first, last : range which contains all the elements between first
+			      and last, including the element pointed by first but
+                  not the element pointed by last.
+
+	pred : Unary function that accepts an element in the range
+		   as argument and returns a value in boolean.
+
+Return value :
+
+	Returns an iterator to the first element in the range
+	[first, last] for which pred(function) returns true. If
+	no such element is found, the function returns last.
+
+-------
+
+// CPP program to illustrate
+// std::find_if and std::find_if_not
+#include <bits/stdc++.h>
+
+// Returns true if argument is odd
+bool IsOdd(int i)
+{
+	return i % 2;
+}
+
+int main()
+{
+	std::vector<int> vec{ 10, 25, 40, 55 };
+
+	// Iterator to store the position of element found
+	std::vector<int>::iterator it;
+
+	// std::find_if
+	it = std::find_if(vec.begin(), vec.end(), IsOdd);
+	std::cout << "The first odd value is " << *it << '\n';
+
+	// Iterator to store the position of element found
+	std::vector<int>::iterator ite;
+
+	// std::find_if_not
+	ite = std::find_if_not(vec.begin(), vec.end(), IsOdd);
+
+	std::cout << "The first non-odd(or even) value is " << *ite << '\n';
+
+	return 0;
+}
+
+Output:
+
+The first odd value is 25
+The first non-odd(or even) value is 10

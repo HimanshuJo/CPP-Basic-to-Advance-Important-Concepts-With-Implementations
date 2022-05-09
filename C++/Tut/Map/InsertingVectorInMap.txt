@@ -1,0 +1,11 @@
+
+Entering an empty vector into map:
+
+	map<int, vector<int>> map;
+
+	map.insert(pair<int,vector<int>>(10, vector<int>()));
+
+	-------
+
+	map[10].push_back(1);
+	map[10].push_back(2);

@@ -1,0 +1,114 @@
+Complexity of different operations in Binary tree, Binary Search Tree and AVL tree
+
+Binary tree:
+
+    In a binary tree, a node can have maximum two children
+
+    -------
+
+    Searching: 
+    
+        For searching element 2, we have to traverse all elements 
+        (assuming we do breadth first traversal). 
+        
+        Therefore, searching in binary tree has worst case complexity of O(n).
+
+    Insertion: 
+    
+        For inserting element as left child of 2, we have to traverse all elements. 
+        
+        Therefore, insertion in binary tree has worst case complexity of O(n).
+
+    Deletion: 
+    
+        For deletion of element 2, we have to traverse all elements to find 2 
+        (assuming we do breadth first traversal). 
+        
+        Therefore, deletion in binary tree has worst case complexity of O(n)
+
+-------
+
+Binary Search Tree (BST) –
+
+    BST is a special type of binary tree in which left child of a node has value 
+    less than the parent and right child has value greater than parent
+
+    -------
+
+    Searching:
+    
+        For searching element 1, we have to traverse all elements (in order 3, 2, 1). 
+        
+        Therefore, searching in binary search tree has worst case complexity of O(n). 
+        
+        In general, time complexity is O(h) where h is height of BST.
+
+    Insertion: 
+    
+        For inserting element 0, it must be inserted as left child of 1. 
+        
+        Therefore, we need to traverse all elements (in order 3, 2, 1) to 
+        insert 0 which has worst case complexity of O(n). 
+        
+        In general, time complexity is O(h).
+    
+    Deletion:
+    
+        For deletion of element 1, we have to traverse all elements to find 1 
+        (in order 3, 2, 1). 
+        
+        Therefore, deletion in binary tree has worst case complexity of O(n).
+        
+        In general, time complexity is O(h).
+
+-------
+
+AVL/ Height Balanced Tree –
+
+    AVL tree is binary search tree with additional property that difference 
+    between height of left sub-tree and right sub-tree of any node 
+    can’t be more than 1. 
+    
+    For example, BST shown in Figure 1 is not AVL as difference between 
+    left sub-tree and right sub-tree of node 3 is 2.
+
+    However, BST shown in Figure 2 is AVL tree.
+
+    Fig. 1:
+
+                    3
+                   /
+                  2
+                 /
+                1
+
+    Fig. 2:
+
+                5
+               / \
+              4   7
+             /     \
+            1       9
+
+    -------
+
+    Searching: 
+    
+        For searching element 1, we have to traverse elements 
+        (in order 5, 4, 1) = 3 = log2n. 
+        
+        Therefore, searching in AVL tree has worst case complexity of O(log2n).
+
+    Insertion: 
+    
+        For inserting element 12, it must be inserted as right child of 9.
+        
+        Therefore, we need to traverse elements (in order 5, 7, 9) 
+            to insert 12 which has worst case complexity of O(log2n).
+
+    Deletion:
+    
+        For deletion of element 9, we have to traverse elements to find 9 
+            (in order 5, 7, 9). 
+            
+        Therefore, deletion in binary tree has worst case complexity of O(log2n).

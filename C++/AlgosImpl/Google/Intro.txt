@@ -1,0 +1,103 @@
+Tell me about one of the projects on your resume.
+What technologies did you use to get this project going?
+What if your project had 5000 or 50000 or 5000000 users?
+
+-------
+
+What's an inode?
+
+	Inodes, speculated to be short for “index nodes,” 
+
+	An inode is a file data structure that stores information about any 
+		Linux file except its name and data.
+
+	What are inodes used for?
+
+		Data is stored on your disk in the form of fixed-size blocks. If you save a file that exceeds a standard block, your computer will find the next available segment on which to store the rest of your file. Over time, that can get super confusing.
+
+		That’s where inodes come in. While they don’t contain any of the file’s actual data, it stores the file’s metadata, including all the storage blocks on which the file’s data can be found. 
+
+		Information contained in an inode:
+
+			File size
+			Device on which the file is stored 
+			User and group IDs associated with the file
+			Permissions needed to access the file
+			Creation, read, and write timestamps
+			Location of the data (though not the filepath)
+			Inodes are also independent of filenames. That means you can copy a single file, rename it, and still have it point to the same inode as the original.
+
+-------
+
+What's the angle between clock hands when it's 3:15?
+
+-------
+
+Write a C function that returns angle between clock hands for any (hour, minute).
+
+	/*
+	The minute hand moves 360 degrees in 60 minute(or 6 degrees in one minute) and hour hand moves 360 degrees in 12 hours(or 0.5 degrees in 1 minute). In h hours and m minutes, the minute hand would move (h*60 + m)*6 and hour hand would move (h*60 + m)*0.5.
+	*/
+	// C program to find angle between hour and minute hands
+	#include <stdio.h>
+	#include <stdlib.h>
+
+	// Utility function to find minimum of two integers
+	int min(int x, int y) { return (x < y)? x: y; }
+
+	int calcAngle(double h, double m)
+	{
+		// validate the input
+		if (h <0 || m < 0 || h >12 || m > 60)
+			printf("Wrong input");
+
+		if (h == 12) h = 0;
+		if (m == 60)
+		{
+			m = 0;
+			h += 1;
+			if(h>12) h = h-12;
+		}
+
+
+		// Calculate the angles moved by hour and minute hands
+		// with reference to 12:00
+		int hour_angle = 0.5 * (h*60 + m);
+		int minute_angle = 6*m;
+
+		// Find the difference between two angles
+		int angle = abs(hour_angle - minute_angle);
+
+		// Return the smaller angle of two possible angles
+		angle = min(360-angle, angle);
+
+		return angle;
+	}
+
+	// Driver Code
+	int main()
+	{
+		printf("%d n", calcAngle(9, 60));
+		printf("%d n", calcAngle(3, 30));
+		return 0;
+	}
+
+-------
+
+Write a binary tree.
+How would you troubleshoot this problem - network diagram presented.
+What's the difference between a router and switch?
+Implement a routine in C that counts number of characters in a string.
+Given 100GB file and a computer with 1GB of memory, how would you sort it.
+Can you make it parallel and solve it on 100 computers?
+What's a priority queue?
+How does BGP work?
+Can DNS use TCP? In which cases DNS uses TCP?
+Implement set difference in any language you like.
+How does HTTP work?
+How does 3 way handshake work in TCP?
+What's void *?
+What's the sticky bit?
+What's the system call for creating files?
+Order by execution time: reading disk, accessing memory, context switch, writing a cpu register.
+How would you count the number of set bits in a very huge number?

@@ -1,0 +1,11 @@
+int to char(actual)
+
+char c = '3';
+int n = c - '0'; // n == 3
+
+-------
+
+char to int
+
+char ch='a';
+int ch_=(int)ch; // ch_=97

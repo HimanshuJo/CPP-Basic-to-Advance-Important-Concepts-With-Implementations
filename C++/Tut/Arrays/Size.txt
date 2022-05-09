@@ -1,0 +1,53 @@
+Find the length of an array:
+
+	1. Using sizeof()
+
+		One way to find the length of an array is to divide the size of the array by the size of each element (in bytes).
+
+		The built-in sizeof() operator is used for this purpose:
+
+		Example:
+
+			#include <iostream>
+			using namespace std;
+
+			int main() {
+			  int arr[] = {10,20,30,40,50,60};
+			  int arrSize = sizeof(arr)/sizeof(arr[0]);
+			  cout << "The size of the array is: " << arrSize;
+			  return 0;
+			}
+
+	-------
+
+	2. Using pointer arithmetic
+
+		Since we have a pointer at the start of the array, the length of the array can be calculated
+			if we manage to find out the address where the array ends. 
+
+		This is done as follows:
+
+			int arrSize = *(&arr + 1) - arr;
+
+		-------
+
+		Let’s break down the above line of code:
+
+    		(&arr + 1) points to the memory address right after the end of the array.
+
+    		*(&arr + 1) simply casts the above address to an int *.
+
+    		Subtracting the address of the start of the array, from the address of the end of the array,
+    			gives the length of the array.
+
+		Example:
+		
+			#include <iostream>
+			using namespace std;
+
+			int main() {
+			  int arr[] = {10,20,30,40,50,60};
+			  int arrSize = *(&arr + 1) - arr;
+			  cout << "The length of the array is: " << arrSize;
+			  return 0;
+			}

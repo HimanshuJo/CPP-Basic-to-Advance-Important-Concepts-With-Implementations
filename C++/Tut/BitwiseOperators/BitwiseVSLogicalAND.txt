@@ -1,0 +1,109 @@
+A Bitwise And operator is represented as ‘&’ and a logical operator is represented as ‘&&’. 
+
+	The following are some basic differences between the two operators.
+
+	a) The logical and operator ‘&&’ expects its operands to be boolean expressions (either 1 or 0) 
+		and returns a boolean value.
+
+		The bitwise and operator ‘&’ work on Integral (short, int, unsigned, char, bool, unsigned char, long) values 
+			and return Integral value.
+
+		#include<stdio.h>
+		int main()
+		{
+			int x = 3; //...0011
+			int y = 7; //...0111
+
+			// A typical use of '&&'
+			if (y > 1 && y > x)
+			printf("y is greater than 1 AND x\n");
+
+			// A typical use of '&'
+			int z = x & y; // 0011
+			
+			printf ("z = %d", z);
+
+			return 0;
+		}
+
+		-------
+
+		Output
+
+			y is greater than 1 AND x
+			z = 3
+
+	-------
+
+	b) If an integral value is used as an operand for ‘&&’ which is supposed to work on boolean values, 
+		the following rule is used in C. 
+		
+		Zero is considered as false and non-zero is considered as true. 
+
+		For example in the following program x and y are considered as 1.
+
+		C Program:
+
+			#include<stdio.h>
+			// Example that uses non-boolean expression as
+			// operand for '&&'
+			int main()
+			{
+				int x = 2, y = 5;
+				printf("%d", x&&y);
+				return 0;
+			}
+
+		-------
+
+		Output
+		
+			1
+
+		-------
+
+		It is compiler error to use the non-integral expression as operand for bitwise &. 
+
+		For example the following program shows compiler error.
+
+		C Program:
+
+			#include<stdio.h>
+			// Example that uses non-integral expression as
+			// operator for '&'
+			int main()
+			{
+			float x = 2.0, y = 5.0;
+				printf("%d", x&y);
+				return 0;
+			}
+		
+		-------
+
+		Output: 
+
+			error: invalid operands to binary & (have 'float' and 'float')
+
+	-------
+
+	c) The ‘&&’ operator doesn’t evaluate the second operand if the first operand becomes false. 
+
+		Similarly ‘||’ doesn’t evaluate the second operand when first operand becomes true. 
+
+		The bitwise ‘&’ and ‘|’ operators always evaluate their operands. 
+
+		C Program:
+
+			#include<stdio.h>
+			int main()
+			{
+				int x = 0;
+
+				// 'Geeks in &&' is NOT printed because x is 0
+				printf("%d\n", (x && printf("Geeks in && ")));
+
+				// 'Geeks in &' is printed
+				printf("%d\n", (x & printf("Geeks in & ")));
+
+				return 0;
+			}

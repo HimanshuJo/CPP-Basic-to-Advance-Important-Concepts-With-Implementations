@@ -1,0 +1,121 @@
+What is a mask:
+
+	A mask defines which bits you want to keep, and which bits you want to clear.
+
+	Masking is the act of applying a mask to a value. This is accomplished by doing:
+
+    	Bitwise ANDing in order to extract a subset of the bits in the value
+
+    	Bitwise ORing in order to set a subset of the bits in the value
+    	
+    	Bitwise XORing in order to toggle a subset of the bits in the value
+
+	-------
+
+	Below is an example of extracting a subset of the bits in the value:
+
+		Mask:   00001111b
+		
+		Value:  01010101b
+
+	-------
+
+	Applying the mask to the value means that we want to clear the first (higher) 4 bits, 
+		and keep the last (lower) 4 bits. Thus we have extracted the lower 4 bits. 
+
+	The result is:
+
+		Mask:   00001111b
+		
+		Value:  01010101b
+		
+		Result: 00000101b
+
+-------
+
+Masking is implemented using AND, so in C we get:
+
+uint8_t stuff(...) {
+  uint8_t mask = 0x0f;   // 00001111b
+  uint8_t value = 0x55;  // 01010101b
+  return mask & value;
+}
+
+-------
+
+Here is a fairly common use-case: Extracting individual bytes from a larger word. 
+
+	We define the high-order bits in the word as the first byte. 
+
+	We use two operators for this, &, and >> (shift right). 
+
+	This is how we can extract the four bytes from a 32-bit integer:
+
+		void more_stuff(uint32_t value) {             // Example value: 0x01020304
+		    uint32_t byte1 = (value >> 24);           // 0x01020304 >> 24 is 0x01 so
+		                                              // no masking is necessary
+		    uint32_t byte2 = (value >> 16) & 0xff;    // 0x01020304 >> 16 is 0x0102 so
+		                                              // we must mask to get 0x02
+		    uint32_t byte3 = (value >> 8)  & 0xff;    // 0x01020304 >> 8 is 0x010203 so
+		                                              // we must mask to get 0x03
+		    uint32_t byte4 = value & 0xff;            // here we only mask, no shifting
+		                                              // is necessary
+		    ...
+		}
+
+-------
+
+Bit-Masking means imposing mask over bits. 
+
+	Here is a bit-masking with AND-
+
+	         1 1 1 0 1 1 0 1   [input]
+	    (&)  0 0 1 1 1 1 0 0    [mask]
+	    ------------------------------
+	         0 0 1 0 1 1 0 0  [output]
+
+ 	So, only the middle 4 bits (as these bits are 1 in this mask) remain.
+
+-------
+
+Lets see this with XOR-
+
+         1 1 1 0 1 1 0 1   [input]
+    (^)  0 0 1 1 1 1 0 0    [mask]
+    ------------------------------
+         1 1 0 1 0 0 0 1  [output]
+
+    Now, the middle 4 bits are flipped (1 became 0, 0 became 1).
+
+-------
+
+So, using bit-mask we can access individual bits [examples]. 
+
+	Sometimes, this technique may also be used for improving performance. Take this for example-
+
+		bool isOdd(int i) {
+		    return i%2;
+		}
+
+	This function tells if an integer is odd/even. 
+
+	We can achieve the same result with more efficiency using bit-mask-
+
+		bool isOdd(int i) {
+		    return i&1;
+		}
+
+	-------
+
+	Short Explanation: 
+
+		If the least significant bit of a binary number is 1 then it is odd; 
+
+		for 0 it will be even. 
+
+		So, by doing AND with 1 we are removing all other bits except for the least significant bit i.e.:
+
+	         55  ->  0 0 1 1 0 1 1 1   [input]
+	    (&)   1  ->  0 0 0 0 0 0 0 1    [mask]
+	    ---------------------------------------
+	          1  <-  0 0 0 0 0 0 0 1  [output]

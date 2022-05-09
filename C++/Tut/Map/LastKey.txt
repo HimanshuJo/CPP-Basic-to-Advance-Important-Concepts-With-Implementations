@@ -1,0 +1,19 @@
+// Retrieve last key for map
+
+if(map.rbegin() != map.rend())
+	cout<<map.rbegin()->first;
+
+-------
+
+if(!map.empty())
+    (--map.end())->first;
+
+-------
+
+std::prev(map.end())->first;
+
+-------
+
+auto it=m.end();
+it--;
+int element=it->first;

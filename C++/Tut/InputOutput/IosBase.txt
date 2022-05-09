@@ -1,0 +1,51 @@
+
+Significance of:
+
+	ios_base::sync_with_stdio(false);
+
+	cin.tie(NULL);
+
+	-------
+
+		ios_base::sync_with_stdio(false);
+
+			this disables the synchronization between the C and C++ standard streams
+
+			By default, all the streams are synchronized, which in practice allows you to mix C and C++ style I/O
+				and get the sensible results
+
+			If we disable the synchronization, then C++ streams are allowed to have their own independent buffers
+				which makes mixing C and C++ style I/O an adventure
+
+			Also keep in mind that synchronized C++ streams are thread-safe (output from different threads may
+				interleave, but you get no data races)
+
+		-------
+
+		cin.tie(false)
+
+			This unties cin from cout to enure a sensible user interaction
+
+			For example:
+
+				std::cout << "Enter your name";
+				std::cin >> name;
+
+				if cin and cout are tied, then we can expect the output to be flushed (i.e,. visible on the console)
+
+					before the program prompts input from the user.
+
+				if we untie the streams, the program might block waiting for the user to enter their name but
+					the "Enter your name" message is not yet visible (because cout is buffered by default
+					output is flushed/displayed on the console only on demand or when the buffer is full)
+
+				so if we untie cin from cout, we must make sure to flush cout manually everytime we want
+					to display something before expecting input on cin
+
+			tie() is a method which simply guarantees the flushing of std::cout before std::cin accepts an input. 
+
+				This is useful for interactive console programs which require the console to be updated constantly 
+				but also slows down the program for large I/O. 
+
+				The NULL part just returns a NULL pointer.
+

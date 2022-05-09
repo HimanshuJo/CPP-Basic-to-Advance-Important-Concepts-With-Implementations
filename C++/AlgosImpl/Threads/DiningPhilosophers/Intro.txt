@@ -1,0 +1,185 @@
+Dining Philosophers problem
+
+Overview :
+	
+	Dining Philosophers Problem States that there are 5 Philosophers who are engaged in two activities Thinking and Eating. 
+
+	Meals are taken communally in a table with five plates and five forks in a cyclic manner as shown in the figure.
+
+Constraints and Condition for the problem :
+
+	Every Philosopher needs two forks in order to eat.
+	
+	Every Philosopher may pick up the forks on the left or right but only one fork at once.
+	
+	Philosophers only eat when they had two forks. We have to design such a protocol i.e. pre and post protocol which ensures that a philosopher only eats if he or she had two forks.
+	
+	Each fork is either clean or dirty.
+
+-------
+
+Solution :
+
+Correctness properties it needs to satisfy are :
+
+	Mutual Exclusion Principle –
+		No two Philosophers can have the two forks simultaneously.
+
+	Free from Deadlock –
+		Each philosopher can get the chance to eat in a certain finite time.
+
+	Free from Starvation –
+		When few Philosophers are waiting then one gets a chance to eat in a while.
+
+	No strict Alternation.
+	
+	Proper utilization of time.
+
+Algorithm(outline) :
+
+	loop forever
+	    p1: think
+	    p2: preprotocol
+	    p3: eat
+	    p4: postprotoco
+
+-------
+
+First Attempt :
+
+	We assume that each philosopher is initialized with its index I and that addition is implicitly modulo 5. 
+
+	Each fork is modeled as a semaphore where wait corresponds to taking a fork and signal corresponds to putting down a fork.
+
+Algorithm –
+
+	semaphore array[0..4] fork ← [1, 1, 1, 1, 1]
+	
+	loop forever
+       p1 : think                
+       p2 : wait(fork[i])
+       p3 : wait(fork[i + 1])
+       p4 : eat
+       p5 : signal(fork[i])
+       p6 : signal(fork[i + 1])
+
+Problem with this solution :
+
+	This solution may lead to a deadlock under an interleaving that has all the philosophers pick up their 
+	left forks before any of them tries to pick up a right fork. 
+
+	In this case, all the Philosophers are waiting for the right fork but no one will execute a single instruction.
+
+-------
+
+Second Attempt :
+
+	One way to tackle the above situation is to limit the number of philosophers entering the room to four. 
+
+	By doing this one of the philosophers will eventually get both the fork and execute all the instruction leading to no deadlock.
+
+Algorithm –
+
+	semaphore array[0..4] fork ← [1, 1, 1, 1, 1]
+
+   	semaphore room ← 4
+   
+   	loop forever
+       p1 : think                
+       p2 : wait(room)                        
+       p3 : wait(fork[i])                                  
+       p4 : wait(fork[i + 1])                                           
+       p5 : eat                                                
+       p6 : signal(fork[i])         
+       p7 : signal(fork[i + 1])                  
+       p8 : signal(room)
+
+In this solution, we somehow interfere with the given problem as we allow only four philosophers.
+
+-------
+
+Third Attempt :
+
+	We use the asymmetric algorithm in the attempt where the first four philosophers execute the original solution 
+	but the fifth philosopher waits for the right fork and then for the left fork.
+
+Algorithm –
+
+	semaphore array [0..4] fork ← [1,1,1,1,1]
+
+For the first four philosophers –
+
+	loop forever
+	   p1 : think            
+	   p2 : wait(fork[i])                     
+	   p3 : wait(fork[i + 1])                              
+	   p4 : eat                                   
+	   p5 : signal(fork[i])                                            
+	   p6 : signal(fork[i + 1])
+                                  
+For the fifth philosopher –
+
+	loop forever
+	   p1 : think            
+	   p2 : wait(fork[0])                     
+	   p3 : wait(fork[4])                              
+	   p4 : eat                                   
+	   p5 : signal(fork[0])                                            
+	   p6 : signal(fork[4])
+
+Note –
+
+This solution is also known as Chandy/Mishra Solution.
+
+Advantages of this Solution :
+
+	Allows a large degree of concurrency.
+	Free from Starvation.
+	Free from Deadlock.
+	More Flexible Solution.
+	Economical
+	Fairness
+	Boundedness.
+
+The above discussed the solution for the problem using semaphore. 
+	Now with monitors, Here, Monitor maintains an array of the fork which counts the number of free forks available to each philosopher. 
+
+	The take Forks operation waits on a condition variable until two forks are available. 
+
+	It decrements the number of forks available to its neighbor before leaving the monitor. 
+
+	After eating, a philosopher calls release Forks which updates the array fork and checks if freeing these forks makes it possible to signal.
+
+Algorithm –
+
+	monitor ForkMonitor:
+	integer array[0..4]
+	fork ← [2,2,2,2,2]                                                       
+	condition array[0..4]OKtoEat
+
+	operation takeForks(integer i)                  
+	if(fork[i]!=2)
+	waitC(OKtoEat[i])
+
+	fork[i+1] <- fork[i+1]-1
+	fork[i-1] <- fork[i-1]-1   
+
+	operation releaseForks(integer i)
+	fork[i+1] <- fork[i+1]+1
+	fork[i-1] <- fork[i-1]
+
+	if(fork[i+1]==2)
+	signalC(OKtoEat[i+1])
+	         
+	if(fork[i-1]==2)
+	signalC(OKtoEat[i-1])
+
+For each Philosopher –
+
+ loop forever :
+	p1 : think        
+	p2 : takeForks(i)                
+	p3 : eat                      
+	p4 : releaseForks(i)
+
+	Here Monitor will ensure all such needs mentioned above.

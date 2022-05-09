@@ -1,0 +1,156 @@
+1. Initializing by pushing values one by one:
+
+	#include <bits/stdc++.h>
+	using namespace std;
+
+	int main()
+	{
+		// Create an empty vector
+		vector<int> vect;
+
+		vect.push_back(10);
+		vect.push_back(20);
+		vect.push_back(30);
+
+		for (int x : vect)
+			cout << x << " ";
+
+		return 0;
+	}
+
+	Output: 
+	
+		10 20 30
+
+-------
+
+
+2. Specifying size and initializing all values:
+
+	#include <bits/stdc++.h>
+	using namespace std;
+
+	int main()
+	{
+		int n = 3;
+
+		// Create a vector of size n with
+		// all values as 10.
+		vector<int> vect(n, 10);
+
+		for (int x : vect)
+			cout << x << " ";
+
+		return 0;
+	}
+
+	Output: 
+
+		10 10 10
+
+-------
+
+3. Initializing like arrays:
+
+	#include <bits/stdc++.h>
+	using namespace std;
+
+	int main()
+	{
+		vector<int> vect{ 10, 20, 30 };
+
+		for (int x : vect)
+			cout << x << " ";
+
+		return 0;
+	}
+
+	Output: 
+	
+		10 20 30
+
+-------
+
+4. Initializing from an array:  *IMP
+
+	#include <bits/stdc++.h>
+	using namespace std;
+
+	int main()
+	{
+		int arr[] = { 10, 20, 30 };
+		int n = sizeof(arr) / sizeof(arr[0]);
+
+		vector<int> vect(arr, arr + n);
+
+		for (int x : vect)
+			cout << x << " ";
+
+		return 0;
+	}
+
+	Output: 
+		
+		10 20 30
+
+-------
+
+5. Initializing from another vector:
+
+	#include <bits/stdc++.h>
+	using namespace std;
+
+	int main()
+	{
+		vector<int> vect1{ 10, 20, 30 };
+
+		vector<int> vect2(vect1.begin(), vect1.end());
+
+		for (int x : vect2)
+			cout << x << " ";
+
+		return 0;
+	}
+
+	Output: 
+		
+		10 20 30
+
+-------
+
+6. Initializing all elements with a particular value:
+
+	#include <bits/stdc++.h>
+	using namespace std;
+
+	int main()
+	{
+		vector<int> vect1(10);
+		int value = 5;
+		fill(vect1.begin(), vect1.end(), value);
+		for (int x : vect1)
+			cout << x << " ";
+	}
+
+	Output: 
+		5 5 5 5 5 5 5 5 5 5
+
+-------
+
+7. Initialize vector of custom type with all zeros with memset
+
+	std::vector<SomeStruct> someStructVect(length);
+
+	memset(someStructVect.data(), 0, sizeof(SomeStruct)*length);
+
+-------
+
+Initialization 2d vectors:
+
+	std::vector<std::vector<int>> twoDimVector(3, std::vector<int>(2, 0));
+
+-------
+
+Initialization 3d Vectors:
+
+	vector<vector<vector<double>>> f(3, vector<vector<double>>(4, vector<double>(5)));

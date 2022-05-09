@@ -1,0 +1,152 @@
+It can be used to solve many simple counting problems,
+such as how many ways there are to put n indistinguishable balls into k distinguishable bins
+
+-------
+
+Statements of theorems:
+
+The stars and bars method is often introduced specifically to prove the following two theorems 
+of elementary combinatorics concerning the number of solutions to an equation
+
+-------
+
+Theorem one
+
+	For any pair of positive integers n and k, the number of k-tuples of positive integers whose sum is n is equal to the number of (k − 1)-element subsets of a set with n − 1 elements.
+
+	For example, if n=10 and k=4, the theorem gives the number of solutions to:
+
+	x_{1}+x_{2}+x_{3}+x_{4}=10
+
+	with x_{1},x_{2},x_{3},x_{4}>0
+
+	The answer is given by the binomial coefficient {n-1} \choose {k-1}.
+
+	For the above example, there are {\binom {10-1}{4-1}}={\binom {9}{3}}=84} of them.
+
+	These consist of the permutations of the tuples
+	(1,1,1,7),
+	(1,1,2,6),
+	(1,1,3,5),
+	(1,1,4,4),
+	(1,2,2,5),
+	(1,2,3,4),
+	(1,3,3,3),
+	(2,2,2,4),
+	(2,2,3,3)}
+
+-------
+
+Theorem two
+
+	For any pair of positive integers n and k, the number of k-tuples of non-negative integers 
+	whose sum is n is equal to the number of multisets of cardinality k − 1 taken from a set of size n + 1.
+
+	For example, if n=10 and k=4, the theorem gives the number of solutions to:
+
+		x_{1}+x_{2}+x_{3}+x_{4}=10
+
+		with x_{1},x_{2},x_{3},x_{4}>0
+
+	The answer is given by the binomial coefficient {\binom {n+k-1}{k-1}}}. 
+
+	For the above example, there are {\binom {10+4-1}{4-1}}={\binom {13}{3}}=286} of them.
+
+-------
+
+Proofs via the method of stars and bars
+
+	Theorem one proof
+
+		Suppose there are n objects (represented here by stars) to be placed into k bins, such that all bins contain at least one object. 
+
+		The bins are distinguishable (say they are numbered 1 to k) but the n stars are not (so configurations are only distinguished by the number of stars present in each bin). 
+
+		A configuration is thus represented by a k-tuple of positive integers, as in the statement of the theorem.
+
+		For example, with n = 7 and k = 3, start by placing the stars in a line:
+
+						★ ★ ★ ★ ★ ★ ★
+					Fig. 1: Seven objects, represented by stars
+
+		The configuration will be determined once it is known which is the first star going to the second bin, and the first star going to the third bin, etc.. 
+
+		This is indicated by placing k − 1 bars between the stars. Because no bin is allowed to be empty (all the variables are positive), there is at most one bar between any pair of stars.
+
+						For example:
+
+						★  ★  ★  ★  | ★ |  ★  ★
+
+						  ^   ^  ^    ^   ^    ^    -> n-1 gaps required
+
+		Fig. 2: These two bars give rise to three bins containing 4, 1, and 2 objects
+
+		There are n − 1 gaps between stars. 
+		A configuration is obtained by choosing k − 1 of these gaps to contain a bar;
+		
+			therefore there are {\binom {n-1}{k-1}}} possible combinations.
+
+	-------
+
+	Theorem two proof
+
+		In this case, the weakened restriction of non-negativity instead of positivity means that we can place 
+		multiple bars between stars, before the first star and after the last star.
+
+		For example, when n = 7 and k = 5, the tuple (4, 0, 1, 2, 0) may be represented by the following diagram:
+
+					★ ★ ★ ★ | | ★ | ★ ★ |
+
+		Fig. 3: These four bars give rise to five bins containing 4, 0, 1, 2, and 0 objects
+
+		To see that there are {binom {n+k-1}{k-1}}} possible arrangements, observe that any arrangement of stars and bars 
+		consists of a total of n + k − 1 objects, n of which are stars and k − 1 of which are bars. 
+
+		Thus, we only need to choose k − 1 of the n + k − 1 positions to be bars (or, equivalently, choose n of the positions to be stars).
+
+		Theorem 1 can now be restated in terms of Theorem 2, because the requirement that all the variables are positive is 
+		equivalent to pre-assigning each variable a 1, and asking for the number of solutions when each variable is non-negative.
+
+		For example:
+
+		x_{1}+x_{2}+x_{3}+x_{4}=10
+
+		with x_{1},x_{2},x_{3},x_{4}>0
+
+		is equivalent to:
+
+		x_{1}+x_{2}+x_{3}+x_{4}=6
+		with x_{1},x_{2},x_{3},x_{4}\geq 0
+
+-------
+
+Example 1
+
+	If one wishes to count the number of ways to distribute seven indistinguishable one dollar coins among 
+	Amber, Ben, and Curtis so that each of them receives at least one dollar, one may observe that distributions are essentially equivalent to tuples of three positive integers whose sum is 7. 
+
+	(Here the first entry in the tuple is the number of coins given to Amber, and so on.) 
+
+	Thus stars and bars theorem 1 applies, with n = 7 and k = 3, and there are {7-1 \choose 3-1}=15 ways to distribute the coins
+
+	-------
+
+	If it is allowed to give either Amber, Ben or Curtis no coin, then
+		Number of ways to distribute seven indistinguishable one dollar coins among these friends is:
+
+		{7+3-1 \choose 3-1}=36 ways to distribute the coins
+
+		e.g. 1 way is:
+
+			1 | | 6 (Amber receives 1, Ben 0, Curtis 6)
+
+-------
+
+Example 2
+
+	If n = 5, k = 4, and a set of size k is {a, b, c, d}, then ★|★★★||★ could represent 
+	either the multiset {a, b, b, b, d} or the 4-tuple (1, 3, 0, 1). 
+
+	The representation of any multiset for this example should use SAB2 with n = 5 stars and k − 1 = 3 bars to give 
+
+		{5+4-1 \choose 4-1}={8 \choose 3}=56

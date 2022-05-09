@@ -1,0 +1,237 @@
+How to remove all the occurrences of a char:
+
+	#include <algorithm>
+	
+		str.erase(std::remove(str.begin(), str.end(), 'a'), str.end());
+
+-------
+
+std::string::erase
+
+	The function erases a part of the string content, shortening the length of the string. 
+
+	The characters affected depend on the member function version used: 
+	
+		Return value : erase() returns *this. 
+
+	-------
+
+	Syntax 1: Erases all characters in a string 
+
+		string& string ::erase ()
+
+		Example:
+
+			#include <iostream>
+			#include <string>
+			using namespace std;
+
+			// Function to demo erase()
+			void eraseDemo(string str)
+			{
+				// Deletes all characters
+				str.erase();
+
+				cout << "After erase() : ";
+				cout << str;
+			}
+
+			int main()
+			{
+				string str("Hello World!");
+
+				cout << "Before erase() : ";
+				cout << str << endl;
+				eraseDemo(str);
+
+				return 0;
+			}
+
+		Output: 
+
+			Before erase() : Hello World!
+			After erase() :
+
+	-------
+
+ 	Syntax 2: Erases all characters after position ‘pos’ 
+
+		string& string ::erase (size_type pos)
+			
+			- Throw out_of_range if idx > size()
+
+	Example:
+
+		#include <iostream>
+		#include <string>
+		using namespace std;
+		 
+		// Function to demo erase
+		void eraseDemo(string str)
+		{
+		    // Deletes all characters after the specified position (1 based indexing)
+		    str.erase(1);
+		 
+		    cout << "After erase(idx) : ";
+		    cout << str;
+		}
+		 
+		int main()
+		{
+		    string str("Hello World!");
+		 
+		    cout << "Before erase(idx) : ";
+		    cout << str << endl;
+		    eraseDemo(str);
+		 
+		    return 0;
+		}
+
+		Output: 
+
+			Before erase(idx) : Hello World!
+			After erase(idx) : H
+
+	-------
+
+	Syntax 3: Erases at most, len characters of *this, starting at index idx. 
+
+		string& string ::erase (size_type idx, size_type len)
+			
+			- If len is missing, all remaining characters are removed.
+			
+			- Throw out_of_range if idx > size().
+
+	Example:
+
+		#include <iostream>
+		#include <string>
+		using namespace std;
+		 
+		// Function to demo erase
+		void eraseDemo(string str)
+		{
+		    // Deletes 4 characters from index number 1
+		    str.erase(1, 4);
+		 
+		    cout << "After erase : ";
+		    cout << str;
+		}
+		 
+		int main()
+		{
+		    string str("Hello World!");
+		 
+		    cout << "Before erase : ";
+		    cout << str << endl;
+		    eraseDemo(str);
+		 
+		    return 0;
+		}
+
+		Output: 
+
+			Before erase : Hello World!
+			After erase : H World!
+
+	-------
+
+	Syntax 4: Erase the single character at iterator position pos. 
+
+		string& string ::erase (iterator pos)
+
+			- Return the first character after the last character removed
+			
+			- If no such character is remaining then, returns 
+		  		
+		  		string::end() i.e. position after the last character.
+
+	Example:
+
+		#include <iostream>
+		#include <string>
+		using namespace std;
+		 
+		// Function to demo erase
+		void eraseDemo(string str)
+		{
+		    // Deletes character at position 4
+		    str.erase(str.begin() + 4);
+		 
+		    cout << "After erase : ";
+		    cout << str;
+		}
+		 
+		int main()
+		{
+		    string str("Hello World!");
+		 
+		    cout << "Before erase : ";
+		    cout << str << endl;
+		    eraseDemo(str);
+		 
+		    return 0;
+		}
+
+		Output: 
+
+			Before erase : Hello World!
+			After erase : Hell World!
+
+	-------
+
+	Syntax 5: Erase characters from iterator pos. to another iterator pos. 
+
+		string& string ::erase (iterator beg, iterator end)
+
+			- Erases all characters of the range [beg, end)
+			
+			- Returns end i.e. the first character after the
+		  		last character removed.
+			
+			- If no such character is remaining then, returns 
+		  		string::end() i.e. position after the last character
+
+	Example:
+
+		#include <iostream>
+		#include <string>
+		using namespace std;
+		 
+		// Function to demo erase
+		void eraseDemo(string str)
+		{
+		    // Deletes all characters between 0th index and
+		    // str.end() - 6
+		    str.erase(str.begin() + 0, str.end() - 6);
+		 
+		    cout << "After erase : ";
+		    cout << str;
+		}
+		 
+		int main()
+		{
+		    string str("Hello World!");
+		 
+		    cout << "Before erase : ";
+		    cout << str << endl;
+		    eraseDemo(str);
+		 
+		    return 0;
+		}
+
+		Output: 
+
+			Before erase : Hello World!
+			After erase : World!
+
+	-------
+
+	Syntax 6:
+
+    	string s1 = "hem n shh";
+    	s1.erase(std::remove(s1.begin(), s1.end(), ' '), s1.end());
+
+    	Output:
+
+    		hemnshh

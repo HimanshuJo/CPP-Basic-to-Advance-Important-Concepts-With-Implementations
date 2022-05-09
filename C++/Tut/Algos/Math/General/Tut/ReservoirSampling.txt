@@ -1,0 +1,60 @@
+Intuition:
+
+    In order to do random sampling over a population of 'unknown size' with 'constant space'
+
+        the answer is reservoir sampling
+
+    -------
+
+    The reservoir sampling algorithm is intended to sample k elements from a population of
+        unknown size
+
+        In our case the k happens to be one
+
+    Furthermore, the reservoir sampling is a family of algorithms which includes several variants over
+        the time
+
+-------
+
+Simple Algorithm: (Algorithm R)
+
+    # S has items to sample, R will contain the results
+
+    def ReservoirSample(S[1..n], R[1..k])
+
+    # fill the reservoir array
+
+    for i := 1 to k
+        R[i] := S[i]
+
+    # replace the elements with gradually decreasing probability
+
+    for i := k+1 to n
+
+        # randomInteger(a, b) generates a uniform integer
+
+        # from the inclusive range {a, ..., b} *)
+
+        j := randomInteger(1, i)
+        if j <= k
+            R[j] := S[i]
+
+-------
+
+Summarize:
+
+    Initially, we fill up an array of reservoir R[] with the heading elements from the
+        pool of samples S[].
+
+        At the end of the algorithm, the reservoir will contain the final elements we sample from the pool.
+
+    We then iterate through the rest of elements in the pool.
+
+        For each element, we need to decide if we want to include it in the reservoir or not.
+
+        If so, we will replace an existing element in reservoir with the current element.
+
+-------
+
+One important question that one might have is that how we can ensure that each
+    element has an equal probability to be chosen.

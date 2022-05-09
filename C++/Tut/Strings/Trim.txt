@@ -1,0 +1,95 @@
+Remove all white spaces:
+
+string s1 = "hem n shh";
+s1.erase(remove(s1.begin(), s1.end(), ' '), s1.end());
+
+Output:
+
+    hemnshh
+
+-------
+
+Using regex
+
+#include <iostream>
+#include <string>
+#include <regex>
+using namespace std;
+
+string ltrim(const string &s) {
+    return regex_replace(s, regex("^\\s+"), string(""));
+}
+ 
+string rtrim(const string &s) {
+    return regex_replace(s, regex("\\s+$"), string(""));
+}
+
+string mtrim(const string &s) {
+    return regex_replace(s, regex("\\s+"), string(" "));
+}
+ 
+string trim(const string &s) {
+    return mtrim(ltrim(rtrim(s)));
+}
+ 
+int main()
+{
+    string s = " \t\n  Hello             World  ";
+    cout<<"prev: "<<s<<endl;
+    string nwStr=trim(s);
+    cout<<"next: "<<nwStr<<endl;
+    return 0;
+}
+
+Output:
+
+prev:    Hello             World
+next: Hello World
+
+-------
+
+Using find_if
+
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+string& ltrim(string &s)
+{
+    auto it = find_if(s.begin(), s.end(),
+                    [](char c) {
+                        return !isspace<char>(c, locale::classic());
+                    });
+    s.erase(s.begin(), it);
+    return s;
+}
+ 
+string& rtrim(string &s)
+{
+    auto it = find_if(s.rbegin(), s.rend(),
+                    [](char c) {
+                        return !isspace<char>(c, locale::classic());
+                    });
+    s.erase(it.base(), s.end());
+    return s;
+}
+ 
+string& trim(string &s) {
+    return ltrim(rtrim(s));
+}
+ 
+int main()
+{
+    string s = "\n\t\t\t\tHello World  ";
+    cout<<"prev: "<<s<<endl;
+    trim(s);
+    cout<<"next: "<<s<<endl;
+    return 0;
+}
+
+Output:
+
+prev:
+                                Hello World
+next: Hello World

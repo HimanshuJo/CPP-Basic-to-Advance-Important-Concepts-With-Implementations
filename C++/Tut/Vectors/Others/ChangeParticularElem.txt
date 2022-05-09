@@ -1,0 +1,70 @@
+You have four ways of accessing a specific item in a vector:
+
+	Using the [] operator
+
+	Using the member function at(...)
+
+	Using an iterator in combination with a given offset
+
+	Using std::for_each from the algorithm header of the standard C++ library. This is another way which I can recommend (it uses internally an iterator)
+
+-------
+
+static const int arr[] = {1, 2, 3, 4};
+
+std::vector<int> v(arr, arr + sizeof(arr) / sizeof(arr[0]));
+
+-------
+
+This creates a vector as seen below:
+
+	1 2 3 4
+
+First let's look at the [] way of doing things. 
+
+	It works in pretty much the same way as you expect when working with a normal array. 
+
+	You give an index and possibly you access the item you want. 
+
+		I say possibly because the [] operator doesn't check whether the vector actually has that many items. 
+
+		This leads to a silent invalid memory access. 
+
+		Example:
+
+			v[10] = 9;
+
+-------
+
+A much better way is to use at(...)
+
+	This will automatically check for out of bounds behavior and break throwing an std::out_of_range. 
+	So in the case when we have
+
+		v.at(10) = 9;
+
+		We will get:
+
+		    terminate called after throwing an instance of 'std::out_of_range'
+		    what(): vector::_M_range_check: __n (which is 10) >= this->size() (which is 4)
+
+-------
+
+The third way is similar to the [] operator in the sense you can screw things up. 
+
+A vector just like an array is a sequence of continuous memory blocks containing data of the same type. 
+
+This means that you can use your 'starting address' by assigning it to an iterator and then just 
+	add an offset to this iterator. 
+
+	The offset simply stands for how many items after the first item you want to traverse:
+
+		std::vector<int>::iterator it = v.begin(); // First element of your vector
+
+		*(it+0) = 9;  // offset = 0 basically means accessing v.begin()
+
+		// Now we have 9 2 3 4 instead of 1 2 3 4
+
+		*(it+1) = -1; // offset = 1 means first item of v plus an additional one
+		
+		// Now we have 9 -1 3 4 instead of 9 2 3 4

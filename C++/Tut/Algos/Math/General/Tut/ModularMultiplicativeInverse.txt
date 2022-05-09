@@ -1,0 +1,136 @@
+Definition:
+
+	A modular multiplicative inverse of an integer 'a' is an integer x such that:
+		a * x is congruent to 1 modular some modulus m
+
+		To write it in a formal way: we want to find an integer x so that:
+
+			a * x === 1 mod m
+
+		We will also denote x simply with a^-1
+
+	-------
+
+	We should note that modular inverse does not always exist,
+
+		for example: let m=4, a=2
+
+		by checking all the possible values modulo m
+			
+		it should become clear that we cannot find a^-1 satisfying the above condition
+
+		It can be proven that the modular inverse exists if and only if:
+			'a' and 'm' are relatively prime (i.e. gcd(a, m) = 1)
+
+-------
+
+Methods to find Modular Inverse using Extended Euclidean Algorithm:
+
+	Consider the following equation with unknown x and y:
+
+		a * x + m * y = 1
+
+		This is a 'Linear Diophantine Equation' in two variables.
+
+		As shown above: gcd(a, m) = 1, the equation has a solution which can be found using the 'Extended Euclidean Algorithm'
+
+		Note that gcd(a, m) = 1 is also the condition for the modular inverse to exist
+
+	Here if we take modulo 'm' both sides, we can get rid of m*y and the equation becomes:
+
+		a * x === 1 mod m
+
+		Thus, the modular inverse of a is x
+
+-------
+
+Sample implementation:
+
+	int x, y;
+	int g = extended_euclidean(a, m, x, y);
+	if (g != 1) {
+		cout << "No Solution !" << "\n"
+	} else {
+		x = (x % m + m) % m;
+		cout << x << "\n";
+	}
+
+	Notice the way we modify 'x'
+
+		The resulting 'x' from the Euclidean algorithm may be negative, so:
+			x % m might also be negative, and we first have to add 'm' to make it positive
+
+-------
+
+Finding the Modular Inverse using Binary Exponentiation:
+
+	Another method for finding modular inverse is to use the 'Euler's theorem', which states that the following congruence is true
+		if 'a' and 'm' are relatively prime:
+
+			a^ϕ(m) ≡ 1 mod m
+
+			ϕ is Euler's Totient function. 
+
+				Again, note that a and m being relative prime was also the condition for the modular inverse to exist.
+
+	If m is a prime number, this simplifies to Fermat's little theorem:
+
+		a^(m−1) ≡ 1 mod m
+
+	Multiply both sides of the above equations by a^−1, and we get:
+
+    	For an arbitrary (but coprime) modulus m
+
+    		a^(ϕ(m)−1) ≡ a^−1 mod m
+
+	For a prime modulus m: a^(m−2) ≡ a^−1 mod m
+
+	From these results, we can easily find the modular inverse using the binary exponentiation algorithm, which works in O(logm) time.
+
+	Even though this method is easier to understand than the method described in previous paragraph, in the case when m is not a prime number, we need to calculate Euler phi function, which involves factorization of m, which might be very hard. 
+
+	If the prime factorization of m is known, then the complexity of this 
+	method is O(log m).
+
+-------
+
+Finding the modular inverse for every number modulo m:
+
+	The problem is the following: we want to compute the modular inverse for every number in the range [1, m−1].
+
+	Applying the algorithms described in the previous sections, we can obtain a solution with complexity O(m log m).
+
+	Here we present a better algorithm with complexity O(m). 
+
+		However for this specific algorithm we require that the modulus m is prime.
+
+			We denote by inv[i] the modular inverse of i. 
+
+			Then for i>1 the following equation is valid:
+
+				inv[i] = −⌊m/i⌋ ⋅ inv[m mod i] mod m
+
+	-------
+
+	Thus the implementation is very simple:
+
+		inv[1] = 1;
+		for(int i = 2; i < m; ++i)
+		    inv[i] = m - (m/i) * inv[m%i] % m;
+
+-------
+
+Proof
+
+	We have:
+	
+		m mod i = m − ⌊m/i⌋ ⋅ i
+
+	Taking both sides modulo m yields:
+		m mod i ≡ −⌊mi⌋⋅i mod m
+
+	Multiply both sides by i^−1⋅(m mod i)^−1 yields:
+		(m mod i)⋅i^−1⋅(m mod i)^−1 ≡ −⌊m/i⌋⋅i⋅i^−1⋅(m mod i)^−1 mod m
+
+	which simplifies to:
+		i^−1 ≡ −⌊m/i⌋⋅(m mod i)^−1 mod m

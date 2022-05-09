@@ -1,0 +1,42 @@
+
+Unsigned Integers:
+
+	Can hold a larger positive value and no negative value.
+
+	There are different ways of representing signed integers. 
+
+		The easiest to visualize is to use the leftmost bit as a flag (sign and magnitude), 
+			but more common is two's complement. 
+
+		Both are in use in most modern microprocessors — floating point uses sign and magnitude, 
+			while integer arithmetic uses two's complement.
+
+	In a 8-bit number system:
+
+		It consists of only non-negative values i.e 0 to 255.
+
+	In a 32-bit number system:
+
+		An unsigned integer is a 32-bit datum that encodes a non-negative integer in the range [0 - 4294967295]
+
+-------
+
+Signed Integers:
+
+	can hold both positive and negative numbers.
+
+	In a 8-bit number system:
+
+		It consists of both negative and positive values but in different formats like
+
+			0 to +127
+
+			-1 to -128
+
+	In a 32-bit number system:
+
+		A signed integer is a 32-bit datum that encodes an integer in the range [-2147483648 to 2147483647]
+
+		The signed integer is represented in two's complement notation.
+
+			The most significant byte is 0 and the lest significant byte is 3 

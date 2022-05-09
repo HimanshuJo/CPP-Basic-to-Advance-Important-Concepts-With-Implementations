@@ -1,0 +1,162 @@
+You are given a 0-indexed binary string s and two integers minJump and maxJump. 
+ 
+ In the beginning, you are standing at index 0, which is equal to '0'. 
+
+ 	You can move from index i to index j if the following conditions are fulfilled:
+
+    i + minJump <= j <= min(i + maxJump, s.length - 1), and
+    	s[j] == '0'.
+    
+    Return true if you can reach index s.length - 1 in s, or false otherwise.
+    
+    Example 1:
+
+	Input: s = "011010", minJump = 2, maxJump = 3
+	Output: true
+	
+	Explanation:
+	In the first step, move from index 0 to index 3. 
+	In the second step, move from index 3 to index 5.
+
+-------
+
+In this we have a range of jumps we can do,
+
+	in the earlier jumps we just had a maxJump that we can do, but now we also have a minJump also
+
+	0's are the position we are allowed to land at, and 1's are the position where there is a cactus
+
+	Since we're not allowed to land at 1's we can't also jump from 1's
+
+	-------
+
+	DP in this case can let us the complexity of O(n) * j, where n is the number of positions, 
+		and j is the range of jumps we can do
+
+	We can solve this algorithm in O(n) by performing BFS
+
+-------
+
+If the end position is 1 then we have to return false
+
+	In our BFS approach, our next frontier will be the position at minJump and maxJump
+
+		If the position at either minJump and MaxJump is 1, then we can't start from there
+
+	We will be maintaining what is the farthest position we have reached so far
+
+-------
+
+class Solution
+{
+public:
+    bool canReach(string s, int minJump, int maxJump)
+    {
+        int n = s.length();
+        if (s[n - 1] != '0')
+            return false;
+        int i = 0;
+        queue<int> q;
+        q.push(0);
+        int curr_max = 0;
+        while (!q.empty())
+        {
+            i = q.front();
+            q.pop();
+            if (i == n - 1)
+                return true;
+            for (int j = max(i + minJump, curr_max); j <= min(i + maxJump, n - 1); j++)
+            {
+                if (s[j] == '0')
+                    q.push(j);
+            }
+            curr_max = min(i + maxJump + 1, n);
+        }
+        return false;
+    }
+};
+
+/*
+If last character is not '0', return false
+
+Assuming i has current position where we are standing and using standard BFS approach with slight optimization (to avoid TLE).
+
+Slight Optimization: 
+
+	I got TLE with standard BFS so added this to avoid extra traversals.
+
+		max_curr : max position which has been visited till previous iteration, 
+				   start next iteration after max_curr to avoid duplication indices traversals.
+
+ 	Initially i = 0 , insert i into queue.
+
+ 	Pop i from queue front
+
+ 	Iterate from max(i+minJump, max_curr) to (i+maxJump) and put all 0's indices in queue.
+
+ 	Update max_curr after complete iteration.
+
+ 	-------
+
+ 	as we already added our required 0s to our queue.
+		
+		So we will keep track of the max index of 0 which we have encountered in every iteration 
+			and start from that in the next iteration.
+
+			=>  curr_max = min(i + maxJump + 1, n);
+*/
+
+-------
+
+class Solution:
+	def canReach(self, s: str, minJump: int, maxJump: int) -> bool:
+		q, farthest = dequeue([0]), 0
+		while q:
+			i = q.popleft()
+			
+			# what's the first value we're gonna be jumping
+			start = max(i + minJump, farthest + 1)  # what if i + minJump is something we've already jumped to (main trick here)
+
+			# now we'll be iterating through all the possible jumps that we could make starting from the current index
+			# the end is gonna be i + maxJump
+			# but what is i + maxJump is out of bounds, therefore we use min
+			# +1 because in py the ending range is always no inclusive
+			for j in range(start, min(i + maxJump + 1, len(s)):
+				if s[j] == "0":
+					q.append(j)
+					if j == len(s) - 1:
+						return True
+			farthest = i + maxJump
+		return False
+
+-------
+
+class Solution {
+	public boolean canReach(String s, int minJump, int maxJump) {
+		if (s.charAt(s.length() - 1) == '1') {
+			return false;
+		}
+		Queue<Integer> queue = new LinkedList<>();;
+		queue.offer(0);
+		for (int i = 1; i < s.length(); ++i) {
+			if (s.charAt(i) == '0') {
+				// remove indices from the queue if they can't be jumped to
+				while (!queue.isEmpty() && queue.peek() + maxJump < i) {
+					queue.poll();
+				}
+				// empty queue means that there are no indices to jump to
+				if (queue.isEmpty()) {
+					return false;
+				}
+				int prev = queue.peek();
+				if (prev + maxJump >= 1 && prev + minJump <= i) {
+					queue.offer(i);
+					if (i == s.length() - 1) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+}

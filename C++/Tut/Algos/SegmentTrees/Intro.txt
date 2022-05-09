@@ -1,0 +1,157 @@
+Use cases of Segment Tree:
+
+	It helps with range query in an array
+
+	Suppose we have an array
+		
+		arr = 		{-1, 3, 4, 0, 2, 1}
+		
+		indexes =	{0, 1, 2, 3, 4, 5}
+
+		Example of some of the queries we can ask:
+			What is the minimum from index 2 to 4 in this array
+				ans = 0
+
+			What is the minimum from 0 to 3 in this array
+				ans = -1
+
+			What is the maximum in certain range?
+
+			What is the sum in certain range? etc.
+
+-------
+
+Without Segment Trees if we try to find out the answer, let's say for an array that has millions of numbers
+	one way to do a linear search that will result in
+		O(mn) Time
+			where m -> is the number of queries
+				  n -> is the size of the array
+
+    other way is to create a square matrix, and fill up the matrix by finding out the min
+    	for each range
+
+    	once the matrix has been built we can easily answer the min queries in O(1) time,
+    	however, building up the matrix will take O(n^2) time
+    		also O(n^2) space to maintain this matrix
+
+-------
+
+Segment Trees takes O(n) time to build
+
+Segment Trees takes O(n) space to maintain a segment tree
+
+Segment Trees answers the query in O(log n) time
+
+-------
+
+Segment Tree:
+
+	It is a binary tree, ans the elements of an array are the leaves of that binary tree
+
+		Each node in the Binary Tree is maintaining the minimum for a range
+
+	Suppose I am looking for a particular range, there are three rules which we need to take into account
+
+		1. Partial Overlap
+
+			here we have to look into both the sides of the tree
+
+		2. Total Overlap
+
+			here we have to already stop our search
+
+			it means an interval is totally inside the other interval or is exactly equal to that interval
+				e.g. [3, 5] totally overlaps [0, 4]
+
+		3. No Overlap
+
+-------
+
+It will appears like we are searching the entire tree, but in reality it turns out that at max we will go in
+	4 different depths, so in worst case the time will be 4 * log(n)
+
+-------
+
+Segment Trees for arrays:
+
+	If my array length is a power of 2, then
+
+		the size of the segment tree will be:
+			len(array) * 2 - 1
+
+	If my array length is not the power of 2, then
+
+		I will firstly find the next power of 2, and then calculate the size by the same formula
+
+		(NextPowerOfTwo) * 2 - 1
+
+	-------
+
+	Suppose we have an array arr = {-1, -1, 3, -1, 0, 3, 6}
+
+		To get the left child for a particular node we can use the formula
+
+			leftChild = 2*i + 1, where i is the index of that particular element in the array
+
+		To get the right child for a particular node we can use the formula
+
+			rightChild = 2*i + 2, where i is the index of that particular element in the array
+
+		To get the parent for a particular node we can use the formula
+
+			parent = (i - 1)/2, where i is the index of that particular element in the array
+
+	-------
+
+	The total size of the array in the worst case can be:
+
+		4n, therefore the space complexity is O(n)
+
+	The total time to build the entire array in worst case can be O(n)
+
+-------
+
+Recursive Function to construct Seg Tree for a given array
+
+	For this we will pre-initialize of segTree or resultant array with really big numbers
+
+	Also the length of the resultant segment tree is dependent on the length of the input array
+
+	If the length of my input array is a power of 2, then we can just multiply it by 2 and subtract 1
+
+	Else I will get the next power of 2 and do the same thing as above
+
+	-------
+
+	void constructTree(int[] input, int[] segTree, int low, int high, int pos) {
+		if (low == high) {
+			segTree[pos] = input[low];
+			return;
+		}
+		int mid = (low + high) / 2;
+		constructTree(input, segTree, low, mid, 2 * pos + 1);
+		constructTree(input, segTree, mid + 1, high, 2 * pos + 2);
+		segTree[pos] = min(segTree[2 * pos + 1], segTree[2 * pos + 2]);
+	}
+
+-------
+
+How to perform a range query in the segment tree:
+	
+	qLow -> left range of our query
+	qHigh -> right range of our query
+
+	int rangeMinQuery(int[] segTree, int qLow, int qHigh, int low, int high, int pos) {
+		// totally overlaps condition
+		if (qLow <= low && qHigh >= high) {
+			return segTree[pos]
+		}
+		// no overlap condition
+		if (qLow > high || qHigh < low) {
+			return MAX_VALUE;
+		}
+		int mid = (low + high) / 2;
+		return min(rangeMinQuery(segTree, qLow, qHigh, low, mid, 2 * pos + 1),
+					rangeMinQuery(SegTree, qLow, qHigh, mid + 1, high, 2 * pos + 2));
+	}
+

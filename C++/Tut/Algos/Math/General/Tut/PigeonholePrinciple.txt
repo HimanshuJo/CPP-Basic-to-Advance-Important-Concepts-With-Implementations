@@ -1,0 +1,317 @@
+The Pigeonhole Principle:
+
+	If k + 1 or more pigeons are distributed among k pigeonholes, then at least one pigeonhole contains two or more
+		pigeons
+
+		Proof:
+
+			The contrapositive of the statement is:
+
+				If each pigeonhole contains at most one pigeon, then there are at most k pigeons.
+
+-------
+
+Pigeonhole Principle (General):
+	If n or more pigeons are distributed among k > 0 pigeonholes, then at least one pigeonhole contains
+		at least math.ceil(n / k)
+
+	Proof:
+
+		Suppose each pigeonhole contains at most Math.ceil(n / k) - 1 pigeons
+
+		Then the total number of pigeons is at most 
+			k * (Math.ceil(n/k) - 1) 
+			< k(n/k) 
+			= n pigeons
+
+-------
+
+Suppose a flock of 20 pigeons flies into a set of 19 pigeonholes to roost.
+
+	Because there are 20 pigeons but only 19 pigeonholes, at least one of these 19 pigeonholes must have
+		two pigeons in it.
+
+	So, this principle in general states that, if there are more pigeons than the pigeonholes, then there must be
+		at least one pigeonhole with at least two pigeons in it
+
+	-------
+
+	Theorem:
+
+		1. If "A" is the average number of pigeons per hole, where A is not an integer then,
+			* At least one pigeon hole contains ceil(A) [smallest integer greater than or equal to A] pigeons
+
+			* Remaining pigeon holes contains at most floor(A) [largest integer less than or equal to A] pigeons
+
+		2. We can say that, if n + 1 objects are put into n boxes, then at least one box contains two or more objects
+
+		-------
+
+		The abstract formulation of the principle:
+			Let X and Y be finite sets and let f: A -> B be a function:
+
+				a. If X has more elements than Y, then f is not one-to-one
+
+				b. If X and Y have the same number of elements and f is onto, then f is one-to-one
+
+				c. If X and Y have the same number of elements and f is one-to-one, then f is onto
+
+		-------
+
+		Pigeonhole principle is one of the simplest but most useful ideas in mathematics.
+
+			E.g. 1: If (k*n + 1) pigeons are kept in 'n' pigeon holes where k is a positive integer, what is the
+					average number of pigeons per pigeon hole?
+
+			Sol. Average number of pigeons per hole = (k*n + 1) / n
+													= k + 1/n
+
+			 	Therefore there will be at least one pigeonhole which will contain at least (k + 1) pigeons
+			 		i.e ceil[k + 1/n]
+
+			 		and remaining will contain at most k, i.e. floor [k + 1/n] pigeons
+
+		 		hence, minimum number of pigeons required to ensure that at least one pigeon hole contains (k + 1) pigeons
+		 			is (k*n + 1)
+
+-------
+
+Examples:
+
+	Example 1:
+
+		A bag contains 10 red marbles, 10 white marbles, and 10 blue marbles.
+
+		What is the minimum no. of marbles you have to choose randomly from the bag to ensure that we get 4 marbles
+			of the same color?
+
+	Solution:
+
+		Applying pigeonhole principle:
+
+			No. of colors (pigeonholes) n = 3
+
+			No. of marbles (pigeons) k + 1 = 4
+
+			Therefore the minimum no. of marbles required = k*n + 1
+				By simplifying we get k*n + 1 = 10
+
+					as k = 3
+					   n = 3
+
+					   => k*n + 1 = 3*3 + 1 = 10
+
+   	-------
+
+   	Example 2:
+
+   		Sock-picking
+			
+			Assume a drawer contains a mixture of black socks and blue socks, each of which can be worn on either foot, 
+			and that you are pulling a number of socks from the drawer without looking. 
+
+			What is the minimum number of pulled socks required to guarantee a pair of the same color? 
+
+				Using the pigeonhole principle, to have at least one pair of the same color (m = 2 holes, one per color) 
+				using one pigeonhole per color, you need to pull only three socks from the drawer (n = 3 items). 
+
+				Either you have three of one color, or you have two of one color and one of the other.
+
+	-------
+
+	Example 3:
+
+		Hand-shaking
+
+			If there are n people who can shake hands with one another (where n > 1), 
+			the pigeonhole principle shows that there is always a pair of people who will 
+			shake hands with the same number of people. 
+
+			In this application of the principle, the 'hole' to which a person is assigned is 
+			the number of hands shaken by that person.
+
+		 	Since each person shakes hands with some number of people from 0 to n − 1, there are 'n' possible holes.
+
+		 	Proof:
+
+		 		Suppose there are 3 people, therefore there are 3 possible holes, 
+		 		as we'll calculate the handshakes done by each person
+
+		 			Case 1:
+
+			 			Let person 1 shakes hands with person 2 and person 3
+
+			 				so in the first hole we have a value 2
+
+		 				For person 2, we already know it has atleast a value of 1, as person 1 
+		 				has already done a handshake with him
+		 					let person 2 also does handshake with person 3
+
+		 					so in the second hole we have a value 2
+
+	 					For the third person, we already know the answer, since there are three person, 
+	 						and person 1 has done handshake with two persons
+	 						and person 2 has also done handshake with two persons
+
+	 						hence person 3 has also done handshake with two persons (person 1 and 2)
+
+	 						so in the third hole we have a value 2
+
+	 					So this case easily proves that we have atleast a pair who have done the same amount of handshakes
+
+ 					Case 2:
+						
+						Let person 1 shakes hands with person 2
+
+							so in the first hole we have a value 1
+
+						For person 2, we already know it has atleast a value of 1, as person 1 has already done a handshake with him
+		 					let person 2 also does handshake with person 3
+
+							so in the second hole we have a value 2
+
+						For the third person,
+
+							in this particular case, it will only have a value of 1
+								since person 1 has done handshake with only person 2, 
+								and person 2 has done handshakes with both person 3 and 1
+
+							however, if person 1 had done handshake with person 3, then, for that 
+							particular case, it would have a value of 2
+							since person 1 has done handshake with only person 3, 
+							and person 2 has done handshakes with both person 3 and 1
+
+							in both the case, we'll have a pair who have done equal amount of handshakes
+
+		 	On the other hand, either the '0' hole or the 'n − 1' hole or both must be empty, 
+		 	
+		 		for it is impossible (if n > 1) for some person to shake hands with everybody else while some person 
+		 		shakes hands with nobody. 
+
+		 		This leaves n people to be placed into at most n − 1 non-empty holes, so that the principle applies.
+
+		 		Proof:
+
+		 			Suppose there are 3 people, therefore there are 3 possible holes, as we'll calculate the handshakes done by each person
+
+		 			Case 1: (0th hole is empty)
+
+			 			Let person 1 shakes hands with nobody
+
+			 				so in the first hole we'll have a value 0
+
+		 				Let person 2 shakes hands with person 3
+
+		 					so in the first hole we'll have a value 1
+
+	 					For the third person, we already know the answer, since there are three person, 
+	 						and person 1 has done handshake with nobody
+	 						and person 2 has also done handshake with one person, so that person must be person 3
+
+	 						so in the third hole we have a value 1
+
+	 					So this case easily proves that we have atleast a pair who have done the same amount of handshakes
+	 						and we have (3-1) non empty holes
+
+					Case 2: (N-1'th hole is empty)
+
+						Let person 1 shakes hands with nobody
+
+			 				so in the first hole we'll have a value 0
+
+		 				Let person 2 shakes hands with nobody
+
+		 					so in the first hole we'll have a value 0
+
+	 					Therefore third person also shakes hands with nobody
+
+	 						hence 3rd hole is also empty
+
+			-------
+
+			This hand-shaking example is equivalent to the statement that in any graph with more than one vertex, there is at least one pair of vertices that share the same degree.
+
+			This can be seen by associating each person with a vertex and each edge with a handshake.
+
+	-------
+
+	Example 4:
+
+		Hair-counting
+
+			One can demonstrate there must be at least two people in London with the same number of hairs on their heads as follows.
+
+			Since a typical human head has an average of around 150,000 hairs, it is reasonable to assume 
+			(as an upper bound) that no one has more than 1,000,000 hairs on their head (m = 1 million holes). 
+
+			There are more than 1,000,000 people in London (n is bigger than 1 million items). 
+
+			Assigning a pigeonhole to each number of hairs on a person's head, and assigning people to pigeonholes according to the number of hairs on their head, 
+			there must be at least two people assigned to the same pigeonhole by the 1,000,001'st assignment 
+			(because they have the same number of hairs on their heads) (or, n > m). 
+
+			Assuming London has 9.002 million people, one can even state that at least ten Londoners have the same number of hairs, as having nine Londoners in each of the 1 million pigeonholes accounts for only 9 million people.
+
+			For the average case (m = 150,000) with the constraint: fewest overlaps, there will be at most one person 
+			assigned to every pigeonhole and the 150,001st person assigned to the same pigeonhole as someone else. 
+
+			In the absence of this constraint, there may be empty pigeonholes because the "collision" happens before the 150,001st person.
+
+			The principle just proves the existence of an overlap; it says nothing of the number of overlaps (which falls under the subject of probability distribution).
+
+		More general example:
+
+			Assuming in a rich neighborhood of London, every person has a car and they've either 2 cars, 4 cars, 6 cars or 8 cars
+
+			Suppose there are 7 person living in that neighborhood, then there will be at-least 2 persons who have the same amount of cars
+			(taking into account number of persons living in the neighborhood are greater than the no. of categories (or holes in this case))
+
+			Proof:
+
+				There are 4 holes (2 cars, 4 cars, 6 cars, 8 cars)
+
+				There are 7 pigeons (in this case persons)
+
+				Suppose person 1 has 2 cars
+					Therefore hole 1 has at least a value of 1
+
+				Suppose person 2 has 8 cars
+					Therefore hole 4 has at least a value of 1
+
+				Suppose person 3 has 6 cars
+					hence, hole 3 has at least a value of 1
+
+				Suppose person 4 has 4 cars
+					hence, hole 2 has at least a value of 1
+
+				now it doesn't matter what cars other persons have, there will occupy one of the above
+					mentioned hole, therefore at least 2 pigeons in a given hole
+
+					e.g. suppose person 5 has 8 cars
+						hence, hole 4 has now at least a value of 2
+
+	-------
+
+	Example 5:
+
+		The birthday problem
+			
+			The birthday problem asks, for a set of n randomly chosen people, what is the probability that some pair of them will have the same birthday? 
+
+			The problem itself is mainly concerned with counterintuitive probabilities; however, we can also tell by the pigeonhole principle that, if there are 367 people in the room, there is at least one pair of people who share the same birthday with 100% probability, 
+
+				as there are only 366 possible birthdays to choose from (including February 29, if present).
+
+	-------
+
+	Example 6:
+
+		Team tournament
+
+			Imagine seven people who want to play in a tournament of teams (n = 7 items), 
+			with a limitation of only four teams (m = 4 holes) to choose from. 
+
+			The pigeonhole principle tells us that they cannot all play for different teams; 
+			there must be at least one team featuring at least two of the seven players:
+
+				floor(n-1/m)+1=floor(7-1/4)+1=2

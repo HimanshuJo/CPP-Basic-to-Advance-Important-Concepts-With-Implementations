@@ -1,0 +1,19 @@
+
+std::vector<int> vec[3];
+
+vec.size() does not work with the above vector declaration.
+
+-------
+
+As for why vec.size() does not work, it's because vec is not a vector, it's an array (of vectors), 
+
+	and arrays in C++ are not objects (in the OOP sense that they are not instances of a class) 
+		and therefore have no member functions.
+
+-------
+
+If you want to get the result 3 when doing vec.size() then you either have to use e.g. std::array:
+
+std::array<std::vector<int>, 3> vec;
+
+std::cout << "vec.size() = " << vec.size() << '\n';  // Will output 3

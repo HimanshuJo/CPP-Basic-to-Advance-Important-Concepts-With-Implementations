@@ -1,0 +1,83 @@
+Breadth First Search:
+
+    The only catch here is, unlike trees, graphs may contain cycles,
+        so we may come to the same node again.
+
+    To avoid processing a node more than once, we use a boolean visited array.
+
+    -------
+
+    Adjacency list:
+
+        In graph theory and computer science, an adjacency list is a collection of
+            unordered lists used to represent a finite graph.
+
+        Each list describes the set of neighbors of a vertex in the graph.
+
+        This is one of several commonly used representations of graphs for use in computer programs.
+
+        -------
+
+        Operations of Adjacency list:
+
+            The main operation performed by the adjacency list data structure is to report a
+                list of the neighbors of a given vertex.
+
+            The total time to report all of the neighbors of a vertex v is proportional to the degree of v.
+
+        -------
+
+        Trade-offs:
+
+            The main alternative to the adjacency list is the 'adjacency matrix', a matrix whose
+                rows and columns are indexed by vertices and whose cells contain a boolean value that
+                indicates whether an edge is present between the vertices corresponding to the
+                row and column of the cell.
+
+            For a sparse graph (one in which most pairs of vertices are not connected by edges) an adjacency list
+                is significantly more space-efficient than an adjacency matrix (stored as a two-dimensional array):
+                the space usage of the adjacency list is proportional to the number of edges and vertices in the
+                graph, while for an adjacency matrix stored in this way the space is proportional to the square
+                of the number of vertices.
+
+                However, it is possible to store adjacency matrices more space-efficiently, matching the linear
+                    space usage of an adjacency list, by using a hash table indexed by pairs of vertices
+                    rather than an array.
+
+            The other significant difference between adjacency lists and adjacency matrices is in the
+                efficiency of the operations they perform.
+
+                -------
+
+                * In an adjacency list, the neighbors of each vertex may be listed efficiently, in time
+                    proportional to the degree of the vertex.
+
+                * In an adjacency matrix, this operation takes time proportional to the number of vertices in
+                    the graph, which may be significantly higher than the degree.
+
+                -------
+
+                On the other hand,
+
+                * The adjacency matrix allows testing whether two vertices are adjacent to
+                    each other in constant time;
+
+                * The adjacency list is slower to support this operation.
+
+        -------
+
+        Data structures:
+
+            For use as a data structure, the main alternative to the adjacency list is the adjacency matrix.
+
+            Because each entry in the adjacency matrix requires only one bit, it can be represented in a very
+                compact way, occupying only |V|^2/8 bytes of contiguous space, where |V| is the number of
+                vertices of the graph.
+
+                Besides avoiding wasted space, this compactness encourages locality of reference.
+
+            However, for a sparse graph, adjacency lists require less space, because they do not waste any
+                space to represent edges that are not present.
+
+                Using a naïve array implementation on a 32-bit computer, an adjacency list for an undirected graph
+                    requires about 2·(32/8)|E| = 8|E| bytes of space, where |E| is the number of edges of the graph.

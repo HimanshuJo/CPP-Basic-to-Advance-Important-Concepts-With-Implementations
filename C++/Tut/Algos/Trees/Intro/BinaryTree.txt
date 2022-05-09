@@ -1,0 +1,100 @@
+Types of Binary Tree:
+
+	Rooted:
+
+		A rooted binary tree has a root node and every node has at most two children
+
+	-------
+
+	Full Binary Tree:
+
+		Sometimes referred to a proper or plane binary tree, is a tree in which every node has 
+		either 0 or 2 children
+
+		Another way of defining a full binary tree is a recursive definition
+
+		A full binary tree is either:
+
+			A single vertex
+
+			A tree whose root node has two sub-trees, both of which are full binary trees
+
+		Examples:
+
+			     18
+           /       \  
+         15         30  
+        /  \        /  \
+      40    50    100   40
+
+
+             18
+           /    \   
+         15     20    
+        /  \       
+      40    50   
+    /   \
+   30   50
+
+               18
+            /     \  
+          40       30  
+                   /  \
+                 100   40
+
+	  	-------
+
+	  	Properties of Full Binary Tree:
+
+			The number of nodes n in a Full Binary Tree, is 
+				
+				at least n = 2 * h + 1
+
+				at most n = 2^(h + 1) - 1
+
+				A tree consisting of only a root node has a height of 0
+
+ 	-------
+
+	Complete Binary Tree:
+
+		In this tree every level, except the last level is completely filled, and all the 
+		nodes in the last level are as far as left as possible.
+
+		It can have between 1 and 2^h nodes at the last level h
+
+		-------
+
+		Properties:
+
+			Nodes in the last level of a Complete Binary Tree can be between 1 to 2^h
+
+	-------
+
+	Perfect Binary Tree:
+
+		It is a binary tree in which all the interior nodes have two children and all the 
+		leaves have the same depth or are at the same level.
+
+		An example of a perfect binary tree is the ancestry chart of a person to a given
+		depth, as each person has exactly two parents
+
+		A Perfect Binary Tree is therefore always complete, but a Complete Binary Tree is not 
+		necessarily perfect
+
+		-------
+
+		Properties:
+
+			The number of leaf nodes 'l' in a perfect binary tree is
+
+				l = (n + 1) / 2
+
+				A Full Binary Tree with l leaves has n = 2l-1 nodes
+
+	-------
+	
+	Balanced Binary Tree:
+
+		It's a binary tree in which the left and the right subtrees of every node differ 
+		in height by no more than 1
