@@ -59,9 +59,10 @@ Sample Output 1 :
 2
 
 Explanation For Sample Output 1 :
+
 For the first test case, there are two possible paths to reach (2, 2) from (1, 1) : 
-    (1, 1) -> (1, 2) -> (2, 2)
-    (1, 1) -> (2, 1) -> (2, 2)
+(1, 1) -> (1, 2) -> (2, 2)
+(1, 1) -> (2, 1) -> (2, 2)
 
 For the second test case, there are two ways to reach the bottom left corner - 
 (1, 1) -> (1, 2) -> (1, 3) -> (2, 3) -> (3, 3)

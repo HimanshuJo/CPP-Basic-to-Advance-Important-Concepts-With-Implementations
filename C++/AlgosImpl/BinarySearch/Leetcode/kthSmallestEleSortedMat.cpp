@@ -5,15 +5,15 @@ return the kth smallest element in the matrix.
 
 Note that it is the kth smallest element in the sorted order, not the kth distinct element.
 
-You must find a solution with a memory complexity better than O(n2).
+You must find a solution with a memory complexity better than O(n^2).
 
  
-
 Example 1:
 
 Input: matrix = [[1,5,9],[10,11,13],[12,13,15]], k = 8
 Output: 13
 Explanation: The elements in the matrix are [1,5,9,10,11,12,13,13,15], and the 8th smallest number is 13
+
 Example 2:
 
 Input: matrix = [[-5]], k = 1
@@ -26,33 +26,51 @@ n == matrix.length == matrix[i].length
 1 <= n <= 300
 -10^9 <= matrix[i][j] <= 10^9
 All the rows and columns of matrix are guaranteed to be sorted in non-decreasing order.
-1 <= k <= n2
+1 <= k <= n^2
 */
 
 /*
-We binary search to find the smallest ans in range [minOfMatrix ... maxOfMatrix] as long as countLessOrEqual(ans) >= k, 
+We binary search to find the smallest ans in range [minOfMatrix ... maxOfMatrix] as 
+long as countLessOrEqual(ans) >= k, 
+
 where countLessOrEqual(x) is the number of elements less than or equal to x.
 
 Algorithm
 
-Start with left = minOfMatrix = matrix[0][0] and right = maxOfMatrix = matrix[n-1][n-1].
-Find the mid of the left and the right. This middle number is NOT necessarily an element in the matrix.
-If countLessOrEqual(mid) >= k, we keep current ans = mid and try to find smaller value by searching in the left side. 
-Otherwise, we search in the right side.
-Since ans is the smallest value which countLessOrEqual(ans) >= k, so it's the k th smallest element in the matrix.
+    Start with left = minOfMatrix = matrix[0][0] and right = maxOfMatrix = matrix[n-1][n-1].
 
-How to count number of elements less or equal to x efficiently?
+    Find the mid of the left and the right. 
 
-Since our matrix is sorted in ascending order by rows and columns.
+        This middle number is NOT necessarily an element in the matrix.
 
-We use two pointers, one points to the rightmost column c = n-1, and one points to the lowest row r = 0.
+    If countLessOrEqual(mid) >= k, we keep current ans = mid and try to find smaller value by 
+    searching in the left side. 
+    
+    Otherwise, we search in the right side.
+    
+    -------
 
-If matrix[r][c] <= x then the number of elements in row r less or equal to x is (c+1) (Because row[r] is sorted 
-in ascending order, so if matrix[r][c] <= x then matrix[r][c-1] is also <= x). 
-Then we go to next row to continue counting.
+    Since ans is the smallest value which countLessOrEqual(ans) >= k, so it's the kth smallest element in the matrix.
 
-Else if matrix[r][c] > x, we decrease column c until matrix[r][c] <= x 
-(Because column is sorted in ascending order, so if matrix[r][c] > x then matrix[r+1][c] is also > x).
+    How to count number of elements less or equal to x efficiently?
+
+        Since our matrix is sorted in ascending order by rows and columns.
+
+        We use two pointers, one points to the rightmost column c = n-1, and one points to the lowest row r = 0.
+
+    If matrix[r][c] <= x 
+
+        then the number of elements in row r less or equal to x is (c+1) 
+        (Because row[r] is sorted in ascending order, so if 
+        matrix[r][c] <= x then matrix[r][c-1] is also <= x). 
+    
+        Then we go to next row to continue counting.
+
+    Else if matrix[r][c] > x, we decrease column c until matrix[r][c] <= x
+
+        (Because column is sorted in ascending order, so if matrix[r][c] > x then matrix[r+1][c] is also > x).
+
+-------
 
 Time complexity for counting: O(M+N).
 */
@@ -60,13 +78,18 @@ Time complexity for counting: O(M+N).
 /*
 Complexity
 
-Time: O((M+N) * logD), where M <= 300 is the number of rows, N <= 300 is 
-the number of columns, D <= 2*10^9 is the difference between the maximum element and the minimum element in the matrix.
+Time: 
+
+    O((M+N) * logD), where M <= 300 is the number of rows, N <= 300 is 
+    the number of columns, 
+
+    D <= 2*10^9 is the difference between the maximum element and the minimum element in the matrix.
+
 Space: O(1).
 */
 
 /*
-Solution2:
+Solution 2:
 
 Complexity:
 

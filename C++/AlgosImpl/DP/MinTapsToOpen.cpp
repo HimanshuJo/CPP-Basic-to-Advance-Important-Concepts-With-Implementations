@@ -71,5 +71,3 @@ public:
         return dp[len-1]==len+1?-1:dp[len-1];
     }
 };
-
-int main(){}

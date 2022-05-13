@@ -1,60 +1,42 @@
-//C++ program for the above approach
-#include <bits/stdc++.h>
-
+#include<iostream>
+#include<vector>
+#include<climits>
 using namespace std;
+using ll=long long;
 
-// Program to find missing element
-int findFirstMissing(vector<int> arr , int start ,
-						int end,int first)
-{
+#define V_MAX 1e3
+#define W_MAX 1e9
 
-if (start <= end)
-{
-	int mid = (start + end) / 2;
-
-	/** Index matches with value
-	at that index, means missing
-	element cannot be upto that po*/
-	if (arr[mid] != mid+first)
-	return findFirstMissing(arr, start,
-								mid , first);
-	else
-	return findFirstMissing(arr, mid + 1,
-								end , first);
-}
-return start + first;
-
+int dfs(vector<vector<int>>&in, int N, int idx, int curval,
+       vector<vector<int>>&memo, vector<vector<int>>&seen){
+	if(idx>N) return W_MAX;
+	if(curval<=0) return 0;
+	if(seen[idx][curval]==1) return memo[idx][curval];
+	seen[idx][curval]=1;
+	return (memo[idx][curval]=min(dfs(in, N, idx+1, curval, memo, seen),
+	                              in[idx][0]+
+								 dfs(in, N, idx+1, curval-in[idx][1], memo, seen)));
 }
 
-// Program to find Smallest
-// Missing in Sorted Array
-int findSmallestMissinginSortedArray(vector<int> arr)
-{
-
-// Check if 0 is missing
-// in the array
-if(arr[0] != 0)
-	return 0;
-
-// Check is all numbers 0 to n - 1
-// are present in array
-if(arr[arr.size() - 1] == arr.size() - 1)
-	return arr.size();
-
-int first = arr[0];
-
-return findFirstMissing(arr, 0, arr.size() - 1, first);
+int main(){
+	int N, W;
+	cin>>N>>W;
+	vector<vector<int>>memo(N+1, vector<int>(1e3+1, -1));
+	vector<vector<int>>seen(N+1, vector<int>(1e3+1, -1));
+	vector<vector<int>>in(N, vector<int>(2, 0));
+	for(int i=0; i<N; ++i){
+		for(int j=0; j<2; ++j){
+			cin>>in[i][j];
+		}
+	}
+	bool flag=false;
+	for(int val=V_MAX; val>=0; --val){
+		if(dfs(in, N, 0, val, memo, seen)<=W){
+			flag=true;
+			cout<<val;
+			break;
+		}
+	}
+	if(!flag)
+		cout<<0;
 }
-
-
-// Driver program to test the above function
-int main()
-{
-	vector<int> arr = {0, 1, 2, 2, 2, 3, 7};
-	int n = arr.size();
-
-	// Function Call
-	cout<<"First Missing element is : "<<findSmallestMissinginSortedArray(arr);
-}
-
-// This code is contributed by mohit kumar 29.

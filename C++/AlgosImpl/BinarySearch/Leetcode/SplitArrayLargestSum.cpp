@@ -15,8 +15,6 @@ The best way is to split it into [7,2,5] and [10,8],
 where the largest sum among the two subarrays is only 18.
 */
 /*
-Intuition:
-
 Intuition
 
 This approach is quite different from the previous approaches. 

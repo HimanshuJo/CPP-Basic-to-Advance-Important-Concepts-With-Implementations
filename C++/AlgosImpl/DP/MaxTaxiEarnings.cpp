@@ -35,27 +35,26 @@ Solution 2:
 
 class Solution {
 public:
-    long long dp[(int)1e5];
-    long long recur(vector<vector<int>>&rides, int nn, int idx)
+    long long memo[(int)1e5];
+    long long dfs(vector<vector<int>>&rides, int sz, int idx)
     {
-        if(idx>=nn) return 0;
-        if(dp[idx]!=-1) return dp[idx];
+        if(idx>=sz) return 0;
+        if(memo[idx]!=-1) return memo[idx];
         for(int i=idx+1; i<nn; i++)
         {
             if(rides[i][0]>=rides[idx][1])
                 break;
         }
-        long long op1=recur(rides, nn, idx+1);
-        long long op2=rides[idx][1]-rides[idx][0]+rides[idx][2]+recur(rides,nn,i);
-        return dp[idx]=max(op1, op2);
+        long long incl=rides[idx][1]-rides[idx][0]+rides[idx][2]+recur(rides,nn,i);
+        long long excl=dfs(rides, sz, idx+1);
+        return memo[idx]=max(incl, excl);
     }
     
     long long maxTaxiEarnings(int n, vector<vector<int>>& rides) {
-        
         sort(rides.begin(),rides.end());
-        int nn=rides.size();
-        memset(dp,-1, sizeof dp);
-        return recur(rides, nn, 0);
+        int sz=rides.size();
+        memset(memo,-1, sizeof memo);
+        return dfs(rides, sz, 0);
     }
 };
 */
@@ -113,47 +112,47 @@ using namespace std;
 
 class Solution
 {
-    long long dp[100005];
+    long long memo[100005];
 
     int binarySearch(vector<vector<int>> &rides, int val)
     {
-        int s = 0, e = rides.size() - 1;
+        int left = 0, right = rides.size() - 1;
         int ans = rides.size();
-        while (s <= e)
+        while (left <= right)
         {
             int mid = s + (e - s) / 2;
             if (rides[mid][0] >= val)
             {
                 ans = mid;
-                e = mid - 1;
+                right = mid - 1;
             }
             else
             {
-                s = mid + 1;
+                left = mid + 1;
             }
         }
         return ans;
     }
 
-    long long helper(int i, vector<vector<int>> &rides)
+    long long dfs(int idx, vector<vector<int>> &rides)
     {
-        if (i == rides.size())
+        if (idx == rides.size())
         {
             return 0;
         }
-        if (dp[i] != -1)
-            return dp[i];
-        long long op1 = helper(i + 1, rides);
-        int idx = binarySearch(rides, rides[i][1]);
-        long long op2 = rides[i][1] - rides[i][0] + rides[i][2] + helper(idx, rides);
-        return dp[i] = max(op1, op2);
+        if (memo[idx] != -1)
+            return memo[idx];
+        int nwidx = binarySearch(rides, rides[idx][1]);
+        long long incl = rides[idx][1] - rides[idx][0] + rides[idx][2] + dfs(nwidx, rides);
+        long long excl = dfs(idx + 1, rides);
+        return memo[idx] = max(incl, excl);
     }
 
 public:
     long long maxTaxiEarnings(int n, vector<vector<int>> &rides)
     {
-        memset(dp, -1, sizeof dp);
+        memset(memo, -1, sizeof memo);
         sort(rides.begin(), rides.end());
-        return helper(0, rides);
+        return dfs(0, rides);
     }
 };

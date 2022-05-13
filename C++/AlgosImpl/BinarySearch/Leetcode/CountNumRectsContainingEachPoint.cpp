@@ -36,9 +36,9 @@ Therefore, we return [1, 3].
 
 Constraints:
 
-1 <= rectangles.length, points.length <= 5 * 104
+1 <= rectangles.length, points.length <= 5 * 10^4
 rectangles[i].length == points[j].length == 2
-1 <= li, xj <= 109
+1 <= li, xj <= 10^9
 1 <= hi, yj <= 100
 All the rectangles are unique.
 All the points are unique.
@@ -96,7 +96,6 @@ public:
             mp[rentries[1]].push_back(rentries[0]);
         }
         for(int i=0; i<=100; ++i){
-            vector<int>vec=mp[i];
             sort((mp[i]).begin(), (mp[i]).end());
         }
         int sz=points.size();

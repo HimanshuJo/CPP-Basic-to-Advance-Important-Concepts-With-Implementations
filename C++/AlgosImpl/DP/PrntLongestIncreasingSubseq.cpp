@@ -51,13 +51,13 @@ void constructPrntLIS(int arr[], int n){
                         arr[0]<arr[2]
                         L[0]=3 and size=1
                         L[2]={}
-                        1+1>0 therefore L[2]=L[0] -> L[2]=3 (+ curr ind number)
+                        1+1>0 therefore L[2]=L[0] -> L[2]=3 (, curr ind number)
 
                     j=1
                         arr[1]<arr[2]
                         L[1]=2 and size=1
                         L[2]=3
-                        1+1>1 therefore L[2]=L[1] -> L[2]=2 (+ curr ind number)
+                        1+1>1 therefore L[2]=L[1] -> L[2]=2 (, curr ind number)
 
                 -------
                 i=4
@@ -65,13 +65,13 @@ void constructPrntLIS(int arr[], int n){
                         arr[0]<arr[4]
                         L[0]=3 and size=1
                         L[4]={}
-                        1+1>0 therefore L[4]=L[0] -> L[4]=3 (+ curr ind number)
+                        1+1>0 therefore L[4]=L[0] -> L[4]=3 (, curr ind number)
 
                     j=1
                         arr[1]<arr[4]
                         L[1]=2 and size=1
                         L[4]={3}
-                        1+1>1 therefore L[4]=L[1] -> L[4]=2 (+ curr ind number)
+                        1+1>1 therefore L[4]=L[1] -> L[4]=2 (, curr ind number)
 
                     j=2
                         arr[2]>arr[4] X
@@ -80,7 +80,7 @@ void constructPrntLIS(int arr[], int n){
                         arr[3]<arr[4]
                         L[3]={2, 4} and size=2
                         L[4]={2}
-                        2+1>1 therefore L[4]=L[3] -> L[4]={2, 4} (+ curr ind number)
+                        2+1>1 therefore L[4]=L[3] -> L[4]={2, 4} (, curr ind number)
 
             */
             if ((arr[j]<arr[i])&&(L[j].size()+1)>L[i].size()){

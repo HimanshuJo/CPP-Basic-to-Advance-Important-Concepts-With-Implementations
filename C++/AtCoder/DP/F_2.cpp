@@ -1,3 +1,15 @@
+// F - LCS
+/*
+You are given strings s and t. Find one longest string that is a subsequence of both s and t.
+
+A subsequence of a string x is the string obtained by removing zero or more characters from x and
+concatenating the remaining characters without changing the order.
+
+Constraints
+s and t are strings consisting of lowercase English letters.
+1<=|s|,|t|<=3000
+*/
+
 #include<iostream>
 #include<vector>
 #include<string>

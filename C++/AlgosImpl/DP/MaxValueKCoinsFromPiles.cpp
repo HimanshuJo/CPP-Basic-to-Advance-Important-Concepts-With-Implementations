@@ -14,6 +14,7 @@ Output: 101
 Explanation:
 The above diagram shows the different ways we can choose k coins.
 The maximum total we can obtain is 101.
+
 Example 2:
 
 Input: piles = [[100],[100],[100],[100],[100],[100],[1,1,1,1,1,1,700]], k = 7
@@ -31,7 +32,7 @@ n == piles.length
 */
 
 /*
-Solution2:
+Solution 2:
 
 Either pick all k from previous piles or choose j from current piles & pick k-j from previous piles
 
@@ -53,7 +54,6 @@ Base cases:
 	f(0, k)=0, f(n, 0)=0
 
 -------
-
 
 class Solution {
 public:

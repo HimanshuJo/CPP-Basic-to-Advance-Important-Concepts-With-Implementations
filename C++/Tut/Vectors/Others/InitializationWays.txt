@@ -154,3 +154,11 @@ Initialization 2d vectors:
 Initialization 3d Vectors:
 
 	vector<vector<vector<double>>> f(3, vector<vector<double>>(4, vector<double>(5)));
+
+-------
+
+Initialization 4d Vectors:
+
+	int sz=100;
+
+	vector<vector<vector<vector<int>>>>vec(sz, vector<vector<vector<int>>>(2, vector<vector<int>>(2, vector<int>(2, -1))));

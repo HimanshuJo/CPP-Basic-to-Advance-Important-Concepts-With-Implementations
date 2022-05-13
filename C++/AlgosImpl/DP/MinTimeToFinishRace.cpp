@@ -1,7 +1,7 @@
 // 2188. Minimum Time to Finish the Race
 /*
 You are given a 0-indexed 2D integer array tires where tires[i] = [fi, ri] 
-indicates that the ith tire can finish its xth successive lap in fi * ri^(x-1) seconds.
+indicates that the i'th tire can finish its xth successive lap in fi * ri^(x-1) seconds.
 
 For example, if fi = 3 and ri = 2, then the tire would finish its 1st lap in 3 seconds, 
 its 2nd lap in 3 * 2 = 6 seconds, its 3rd lap in 3 * 2^2 = 12 seconds, etc.
@@ -24,6 +24,7 @@ Lap 3: Change tires to a new tire 0 for 5 seconds and then finish the lap in ano
 Lap 4: Continue with tire 0 and finish the lap in 2 * 3 = 6 seconds.
 Total time = 2 + 6 + 5 + 2 + 6 = 21 seconds.
 The minimum time to complete the race is 21 seconds.
+
 Example 2:
 
 Input: tires = [[1,10],[2,2],[3,4]], changeTime = 6, numLaps = 5
@@ -66,6 +67,9 @@ public:
         int maxLaps=0;
         for(auto &vals: tires){
             long long laptime=vals[0], laptimeTemp=vals[0];
+            // loop second ending condition:
+            // laptime with the current tyre is still under the limit
+            // and we don't need to change the tire
             for(int lap=1; lap<=numLaps&&(laptime<vals[0]+changeTime); ++lap){
                 maxLaps=max(maxLaps, lap);
                 if(best[lap]==0||best[lap]>laptimeTemp){
@@ -75,7 +79,7 @@ public:
                 laptimeTemp+=laptime;
             }
         }
-        return dfs(changeTime, numLaps, maxLaps, memo, best);
+        return (dfs(changeTime, numLaps, maxLaps, memo, best));
     }
 };
 */
@@ -83,8 +87,8 @@ public:
 /*
 Observation:
 
-    Given changeTime <= 10^5, it won't be optimal if we use any tire consecutively 
-    without change for larger than 18 laps.
+Given changeTime <= 10^5, it won't be optimal if we use any tire consecutively 
+without change for larger than 18 laps.
 
 Let's consider the extreme case, when f_i == 1 and r_i == 2
 
@@ -94,7 +98,7 @@ time on the last lap    1   2   4   8   16  32  64  128 256 512
 consecutive laps        11      12      13      14      15      16      17      18
 time on the last lap    1024    2048    4096    8192    16384   32768   65536   131072
 
-it is obvious that at the 18-th consecutive lap, it is alway better to change a tire 
+it is obvious that at the 18-th consecutive lap, it is always better to change a tire 
 (even when f_i and r_i are given their smallest possible values).
 
 this observation leads to two lemmas
@@ -147,7 +151,7 @@ public:
                 withoutChange[i][j]=withoutChange[i][j-1]*tires[i][1];
             }
             /*
-            SInce we define it as the total time, rather than just the time for the
+            Since we define it as the total time, rather than just the time for the
             j'th lap, we have to make it prefixSum
             */
             for(int j=2; j<20; ++j){
