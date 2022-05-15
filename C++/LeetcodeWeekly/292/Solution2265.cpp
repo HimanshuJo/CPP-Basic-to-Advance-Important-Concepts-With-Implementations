@@ -38,7 +38,36 @@ The number of nodes in the tree is in the range [1, 1000].
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+//O(n)
 class Solution {
+public:
+    
+    pair<int, int> dfs(TreeNode *curroot, int &ans){
+        if(curroot==nullptr) return{0, 0};
+        auto left=dfs(curroot->left, ans);
+        int l_sum=left.first, l_count=left.second;
+        auto right=dfs(curroot->right, ans);
+        int r_sum=right.first, r_count=right.second;
+        int sum=curroot->val+l_sum+r_sum;
+        int count=1+l_count+r_count;
+        if(curroot->val==sum/count) ans++;
+        return {sum, count};
+    }
+    
+    void postOrder(TreeNode *root, int &ans){
+        dfs(root, ans);
+    }
+    
+    int averageOfSubtree(TreeNode* root) {
+        int ans=0;
+        postOrder(root, ans);
+        return ans;
+    }
+};
+
+//O(n^2)
+class Solution2 {
 public:
     
     pair<int, int> bfs(TreeNode *curroot){
@@ -89,6 +118,44 @@ public:
                 }   
             }
         }
+        return ans;
+    }
+};
+
+//-------*******-------
+
+// O(n^2)
+class Solution3 {
+public:
+    
+    int dfs2(TreeNode *curroot, int &count){
+        if(curroot==nullptr) return 0;
+        count++;
+        int left=dfs2(curroot->left, count);
+        int right=dfs2(curroot->right, count);
+        return (curroot->val+left+right);
+    }
+    
+    int calSum(TreeNode *root, int &count){
+        return dfs2(root, count);
+    }
+    
+    void dfs1(TreeNode *curroot, int &ans){
+        if(curroot==nullptr) return;
+        int count=0;
+        int avg=(calSum(curroot, count))/count;
+        if(avg==curroot->val) ans++;
+        dfs1(curroot->left, ans);
+        dfs1(curroot->right, ans);
+    }
+    
+    void preOrder(TreeNode *root, int &ans){
+        dfs1(root, ans);
+    }
+    
+    int averageOfSubtree(TreeNode* root) {
+        int ans=0;
+        preOrder(root, ans);
         return ans;
     }
 };
