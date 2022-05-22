@@ -59,7 +59,6 @@ void PrintStack(stack<int> s)
 
 int main()
 {
-	// Stack s
 	stack<int> s;
 
 	s.push(1);
