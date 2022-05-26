@@ -32,7 +32,7 @@ All adjacent nodes are already visited, and node 1 is root node
 so, we stop our recursion here.
 */
 
-// Auxiliary Space :O(N) 
+// Auxiliary Space: O(N) 
 // Time Complexity: O(N)
 // C++ program to print Euler tour of a
 // tree.
@@ -80,7 +80,6 @@ void printEulerTour(int root, int N)
 		cout << Euler[i] << " ";
 }
 
-// Driver code
 int main()
 {
 	int N = 4;
