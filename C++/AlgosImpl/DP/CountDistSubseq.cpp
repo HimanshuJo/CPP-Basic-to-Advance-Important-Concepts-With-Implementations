@@ -120,7 +120,6 @@ int countSub(string str)
 	return dp[n];
 }
 
-// Driver code
 int main()
 {
 	cout << countSub("gfg");

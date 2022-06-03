@@ -1,69 +1,35 @@
-#include<iostream>
 #include<vector>
-#include<list>
+#include<iostream>
 using namespace std;
 
-class Graph{
-	int V;
-	list<int>*adj;
-	void printAllPathsUtil(int, int, bool[], int[], int&);
-
-public:
-	Graph(int V);
-	void addEdge(int u, int v);
-	void printAllPaths(int src, int dest);
-};
-
-Graph::Graph(int V){
-	this->V=V;
-	adj=new list<int>[V];
-}
-
-void Graph::addEdge(int u, int v){
-	adj[u].push_back(v);
-}
-
-void Graph::printAllPaths(int src, int dest){
-	bool *visited=new bool[V];
-	int *path=new int[V];
-	int path_index=0;
-	for(int i=0; i<V; ++i){
-		visited[i]=false;
-	}
-	printAllPathsUtil(src, dest, visited, path, path_index);
-}
-
-void Graph::printAllPathsUtil(int src, int dest, bool visited[], int path[], int &path_index){
-	visited[src]=true;
-	path[path_index]=src;
-	path_index++;
-	if(src==dest){
-		for(int i=0; i<path_index; ++i){
-			cout<<path[i]<<" ";
-		}
-		cout<<endl;
+long dfs(long *values, int sz, int idx, bool flag, vector<vector<long>>&memo){
+	if(idx>=sz) return 0;
+	if(memo[idx][flag]!=-1) return memo[idx][flag];
+    long prof=0;
+	if(!flag){
+		long curprof=max(dfs(values, sz, idx+1, false, memo), values[idx]+dfs(values, sz, idx+1, true, memo));
+		prof=max(prof, curprof);
 	} else{
-		list<int>::iterator i;
-		for(i=adj[src].begin(); i!=adj[src].end(); ++i){
-			if(!visited[*i]){
-				printAllPathsUtil(*i, dest, visited, path, path_index);
-			}
-		}
+		long curprof=max(dfs(values, sz, idx+1, true, memo), -values[idx]+dfs(values, sz, idx+1, false, memo));
+		prof=max(prof, curprof);
 	}
-	path_index--;
-	visited[src]=false;
+    return memo[idx][flag]=prof;
+}
+
+long getMaximumProfit(long *values, int n)
+{
+    int sz=n;
+	vector<vector<long>>memo(sz+1, vector<long>(2, -1));
+    return dfs(values, sz, 0, true, memo);    
 }
 
 int main(){
- 	Graph g(4);
-    g.addEdge(0, 1);
-    g.addEdge(0, 2);
-    g.addEdge(0, 3);
-    g.addEdge(2, 0);
-    g.addEdge(2, 1);
-    g.addEdge(1, 3);
-    int s = 2, d = 3;
-    cout << "Following are all different paths from " << s << " to " << d << endl;
-    g.printAllPaths(s, d);
-    return 0;
+	long *values=new long[7];
+	values[0]=1, values[1]=2, values[2]=3, values[3]=4, values[4]=5;
+	values[5]=6; values[6]=7;
+	int n=7;
+	long long ans=getMaximumProfit(values, n);
+	cout<<"\n-------\n";
+	cout<<ans<<endl;
+	delete []values;
 }
