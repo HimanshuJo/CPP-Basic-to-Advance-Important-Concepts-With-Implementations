@@ -1,12 +1,12 @@
-
-Multisets are a type of associative containers similar to set, with an exception that multiple elements can have same values.
+Multisets are a type of associative containers similar to set, 
+with an exception that multiple elements can have same values.
 
 People could always use a vector or a deque instead of a multiset 
-	(set had its use in the sense it ensured that you had no duplicates in a collection). 
+(set had its use in the sense it ensured that you had no duplicates in a collection). 
 
-	Multiset has one advantage over a vector collection – multiset collections were sorted and 
-		so when you iterated through them, you got them back in some specialized order – 
-		which could be handy in some situations. 
+Multiset has one advantage over a vector collection – multiset collections were sorted and 
+so when you iterated through them, you got them back in some specialized order – 
+which could be handy in some situations. 
 
 -------
 
@@ -33,6 +33,39 @@ Some Basic Functions associated with multiset:
 		Returns whether the multiset is empty
 
 -------
+
+/*
+Other uses of Multiset:
+
+For example:
+
+    struct PhoneBookEntry
+    {
+        std::string name;
+        std::string phoneNumber;
+    }
+
+    In this naive "phone book" entry, there's no reason to have a single entry per name in a phone book. 
+
+    There might be many. 
+
+    So you make a multiset of PhoneBookEntry, and you make the comparator be by name. 
+
+    This way, you can have multiple phone numbers with the same name.
+
+    Now you might think that a map is more suitable for this, sure. 
+
+        But this is just an example. 
+
+        If you have a structure where you don't need a key/value but you need the 
+        search properties of a set with multiple elements per key, you use a multiset.
+
+-------
+
+A Shopping Cart is a MultiSet.
+
+You can put several instances of the same item in a Shopping Cart when you want to buy more than one
+*/
 
 #include <iostream>
 #include <set>

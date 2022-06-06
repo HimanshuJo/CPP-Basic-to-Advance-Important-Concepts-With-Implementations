@@ -33,6 +33,7 @@ Constraints:
 1 <= nums1[i], nums2[j], nums3[k] <= 100
 */
 
+/*
 class Solution {
 public:
     vector<int> twoOutOfThree(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3) {
@@ -77,5 +78,74 @@ public:
             }
         }
         return ans;
+    }
+};
+*/
+
+class Solution {
+public:
+    vector<int> twoOutOfThree(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3) {
+        bool isPresent[3][101];
+        bool seen[101];
+        vector<int>res;
+        for(int i=0; i<3; ++i){
+            for(int j=0; j<=100; ++j){
+                isPresent[i][j]=false;
+                seen[j]=false;
+            }   
+        }
+        for(auto &vals: nums1)
+            isPresent[0][vals]=true;
+        for(auto &vals: nums2){
+            if(isPresent[0][vals]&&!seen[vals]){
+                res.push_back(vals);
+                seen[vals]=true;
+            }
+            isPresent[1][vals]=true;
+        }
+        for(auto &vals: nums3){
+            if((isPresent[0][vals]||isPresent[1][vals])&&!seen[vals]){
+                res.push_back(vals);
+                seen[vals]=true;
+            }
+        }
+        return res;
+    }
+};
+
+// -------*******-------
+
+class Solution {
+public:
+    
+    vector<int> twoOutOfThreeGen(vector<vector<int>>&nums){
+        int sz=nums.size();
+        vector<vector<bool>>isPresent(sz, vector<bool>(101, false));
+        bool seen[101]={false};
+        vector<int>res;
+        for(int i=0; i<sz; ++i){
+            if(i==0){
+                for(auto &vals: nums[0]){
+                    isPresent[0][vals]=true;
+                }
+            } else{
+                for(auto &vals: nums[i]){
+                    for(int x=i-1; x>=0; --x){
+                        if(isPresent[x][vals]&&!seen[vals]){
+                            res.push_back(vals);
+                            seen[vals]=true;
+                            break;
+                        }
+                    }
+                    isPresent[i][vals]=true;
+                }
+            }
+        }
+        return res;
+    }
+    
+    vector<int> twoOutOfThree(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3) {
+        vector<vector<int>>nums={nums1, nums2, nums3};
+        return twoOutOfThreeGen(nums);
     }
 };
