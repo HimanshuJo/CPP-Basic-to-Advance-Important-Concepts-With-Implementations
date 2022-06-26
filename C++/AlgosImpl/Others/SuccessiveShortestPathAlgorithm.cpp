@@ -2,6 +2,7 @@
 #include<vector>
 #include<queue>
 using namespace std;
+
 /*
 struct Edge{
 	int from, to, cap, cost;
@@ -86,7 +87,6 @@ void shortest_paths(int n, int v0, vector<int>& d, vector<int>& p) {
     queue<int> q;
     q.push(v0);
     p.assign(n, -1);
-
     while (!q.empty()) {
         int u = q.front();
         q.pop();

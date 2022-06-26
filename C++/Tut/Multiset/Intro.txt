@@ -12,25 +12,37 @@ which could be handy in some situations.
 
 Some Basic Functions associated with multiset:
 
-	begin()
+	begin() –>  O(1)
 
 		Returns an iterator to the first element in the multiset 
 	
-	end()
+	end() –> O(1)
 
 		Returns an iterator to the theoretical element that follows last element in the multiset 
 	
-	size()
+	size() –> O(1)
 
 		Returns the number of elements in the multiset 
 	
-	max_size()
+	max_size() –> O(1)
 
 		Returns the maximum number of elements that the multiset can hold 
 	
-	empty()
+	empty() –> O(1)
 
 		Returns whether the multiset is empty
+
+    insert(x) –> O(log n)
+
+        Inserts the element x in the multiset
+
+    clear() –> O(n)
+
+        Removes all the elements from the multiset
+
+    erase(x) –> O(log n)
+
+        Removes all the occurrences of x 
 
 -------
 
