@@ -2,17 +2,23 @@
 /*
 Topological sorting for Directed Acyclic Graph (DAG) is a linear ordering of vertices such that
 for every directed edge uv, vertex u comes before v in the ordering.
+
 Topological Sorting for a graph is not possible if the graph is not a DAG.
 
 For example, a topological sorting of the following graph is “5 4 2 3 1 0?.
+
 There can be more than one topological sorting for a graph.
+
 For example, another topological sorting of the following graph is “4 5 2 0 3 1″.
+
 The first vertex in topological sorting is always a vertex with in-degree as 0 (a vertex with no in-coming edges).
 */
 /*
 A DAG G has at least one vertex with in-degree 0 and one vertex with out-degree 0.
 
-Proof: There’s a simple proof to the above fact is that a DAG does not contain a cycle which means that
+Proof: 
+
+There’s a simple proof to the above fact is that a DAG does not contain a cycle which means that
 all paths will be of finite length.
 
 Now let S be the longest path from u(source) to v(destination).
@@ -24,13 +30,16 @@ Algorithm: Steps involved in finding the topological ordering of a DAG:
 
 Step-1: Compute in-degree (number of incoming edges) for each of the vertex present in the DAG and
 initialize the count of visited nodes as 0.
+
 Step-2: Pick all the vertices with in-degree as 0 and add them into a queue (Enqueue operation)
+
 Step-3: Remove a vertex from the queue (Dequeue operation) and then.
 		Increment count of visited nodes by 1.
 		Decrease in-degree by 1 for all its neighbouring nodes.
 		If in-degree of a neighbouring nodes is reduced to zero, then add it to the queue.
 
 Step 4: Repeat Step 3 until the queue is empty.
+
 Step 5: If count of visited nodes is not equal to the number of nodes in the graph then
 the topological sort is not possible for the given graph.
 
@@ -55,13 +64,16 @@ Way 2:
 
 	    for each node in Nodes
 	        If (list[node].size()!=0) then
-	        for each dest in list
-	            indegree[dest]++;
+		        for each dest in list
+		            indegree[dest]++;
+
 	Time Complexity: The outer for loop will be executed V number of times and the inner for loop will be
-		             executed E number of times, Thus overall time complexity is O(V+E).
+		             executed E number of times, 
+
+		             Thus overall time complexity is O(V+E).
+
 	The overall time complexity of the algorithm is O(V+E)
 
-Below is C++ implementation of above algorithm. The implementation uses method 2 discussed above for finding in degrees.
 */
 
 // A C++ program to print topological
@@ -176,11 +188,8 @@ void Graph::topologicalSort()
 	cout << endl;
 }
 
-// Driver program to test above functions
 int main()
 {
-	// Create a graph given in the
-	// above diagram
 	Graph g(6);
 	g.addEdge(5, 2);
 	g.addEdge(5, 0);
