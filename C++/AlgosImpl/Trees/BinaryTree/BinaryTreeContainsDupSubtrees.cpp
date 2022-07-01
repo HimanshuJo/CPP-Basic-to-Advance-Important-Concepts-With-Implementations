@@ -41,7 +41,7 @@ struct Node{
 
 struct Node* newNode(char key){
     struct Node* node=(struct Node*)malloc(sizeof(struct Node));
-    //Node* node=new Node;
+    //Node* node=new Node();
     node->key=key;
     node->left=node->right=NULL;
     return node;
@@ -51,19 +51,19 @@ unordered_set<string>subtrees;
 
 string dupSubTreesUtil(Node* root){
     string s="";
-    if (root==NULL){
+    if(root==NULL){
         return s+MK;
     }
     string lStr=dupSubTreesUtil(root->left);
-    if (lStr.compare(s)==0){
+    if(lStr.compare(s)==0){
         return s;
     }
     string rStr=dupSubTreesUtil(root->right);
-    if (rStr.compare(s)==0){
+    if(rStr.compare(s)==0){
         return s;
     }
     s=s+root->key+lStr+rStr;
-    if (s.length()>3&&subtrees.find(s)!=subtrees.end()){
+    if(s.length()>3&&subtrees.find(s)!=subtrees.end()){
         return "";
     }
     subtrees.insert(s);
