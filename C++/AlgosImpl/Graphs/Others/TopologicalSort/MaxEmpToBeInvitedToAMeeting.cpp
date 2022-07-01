@@ -48,6 +48,7 @@ favorite[i] != i
 */
 
 class Solution{
+	
 	int max_loop_sz, max_comb_sz;
 
 	public:

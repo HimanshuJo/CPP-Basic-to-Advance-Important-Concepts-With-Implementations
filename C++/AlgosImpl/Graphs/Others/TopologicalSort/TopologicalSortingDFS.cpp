@@ -19,7 +19,7 @@ Topological Sorting vs Depth First Traversal (DFS):
 
 						 5 	        4
 					d/       \d  d/   \d
-				    2         0        1
+				    2          0       1
 				    \d                /u
 					 \d              /u
 					          3
@@ -57,7 +57,7 @@ class Graph {
 	// No. of vertices'
 	int V;
 
-	// Pointer to an array containing adjacency listsList
+	// Pointer to an array containing adjacency list
 	list<int>* adj;
 
 	// A function used by topologicalSort

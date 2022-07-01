@@ -46,8 +46,7 @@ public:
             for(int i=0; i<n/2; ++i){
                 if(i%2==0){
                     newNums[i]=min(nums[2*i], nums[2*i+1]);
-                }
-                if(i%2!=0){
+                } else{
                     newNums[i]=max(nums[2*i], nums[2*i+1]);
                 }
             }
@@ -65,13 +64,11 @@ class Solution2 {
 public:
     int minMaxGame(vector<int>& nums) {
         int n=nums.size();
-        vector<int>newNums(n/2, 0);
         for(int j=0; j<n/2; ++j){
             for(int i=0; i<n/2; ++i){
                 if(i%2==0){
                     nums[i]=min(nums[2*i], nums[2*i+1]);
-                }
-                if(i%2!=0){
+                } else{
                     nums[i]=max(nums[2*i], nums[2*i+1]);
                 }
             }
