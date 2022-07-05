@@ -141,60 +141,7 @@ public:
 };
 */
 
-class Solution {
-public:
-    int totalStrength(vector<int>& strength) {
-        int res=0, runningSm=0, mod=1e9+7, n=strength.size();
-        stack<int>stk;
-        vector<int>acc(n+2, 0);
-        for(int i=0; i<=n; ++i){
-            int currNm=i<n?strength[i]:0;
-            runningSm=(runningSm+currNm)%mod;
-            acc[i+1]=(runningSm+acc[i])%mod;
-            while(!stk.empty()&&strength[stk.top()]>currNm){
-                int currIdx=stk.top();
-                stk.pop();
-                int l=stk.empty()?-1:stk.top();
-                long long lacc=l<0?acc[currIdx]:acc[currIdx]-acc[l];
-                long long racc=acc[i]-acc[currIdx];
-                int ln=currIdx-l, rn=i-currIdx;
-                res=(res+(racc*ln-lacc*rn)%mod*strength[currIdx]%mod)%mod;
-            }
-            stk.push(i);
-        }
-        return (res+mod)%mod;
-    }
-};
-
-// -------*******-------
-
-class Solution2 {
-public:
-    int totalStrength(vector<int>& strength) {
-        int res=0, runningSm=0, mod=1e9+7, n=strength.size();
-        vector<int>stack{}, acc(n+2, 0);
-        for(int i=0; i<=n; ++i){
-            int currNm=i<n?strength[i]:0;
-            runningSm=(runningSm+currNm)%mod;
-            acc[i+1]=(runningSm+acc[i])%mod;
-            while(!stack.empty()&&strength[stack.back()]>currNm){
-                int currIdx=stack.back();
-                stack.pop_back();
-                int l=stack.empty()?-1:stack.back();
-                long long lacc=l<0?acc[currIdx]:acc[currIdx]-acc[l];
-                long long racc=acc[i]-acc[currIdx];
-                int ln=currIdx-l, rn=i-currIdx;
-                res=(res+(racc*ln-lacc*rn)%mod*strength[currIdx]%mod)%mod;
-            }
-            stack.push_back(i);
-        }
-        return (res+mod)%mod;
-    }
-};
-
-// -------*******-------
-
-class Solution3 {
+class Solution1 {
 public:
     int totalStrength(vector<int>& strength) {
         int mod=1e9+7;
@@ -237,5 +184,58 @@ public:
             res=(res+mod)%mod;
         }
         return (int) res;
+    }
+};
+
+// -------*******-------
+
+class Solution2 {
+public:
+    int totalStrength(vector<int>& strength) {
+        int res=0, runningSm=0, mod=1e9+7, n=strength.size();
+        stack<int>stk;
+        vector<int>acc(n+2, 0);
+        for(int i=0; i<=n; ++i){
+            int currNm=i<n?strength[i]:0;
+            runningSm=(runningSm+currNm)%mod;
+            acc[i+1]=(runningSm+acc[i])%mod;
+            while(!stk.empty()&&strength[stk.top()]>currNm){
+                int currIdx=stk.top();
+                stk.pop();
+                int l=stk.empty()?-1:stk.top();
+                long long lacc=l<0?acc[currIdx]:acc[currIdx]-acc[l];
+                long long racc=acc[i]-acc[currIdx];
+                int ln=currIdx-l, rn=i-currIdx;
+                res=(res+(racc*ln-lacc*rn)%mod*strength[currIdx]%mod)%mod;
+            }
+            stk.push(i);
+        }
+        return (res+mod)%mod;
+    }
+};
+
+// -------*******-------
+
+class Solution3 {
+public:
+    int totalStrength(vector<int>& strength) {
+        int res=0, runningSm=0, mod=1e9+7, n=strength.size();
+        vector<int>stack{}, acc(n+2, 0);
+        for(int i=0; i<=n; ++i){
+            int currNm=i<n?strength[i]:0;
+            runningSm=(runningSm+currNm)%mod;
+            acc[i+1]=(runningSm+acc[i])%mod;
+            while(!stack.empty()&&strength[stack.back()]>currNm){
+                int currIdx=stack.back();
+                stack.pop_back();
+                int l=stack.empty()?-1:stack.back();
+                long long lacc=l<0?acc[currIdx]:acc[currIdx]-acc[l];
+                long long racc=acc[i]-acc[currIdx];
+                int ln=currIdx-l, rn=i-currIdx;
+                res=(res+(racc*ln-lacc*rn)%mod*strength[currIdx]%mod)%mod;
+            }
+            stack.push_back(i);
+        }
+        return (res+mod)%mod;
     }
 };

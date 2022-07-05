@@ -40,8 +40,10 @@ Approach 2:
 Idea: The idea is to use DFS and find the articulation points simultaneously with some extra coding. 
 As DFS takes O(V+E) time, therefore the time complexity of this approach will be O(V+E).
  
-We will visit the vertices in the tree form known as the DFS tree. In the DFS tree, a vertex u in the graph 
-is the parent of another vertex v if v is adjacent to u and discovered by u.
+We will visit the vertices in the tree form known as the DFS tree. 
+
+In the DFS tree, a vertex u in the graph is the parent of another vertex v 
+if v is adjacent to u and discovered by u.
 
 In the DFS tree, a vertex u is articulation point if any of the following conditions is true:
 
@@ -72,12 +74,15 @@ i.e., parent[u] = NULL and has more than two children, it is an articulation poi
 
 	As a result, we keep an additional array low[] defined as follows.
 
-	low[u] = min(disc[u], disc[k]), where k is an ancestor of node u, and there is a back edge from some descendant of u to k.
+	low[u] = min(disc[u], disc[k]), where k is an ancestor of node u, and 
+	there is a back edge from some descendant of u to k.
 
 	After determining the lowest discovery number for all vertices, the algorithm takes a pair of vertices to 
 	determine articulation points. 
 
-	Consider the vertices V1 and V2. V1 is the parent vertex, while V2 is the child vertex.
+	Consider the vertices V1 and V2. 
+
+		V1 is the parent vertex, while V2 is the child vertex.
 
 	If the lowest discovery number of V1 is more than or equal to the lowest discovery number of V2, 
 	then V1 is an articulation point.
@@ -98,6 +103,11 @@ void dfs(int node, vector<vector<int>>&adj, vector<int>&disc, vector<int>&low,
 		if(seen[nei]==false){
 			dfs(nei, adj, disc, low, node, seen, timer, res);
 			low[node]=min(low[node], low[nei]);
+			/*
+				After returning from the current node, if the 'low' for any of it's neighbor>='discovery time'
+				of the current node, that means removing the current node will make the graph disconnected,
+				or if the graph is disconnected it will result in increase in connected components
+			*/
 			if(low[nei]>=disc[node]&&parent!=-1){
 				/* the parent node is the articulation point
 					removing that will result in more connected components

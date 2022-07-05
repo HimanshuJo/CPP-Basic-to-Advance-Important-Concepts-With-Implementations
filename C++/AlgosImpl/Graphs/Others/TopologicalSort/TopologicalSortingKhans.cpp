@@ -81,24 +81,13 @@ Way 2:
 #include <bits/stdc++.h>
 using namespace std;
 
-// Class to represent a graph
 class Graph {
-	// No. of vertices'
 	int V;
-
-	// Pointer to an array containing
-	// adjacency listsList
 	list<int>* adj;
 
 public:
-	// Constructor
 	Graph(int V);
-
-	// Function to add an edge to graph
 	void addEdge(int u, int v);
-
-	// prints a Topological Sort of
-	// the complete graph
 	void topologicalSort();
 };
 
@@ -113,14 +102,8 @@ void Graph::addEdge(int u, int v)
 	adj[u].push_back(v);
 }
 
-// The function to do
-// Topological Sort.
 void Graph::topologicalSort()
 {
-	// Create a vector to store
-	// indegrees of all
-	// vertices. Initialize all
-	// indegrees as 0.
 	vector<int> in_degree(V, 0);
 
 	// Traverse adjacency lists
@@ -182,7 +165,6 @@ void Graph::topologicalSort()
 		return;
 	}
 
-	// Print topological order
 	for (int i = 0; i < top_order.size(); i++)
 		cout << top_order[i] << " ";
 	cout << endl;
@@ -197,9 +179,7 @@ int main()
 	g.addEdge(4, 1);
 	g.addEdge(2, 3);
 	g.addEdge(3, 1);
-
 	cout << "Following is a Topological Sort of\n";
 	g.topologicalSort();
-
 	return 0;
 }

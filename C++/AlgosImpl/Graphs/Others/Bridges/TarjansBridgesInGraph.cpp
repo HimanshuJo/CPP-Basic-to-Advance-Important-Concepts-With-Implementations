@@ -18,8 +18,8 @@ void dfs(int node, int &timer, int parent, vector<int>&low, vector<int>&disc,
              if(seen[nei]==false){
                  dfs(nei, timer, node, low, disc, adj, seen, res);
                  /*
-                 	the child's low could have been updated to a new min via a back edge
-                 	on returning parent's low should also be updated accordingly
+                 	the child's low could have been updated to a new min via a back edge,
+                 	so on returning parent's low should also be updated accordingly
                  */
                  low[node]=min(low[node], low[nei]);
                  // check for a bridge edge

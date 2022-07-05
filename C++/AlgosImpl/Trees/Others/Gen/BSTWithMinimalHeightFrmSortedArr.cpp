@@ -1,3 +1,8 @@
+/*
+	Given a sorted(increasing order) array with unique integer elements, write and algo
+	to create a binary search tree with minimal height
+*/
+
 #include<vector>
 #include<iostream>
 #include<algorithm>
