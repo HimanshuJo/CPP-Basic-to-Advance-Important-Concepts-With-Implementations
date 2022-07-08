@@ -1,67 +1,37 @@
+#include<climits>
 #include<vector>
 #include<iostream>
-#include<algorithm>
 using namespace std;
 
-class Node{
-public:
-	int val;
-	Node *left, *right;
-};
-
-Node* createNode(int value){
-	Node *nwNode=new Node();
-	nwNode->val=value;
-	nwNode->left=nwNode->right=nullptr;
-	return nwNode; 
+int dfs(vector<int>&nums, const int sz, int idx, vector<int>&memo){
+    if(idx>=sz) return 0;
+    if(memo[idx]!=0) return memo[idx];
+    int ans=INT_MIN;
+    int pk=nums[idx]+dfs(nums, sz, idx+2, memo);
+    int ntpk=0+dfs(nums, sz, idx+1, memo);
+    ans=max(ans, max(pk, ntpk));
+    return memo[idx]=ans;
 }
 
-void dispInOrder(Node *head){
-	if(head->left!=nullptr) dispInOrder(head->left);
-	cout<<head->val<<" ";
-	if(head->right!=nullptr) dispInOrder(head->right);
-}
-
-void dispPreOrder(Node *head){
-	cout<<head->val<<" ";
-	if(head->left!=nullptr) dispPreOrder(head->left);
-	if(head->right!=nullptr) dispPreOrder(head->right);
-}
-
-void dispPostOrder(Node *head){
-	if(head->left!=nullptr) dispPostOrder(head->left);
-	if(head->right!=nullptr) dispPostOrder(head->right);
-	cout<<head->val<<" ";
-}
-
-Node* dfs(vector<int>&arr, int start, int end){
-	if(start>end) return nullptr;
-	int mid=start+(end-start)/2;
-	Node *head=createNode(arr[mid]);
-	head->left=dfs(arr, start, mid-1);
-	head->right=dfs(arr, mid+1, end);
-	return head;
-}
-
-Node* createMinimalBST(vector<int>&arr){
-	int end=arr.size();
-	return dfs(arr, 0, end-1);
+int maximumNonAdjacentSum(vector<int> &nums){
+    int sz=nums.size();
+    vector<int>dp(sz, 0);
+    for(int idx=0; idx<sz; ++idx){
+        int pk=nums[idx], ntpk=0;
+        if(idx>=2){
+            pk+=dp[idx-2];
+        }
+        if(idx-1>=0)
+            ntpk=dp[idx-1];
+        dp[idx]=max(pk, ntpk);
+    }
+    for(auto &vals: dp)
+       cout<<vals<<" ";
+    return 0;
 }
 
 int main(){
-	vector<int>arr{1, 3, 2, 10, 11, 12, 13};
-	sort(arr.begin(), arr.end());
-	/*
-		 10
-	   /    \
-	  2     12
-	 / \   /  \
-	1   3 11   13
-	*/
-	Node *head=createMinimalBST(arr);
-	dispInOrder(head);
-	cout<<"\n-------\n";
-	dispPreOrder(head);
-	cout<<"\n-------\n";
-	dispPostOrder(head);
+    vector<int>nums{2, 1, 4, 9};
+    int ans=maximumNonAdjacentSum(nums);
+    cout<<ans<<endl;
 }
