@@ -51,20 +51,25 @@ vector<vector<int>> createLevelList1(Node *head){
 
 void dfs(Node *head, vector<vector<int>>&res, int level){
 	if(head==nullptr) return;
-	vector<int>curr;
-	if(curr.size()==level){
-		res.push_back(curr);
-	} else{
-        res.resize(level+1);
-		curr=res[level];
-	}
-	curr.push_back(head->val);
-	dfs(head->left, res, level+1);
-	dfs(head->right, res, level+1);
+    res[level].push_back(head->val);
+    if(head->left!=nullptr){
+        dfs(head->left, res, level+1);
+    }
+    if(head->right!=nullptr){
+        dfs(head->right, res, level+1);
+    }
+}
+
+int findLevels(Node *head){
+    if(head==nullptr) return 0;
+    if(head->left) return 1+findLevels(head->left);
+    return 0;
 }
 
 vector<vector<int>> createLevelList2(Node *head){
 	vector<vector<int>>res;
+    int totLevel=findLevels(head);
+    res.resize(totLevel+1);
 	dfs(head, res, 0);
 	return res;
 }
@@ -105,7 +110,7 @@ int main(){
 		cout<<endl;
 	}
 	cout<<"\n-------\n";
-	for(auto &entries: lists){
+	for(auto &entries: lists_){
 		for(auto &nums: entries){
 			cout<<nums<<" ";
 		}

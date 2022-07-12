@@ -47,9 +47,9 @@ vector<vector<int>> findBridges(vector<vector<int>> &edges, int v, int e) {
     }
     vector<int>disc(v, -1);
     vector<int>low(v, -1);
+    vector<bool>seen(v, false);
     int parent=-1;
     int timer=0;
-    vector<bool>seen(v, false);
     vector<vector<int>>res;
     for(int i=0; i<v; ++i){
         if(seen[i]==false){

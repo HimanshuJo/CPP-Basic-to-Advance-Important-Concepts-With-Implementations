@@ -1,5 +1,5 @@
 /*
-	Given a sorted(increasing order) array with unique integer elements, write and algo
+	Given a sorted(increasing order) array with unique integer elements, write an algo
 	to create a binary search tree with minimal height
 */
 

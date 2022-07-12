@@ -131,8 +131,8 @@ vector<int> findArticulationPoints(const int vertices, vector<vector<int>>&edges
 	}
 	vector<int>disc(vertices, -1);
 	vector<int>low(vertices, -1);
-	int parent=-1;
 	vector<bool>seen(vertices, false);
+	int parent=-1;
 	int timer=0;
 	vector<int>res;
 	for(int i=0; i<vertices; ++i){
