@@ -15,8 +15,6 @@ void printList(Node* n)
     }
 }
 
-// Program to create a simple linked
-// list with 3 nodes
 int main()
 {
 	Node* head = NULL;
