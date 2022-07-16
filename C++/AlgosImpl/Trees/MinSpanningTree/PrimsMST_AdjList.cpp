@@ -49,18 +49,18 @@ void makegraph(int m, int n, int wght) {
 }
 
 int main() {
-    makegraph(5, 4, 5);   //insert the node and edge
-    makegraph(5, 1, 3);   //insert the node and edge
-    makegraph(1, 2, 3);   //insert the node and edge
-    makegraph(1, 4, 7);   //insert the node and edge
-    makegraph(2, 5, 11);  //insert the node and edge
-    makegraph(6, 4, 1);   //insert the node and edge
-    makegraph(5, 6, 7);   //insert the node and edge
-    makegraph(3, 1, 3);   //insert the node and edge
-    makegraph(3, 2, 7);   //insert the node and edge
+    makegraph(5, 4, 5);
+    makegraph(5, 1, 3);
+    makegraph(1, 2, 3);
+    makegraph(1, 4, 7);
+    makegraph(2, 5, 11);
+    makegraph(6, 4, 1);
+    makegraph(5, 6, 7);
+    makegraph(3, 1, 3)
+    makegraph(3, 2, 7);
 
-    prims();              //call the function the perform the minimum spanning tree algorithm
-    print_graph();        //print the final minimum spanning tree
+    prims();
+    print_graph();
 
     return 0;
 }

@@ -16,10 +16,12 @@ struct Node* createNewNode(int val){
 }
 
 void dispTreeTopToBottom(unordered_map<struct Node*, struct Node*>&parent, struct Node* node){
+	cout<<"Parents of individual nodes "<<endl;
 	for(auto &entries: parent){
 		if(entries.second!=nullptr) cout<<entries.first->val<<" : "<<entries.second->val<<endl;
 	}
 	cout<<"-------\n";
+	cout<<"Ancestors of node "<<node->val<<endl;
 	while(parent[node]){
 		cout<<parent[node]->val<<" ";
 		node=parent[node];
@@ -79,7 +81,30 @@ int main(){
 	head->left->right=createNewNode(3);
 	head->right->left=createNewNode(11);
 	head->right->right=createNewNode(13);
+	/*
+		 10
+	   /    \
+	  2     12
+	 / \   /  \
+	1   3 11   13
+
+	*/
 	findAncestors1(head, head->left->right);
 	cout<<"***---***\n";
 	findAncestors2(head, head->left->right);
 }
+
+/*
+Parents of individual nodes
+11 : 12
+13 : 12
+1 : 2
+3 : 2
+2 : 10
+12 : 10
+-------
+Ancestors of node 3
+2 10
+***---***
+2 10
+*/

@@ -96,6 +96,8 @@ which is a path that walks through each edge exactly once.
 
 Some properties of Eulerian path
 
+-------
+
 Existence:
 
 A graph has an Eulerian Path if and only if
@@ -110,13 +112,18 @@ In the first case (out[i] == in[i] for each node i), all Eulerian Paths are also
 
 a node with out[i] == in[i] + 1 must be the starting point of an Eulerian Path (if there exists one)
 
+-------
+
 Algorithm
 
-find the starting point of an Eulerian Path.
-if we have out[i] == in[i] for all i, we can start at an arbitrary node.
-perform postorder DFS on the graph, as we "walk" through an edge, we erase (or mark it visited) the walked edge.
-we may reach the same node many times, but we have to pass each edge exactly once.
+    find the starting point of an Eulerian Path.
 
+    if we have out[i] == in[i] for all i, we can start at an arbitrary node.
+
+    perform postorder DFS on the graph, as we "walk" through an edge, we erase 
+    (or mark it visited) the walked edge.
+
+    we may reach the same node many times, but we have to pass each edge exactly once.
 
 */
 

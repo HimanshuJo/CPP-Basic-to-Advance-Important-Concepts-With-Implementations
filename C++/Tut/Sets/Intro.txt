@@ -139,7 +139,7 @@ set::end()
 	Returns:
 		
 		This function returns a bidirectional
-			iterator pointing to next of the last element.
+		iterator pointing to next of the last element.
 
 	-------
 
@@ -224,8 +224,16 @@ Access an element in the set:
 
 To access a particular index, you can use this :
 
-	int first = *next(myset.begin(),0);
-	int third = *next(myset.begin(),2);
+	int first = *next(myset.begin(), 0);
+	int third = *next(myset.begin(), 2);
+
+	-------
+
+	              OR
+
+	std::set<int>::iterator it = my_set.begin();
+	std::advance(it, n);
+	int x = *it;
 
 	-------
 
@@ -233,10 +241,10 @@ To access a particular index, you can use this :
 	using namespace std;
 
 	int main(){
-		set<int>s={1,2,3,4,5};
-		int eleAtZerothInd=*next(s.begin(),0);
-		int eleAtSecondInd=*next(s.begin(),2);
-		int eleAtFourthInd=*next(s.begin(),4);
+		set<int>s={1, 2, 3, 4, 5};
+		int eleAtZerothInd=*next(s.begin(), 0);
+		int eleAtSecondInd=*next(s.begin(), 2);
+		int eleAtFourthInd=*next(s.begin(), 4);
 		cout<<eleAtZerothInd<<endl;
 		cout<<eleAtSecondInd<<endl;
 		cout<<eleAtFourthInd<<endl;
@@ -251,7 +259,7 @@ To access a particular index, you can use this :
 
 	-------
 
-	If the index provided is out of range of the set, set will ouput the last element
+	If the index provided is out of range of the set, set will output the last element
 
 	#include<bits/stdc++.h>
 	using namespace std;

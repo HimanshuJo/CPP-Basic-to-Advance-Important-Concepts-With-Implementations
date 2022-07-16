@@ -71,8 +71,10 @@ Like other Dynamic Programming Problems, the algorithm calculates shortest paths
 		There can be maximum |V| – 1 edges in any simple path, that is why the outer loop runs |v| – 1 times. 
 
 		The idea is, assuming that there is no negative weight cycle, if we have calculated shortest paths 
-		with at most i edges, then an iteration over all edges guarantees to give shortest path with at-most (i+1) edges
+		with at most i edges, then an iteration over all edges guarantees to give 
+		shortest path with at-most (i+1) edges
 */
+
 // Time Complexity: O(VE)
 #include<iostream>
 #include<climits>

@@ -14,9 +14,12 @@ For example, following is a strongly connected graph.
               4->2
 
 It is easy for undirected graph, we can just do a BFS and DFS starting from any vertex.
+
 If BFS or DFS visits all vertices, then the given undirected graph is connected.
 
-This approach won’t work for a directed graph. For example, consider the following graph which is not strongly connected.
+This approach won’t work for a directed graph. 
+
+For example, consider the following graph which is not strongly connected.
 
                     0->1->2->3->4
 
@@ -26,15 +29,19 @@ we cannot reach all vertices.
 
 /*
 A simple idea is to use a all pair shortest path algorithm like Floyd Warshall or find Transitive Closure of graph.
-Time complexity of this method would be O(v3).
+Time complexity of this method would be O(v^3).
 
-We can also do DFS V times starting from every vertex. If any DFS, doesn’t visit all vertices,
-then graph is not strongly connected. 
+We can also do DFS V times starting from every vertex. 
+If any DFS, doesn’t visit all vertices, then graph is not strongly connected. 
 
 This algorithm takes O(V*(V+E)) time which can be same as transitive closure for a dense graph.
 
-A better idea can be Strongly Connected Components (SCC) algorithm. We can find all SCCs in O(V+E) time.
-If number of SCCs is one, then graph is strongly connected. The algorithm for SCC does extra work as it finds all SCCs.
+A better idea can be Strongly Connected Components (SCC) algorithm. 
+
+We can find all SCCs in O(V+E) time.
+
+If number of SCCs is one, then graph is strongly connected. 
+The algorithm for SCC does extra work as it finds all SCCs.
 
 Following is Kosaraju’s DFS based simple algorithm that does two DFS traversals of graph:
 1) Initialize all vertices as not visited.

@@ -1,11 +1,70 @@
-// time complexity is O(E log V)
+/*
+	A minimum spanning tree (MST) or minimum weight spanning tree is a 
+	subset of the edges of a connected, edge-weighted undirected graph that 
+	connects all the vertices together, without any cycles and with the minimum 
+	possible total edge weight.
+
+	That is, it is a spanning tree whose sum of edge weights is as small as possible.
+
+	More generally, any edge-weighted undirected graph (not necessarily connected) has 
+	a minimum spanning forest, which is a union of the minimum spanning trees for 
+	its connected components.
+
+	-------
+
+	There are many use cases for minimum spanning trees. 
+
+		One example is a telecommunications company trying to lay cable in a new neighborhood. 
+
+		If it is constrained to bury the cable only along certain paths (e.g. roads), 
+		then there would be a graph containing the points (e.g. houses) connected by 
+		those paths. 
+
+		Some of the paths might be more expensive, because they are longer, or require the 
+		cable to be buried deeper; these paths would be represented by edges with larger weights. 
+
+		Currency is an acceptable unit for edge weight – there is no requirement for edge 
+		lengths to obey normal rules of geometry such as the triangle inequality
+
+	-------
+
+	A spanning tree for that graph would be a subset of those paths that has no 
+	cycles but still connects every house; there might be several spanning trees possible. 
+
+	A minimum spanning tree would be one with the lowest total cost, representing the 
+	least expensive path for laying the cable.
+
+	-------
+
+	Properties:
+
+		Possible multiplicity:
+
+			If there are n vertices in the graph, then each spanning tree has n − 1 edges.
+
+			There may be several minimum spanning trees of the same weight; 
+			in particular, if all the edge weights of a given graph are the same, 
+			then every spanning tree of that graph is minimum.
+
+		Uniqueness
+			
+			If each edge has a distinct weight then there will be only one, 
+			unique minimum spanning tree. 
+
+			This is true in many realistic situations, such as the telecommunications 
+			company example above, where it's unlikely any two paths have exactly 
+			the same cost. 
+
+			This generalizes to spanning forests as well.
+*/
+// Time complexity is O(E log V)
 /*
 Prim's:
 	It starts to build the Minimum Spanning Tree from any vertex in the graph.
 
 	It traverses one node more than one time to get the minimum distance.
 
-	Prim’s algorithm has a time complexity of O(V2), V being the number of vertices and 
+	Prim’s algorithm has a time complexity of O(V^2), V being the number of vertices and 
 	can be improved up to O(E log V) using Fibonacci heaps.
 
 	Prim’s algorithm gives connected component as well as it works only on connected graph.
