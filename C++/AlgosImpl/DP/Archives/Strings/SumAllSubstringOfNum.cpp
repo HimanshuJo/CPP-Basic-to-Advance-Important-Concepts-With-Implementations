@@ -43,8 +43,6 @@ Sum of all substrings of a string representing a number
 				sumofdigit[i]  =  (i+1) * num[i] + 10 * sumofdigit[i-1]
 */
 
-// C++ program to print sum of all substring of
-// a number represented as a string
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -53,7 +51,6 @@ int toDigit(char ch)
 	return (ch - '0');
 }
 
-// Returns sum of all substring of num
 int sumOfSubstrings(string num)
 {
 	int n = num.length();

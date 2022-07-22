@@ -20,6 +20,35 @@ It is possible for Mr. X to rob the same amount of money by looting two differen
 Just print the maximum possible robbed amount, irrespective of sets of houses robbed.
 */
 
+class Solution {
+public:
+    
+    int dfs(vector<int>&nums, int idx, int start, int memo[][2]){
+        if(idx<start) return 0;
+        if(memo[idx][start]!=-1) return memo[idx][start];
+        int maxx=max(dfs(nums, idx-1, start, memo), dfs(nums, idx-2, start, memo)+nums[idx]);
+        return memo[idx][start]=maxx;
+    }
+    
+    int rob(vector<int>& nums) {
+        int sz=nums.size();
+        int memo[101][2];
+        for(int i=0; i<101; ++i)
+            for(int j=0; j<2; ++j)
+                memo[i][j]=-1;
+        if(nums.size()==1) return nums[0];
+        int n=nums.size();
+        int ans1=dfs(nums, n-2, 0, memo);
+        for(int i=0; i<101; ++i)
+            for(int j=0; j<2; ++j)
+                memo[i][j]=-1;
+        int ans2=dfs(nums, n-1, 1, memo);
+        return max(ans1, ans2);
+    }
+};
+
+// -------*******-------
+
 long long int hRUtil(vector<int>&values){
     int sz=values.size();
     long long int prev1=0, prev2=0;
