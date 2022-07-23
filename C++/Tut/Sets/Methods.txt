@@ -1,31 +1,10 @@
 begin() – Returns an iterator to the first element in the set.
 
--------
-
 end() – Returns an iterator to the theoretical element that follows last element in the set.
-
--------
 
 rbegin()– Returns a reverse iterator pointing to the last element in the container.
 
 rend()– Returns a reverse iterator pointing to the theoretical element right before the first element in the set container.
-
-#include<bits/stdc++.h>
-using namespace std;
-
-int main(){
-	set<int>s={1,2,3,4,5};
-	for (auto it=s.rbegin(); it!=s.rend(); ++it){
-		cout<<(*it)<<" ";
-	}
-	return 0;
-}
-
-Output:
-
-5 4 3 2 1
-
--------
 
 crbegin()– Returns a constant iterator pointing to the last element in the container.
 

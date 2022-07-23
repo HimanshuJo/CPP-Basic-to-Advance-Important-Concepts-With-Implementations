@@ -30,10 +30,8 @@ Return value
     In the versions returning a value, this is an iterator pointing to the newly inserted element in the multiset.
 
     Member type iterator is a bidirectional iterator type that points to elements.
-
 */
 
-// multimap::insert (C++98)
 #include <iostream>
 #include <map>
 
@@ -55,7 +53,6 @@ int main ()
     std::multimap<char, int> anothermultimap;
     anothermultimap.insert(mymultimap.begin(), mymultimap.find('c'));
 
-    // showing contents:
     std::cout << "mymultimap contains:\n";
     for (it = mymultimap.begin(); it != mymultimap.end(); ++it)
         std::cout << (*it).first << " => " << (*it).second << '\n';

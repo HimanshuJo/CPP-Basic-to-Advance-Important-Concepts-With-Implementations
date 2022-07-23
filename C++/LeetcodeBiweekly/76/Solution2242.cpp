@@ -83,7 +83,7 @@ E is edges count
 */
 
 /*
-TLE:
+TLE: 39 / 74
 
 class Solution {
 public:

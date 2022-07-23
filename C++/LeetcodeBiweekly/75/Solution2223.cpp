@@ -40,7 +40,7 @@ s consists of lowercase English letters.
 */
 
 /*
-TLE:
+TLE: 88 / 150
 
 class Solution {
 public:

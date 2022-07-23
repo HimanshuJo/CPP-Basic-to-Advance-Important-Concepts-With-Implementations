@@ -35,7 +35,7 @@ nums1 and nums2 are permutations of [0, 1, ..., n - 1]
 */
 
 /*
-TLE:
+TLE: 20 / 148 
 
 class Solution {
 public:

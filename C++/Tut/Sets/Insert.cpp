@@ -1,6 +1,8 @@
+/*
 set::insert:
 
-	is a built-in function in C++ STL which insert elements in the set container or inserts the elements from a position to another position in the set to a different set.
+	is a built-in function in C++ STL which insert elements in the set container or 
+	inserts the elements from a position to another position in the set to a different set.
 
 Syntax 1: 
  
@@ -12,19 +14,13 @@ Return Value: The function returns an iterator pointing to the inserted element 
 
 Time Complexity: log(N) Where ‘N’ is the number of elements in the set 
 
--------
+*/
 
-// CPP program to demonstrate the
-// set::insert(element) function
 #include <bits/stdc++.h>
 using namespace std;
 int main()
 {
-
 	set<int> s;
-
-	// Function to insert elements
-	// in the set container
 	s.insert(1);
 	s.insert(4);
 	s.insert(2);
@@ -38,11 +34,13 @@ int main()
 	return 0;
 }
 
+/*
 Output:
 
 The elements in set are: 1 2 3 4 5
+*/
 
--------
+/*
 
 Syntax 2: 
  
@@ -51,6 +49,7 @@ Syntax 2:
 Parameters: The function accepts two parameter which are described below: 
  
 	element: It specifies the element to be inserted in the set container.
+
 	position: It does not specify the position where the insertion is to be done, 
 			  it only points to a position from where the searching operation is to be started for 
 			  insertion to make the process faster. 
@@ -63,22 +62,20 @@ Syntax:
  
 	void set_name.insert(iterator position1, iterator position2)
 
-Parameters: The function accepts two parameters position1 and position2 which specifies the range of elements. 
+Parameters: The function accepts two parameters position1 and position2 which specifies the range of elements.
+
 			All the elements in the range [position1, last) are inserted in another set container. 
 
-Return Value: No return type => void. 
+Return Value: No return type => void.
+*/ 
 
-// CPP program to demonstrate the
-// set::insert(iterator1, iterator2) function
+/*
 #include <bits/stdc++.h>
 using namespace std;
+
 int main()
 {
-
 	set<int> s1;
-
-	// Function to insert elements
-	// in the set container
 	s1.insert(1);
 	s1.insert(4);
 	s1.insert(2);
@@ -107,3 +104,4 @@ Output:
 
 The elements in set1 are: 1 2 3 4 5 
 The elements in set2 are: 3 4 5
+*/

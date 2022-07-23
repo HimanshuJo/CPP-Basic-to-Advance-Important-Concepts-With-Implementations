@@ -22,7 +22,7 @@ Constraints:
 */
 
 /*
-TLE:
+TLE: 172 / 379
 
 class Solution {
 public:
@@ -45,7 +45,31 @@ public:
 };
 */
 
-class Solution {
+class Solution1 {
+public:
+    vector<long long> sumOfThree(long long num) {
+        long long left=-1;
+        long long right=num;
+        vector<long long>res;
+        while(left<=right){
+            long long mid=left+(right-left)/2;
+            long long temp=mid+(mid-1)+(mid+1);;
+            if(temp==num){
+                res.push_back(mid-1);
+                res.push_back(mid);
+                res.push_back(mid+1);
+                break;
+            } else if(temp>num){
+                right=mid-1;
+            } else left=mid+1; 
+        }
+        return res;
+    }
+};
+
+// -------*******-------
+
+class Solution2 {
 public:
     vector<long long> sumOfThree(long long num) {
         if(num%3!=0) return {};

@@ -47,7 +47,7 @@ Constraints:
 1 <= left <= right <= 10^4
 */
 /*
-Solution 2: TLE
+Solution 2: TLE 65 / 291
 
 import java.math.BigInteger;
 

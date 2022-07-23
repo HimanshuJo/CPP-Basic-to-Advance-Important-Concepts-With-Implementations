@@ -37,8 +37,6 @@ public:
             tmp.push_back(val_);
             head=head->next;
         }
-        /*for(auto &vals: tmp)
-            cout<<vals<<" ";*/
         int maxx=INT_MIN;
         int n=tmp.size();
         for(int i=0; i<=n/2-1; ++i){

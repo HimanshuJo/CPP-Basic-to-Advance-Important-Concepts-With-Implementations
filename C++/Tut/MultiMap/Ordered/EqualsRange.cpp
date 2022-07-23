@@ -13,9 +13,9 @@ For example, we have a multimap of char & int as key value pair and initialzed w
 {'c', 6},
 {'d', 7},
 
-There are 3 pairs with duplicate key ‘c’. 
+There are 3 pairs with duplicate key ‘c’.
 
-Values associated with key ‘c’ are 3,5 & 6. 
+Values associated with key ‘c’ are 3,5 & 6.
 
 Now let’s see how to access all the values associated with a key in multimap.
 
@@ -23,13 +23,13 @@ Now let’s see how to access all the values associated with a key in multimap.
 
 std::multimap::equal_range
 
-	We can find all values of a key in Multimap using is member function equal_range().
-		
-		pair<iterator, iterator>equal_range(const key_type& k);
+    We can find all values of a key in Multimap using is member function equal_range().
 
-	It accepts the key as an argument and returns a pair of multimap iterator. 
+        pair<iterator, iterator>equal_range(const key_type& k);
 
-	This returned pair has a range that represents the entries with given key.
+    It accepts the key as an argument and returns a pair of multimap iterator.
+
+    This returned pair has a range that represents the entries with given key.
 */
 
 #include <iostream>
@@ -39,7 +39,7 @@ std::multimap::equal_range
 
 int main()
 {
-    std::multimap<char, int> mmapOfPos ={
+    std::multimap<char, int> mmapOfPos = {
         {'a', 1},
         {'b', 2},
         {'c', 3},
@@ -49,14 +49,17 @@ int main()
         {'d', 7},
     };
     typedef std::multimap<char, int>::iterator MMAPIterator;
+
     // It returns a pair representing the range of elements with key equal to 'c'
     std::pair<MMAPIterator, MMAPIterator> result = mmapOfPos.equal_range('c');
+
     std::cout << "All values for key 'c' are," << std::endl;
-    // Iterate over the range
     for (MMAPIterator it = result.first; it != result.second; it++)
         std::cout << it->second << std::endl;
+
     // Total Elements in the range
     int count = std::distance(result.first, result.second);
+
     std::cout << "Total values for key 'c' are : " << count << std::endl;
     return 0;
 }
