@@ -124,25 +124,25 @@ class Version7 {
 public:
 
 	struct someStruct {
-        unsigned int ProductID;
-        string ProductName;
-        string Category;
-        unsigned int Number;
-        float CostPrice;
-        float SellingPrice;
-    };
+		unsigned int ProductID;
+		string ProductName;
+		string Category;
+		unsigned int Number;
+		float CostPrice;
+		float SellingPrice;
+	};
 
 	void initializationTest() {
 		std::vector<someStruct> vtr(2);
 		vtr[1].ProductID = 1; vtr[1].ProductName = "TV Set"; vtr[1].Category = "Entertainment";
-		cout << vtr[1].ProductID <<", "; cout << vtr[1].ProductName <<", "; cout << vtr[1].Category <<", "; cout << vtr[1].Number <<endl;
+		cout << vtr[1].ProductID << ", "; cout << vtr[1].ProductName << ", "; cout << vtr[1].Category << ", "; cout << vtr[1].Number << endl;
 	}
 };
 
 /*
 Output:
 
-0, 0
+1, TV Set, Entertainment, 0
 */
 
 // Initialization 2d, 3d, 4d vectors:
@@ -154,109 +154,109 @@ public:
 		std::vector<std::vector<int>> twoDimVector(x, std::vector<int>(y, 0));
 		//vector<vector<vector<double>>> threeDimVector(x, vector<vector<double>>(y, vector<double>(z, 5)));
 		//vector<vector<vector<vector<int>>>>fourDimVector(x, vector<vector<vector<int>>>(y, vector<vector<int>>(z, vector<int>(z_, -1))));
-		vector<vector<vector<double>>> threeDimVector=
-													{
-														{
-														{5, 5, 5},
-														{5, 5, 5},
-														{5, 5, 5}
-														},
+		vector<vector<vector<double>>> threeDimVector =
+		{
+			{
+				{5, 5, 5},
+				{5, 5, 5},
+				{5, 5, 5}
+			},
 
-														{
-														{5, 5, 5},
-														{5, 5, 5},
-														{5, 5, 5}
-														},
+			{
+				{5, 5, 5},
+				{5, 5, 5},
+				{5, 5, 5}
+			},
 
-														{
-														{5, 5, 5},
-														{5, 5, 5},
-														{5, 5, 5}
-														}
-													};
-		vector<vector<vector<vector<int>>>>fourDimVector=
-														{
-															{ 
-																{ 
-																	{ -1, -1, -1  },
-																	{ -1, -1, -1  },
-																	{ -1, -1, -1  }
-																},
-																{ 
-																	{ -1, -1, -1  },
-																	{ -1, -1, -1  },
-																	{ -1, -1, -1  }
-																},
-																{ 
-																	{ -1, -1, -1  },
-																	{ -1, -1, -1  },
-																	{ -1, -1, -1  }
-																}
-															},
-															{ 
-																{ 
-																	{ -1, -1, -1  },
-																	{ -1, -1, -1  },
-																	{ -1, -1, -1  }
-																},
-																{ 
-																	{ -1, -1, -1  },
-																	{ -1, -1, -1  },
-																	{ -1, -1, -1  }
-																},
-																{ 
-																	{ -1, -1, -1  },
-																	{ -1, -1, -1  },
-																	{ -1, -1, -1  }
-																}
-															},
-															{ 
-																{ 
-																	{ -1, -1, -1  },
-																	{ -1, -1, -1  },
-																	{ -1, -1, -1  }
-																},
-																{ 
-																	{ -1, -1, -1  },
-																	{ -1, -1, -1  },
-																	{ -1, -1, -1  }
-																},
-																{ 
-																	{ -1, -1, -1  },
-																	{ -1, -1, -1  },
-																	{ -1, -1, -1  }
-																}
-															}
-														};
-
-		for(int i=0; i<x; ++i){
-			for(int j=0; j<y; ++j){
-				cout<<twoDimVector[i][j]<<" ";
+			{
+				{5, 5, 5},
+				{5, 5, 5},
+				{5, 5, 5}
 			}
-			cout<<endl;
-		}
-		cout<<"\n-------*******-------\n";
-		for(int i=0; i<x; ++i){
-			for(int j=0; j<y; ++j){
-				for(int k=0; k<z; ++k){
-					cout<<threeDimVector[i][j][k]<<" ";
+		};
+		vector<vector<vector<vector<int>>>>fourDimVector =
+		{
+			{
+				{
+					{ -1, -1, -1  },
+					{ -1, -1, -1  },
+					{ -1, -1, -1  }
+				},
+				{
+					{ -1, -1, -1  },
+					{ -1, -1, -1  },
+					{ -1, -1, -1  }
+				},
+				{
+					{ -1, -1, -1  },
+					{ -1, -1, -1  },
+					{ -1, -1, -1  }
 				}
-				cout<<endl;
+			},
+			{
+				{
+					{ -1, -1, -1  },
+					{ -1, -1, -1  },
+					{ -1, -1, -1  }
+				},
+				{
+					{ -1, -1, -1  },
+					{ -1, -1, -1  },
+					{ -1, -1, -1  }
+				},
+				{
+					{ -1, -1, -1  },
+					{ -1, -1, -1  },
+					{ -1, -1, -1  }
+				}
+			},
+			{
+				{
+					{ -1, -1, -1  },
+					{ -1, -1, -1  },
+					{ -1, -1, -1  }
+				},
+				{
+					{ -1, -1, -1  },
+					{ -1, -1, -1  },
+					{ -1, -1, -1  }
+				},
+				{
+					{ -1, -1, -1  },
+					{ -1, -1, -1  },
+					{ -1, -1, -1  }
+				}
 			}
-			cout<<endl;
+		};
+
+		for (int i = 0; i < x; ++i) {
+			for (int j = 0; j < y; ++j) {
+				cout << twoDimVector[i][j] << " ";
+			}
+			cout << endl;
 		}
-		cout<<"\n-------*******-------\n";
-		for(int i=0; i<x; ++i){
-			for(int j=0; j<y; ++j){
-				for(int k=0; k<z; ++k){
-					for(int l=0; l<z_; ++l){
-						cout<<fourDimVector[i][j][k][l]<<" ";
+		cout << "\n-------*******-------\n";
+		for (int i = 0; i < x; ++i) {
+			for (int j = 0; j < y; ++j) {
+				for (int k = 0; k < z; ++k) {
+					cout << threeDimVector[i][j][k] << " ";
+				}
+				cout << endl;
+			}
+			cout << endl;
+		}
+		cout << "\n-------*******-------\n";
+		for (int i = 0; i < x; ++i) {
+			for (int j = 0; j < y; ++j) {
+				for (int k = 0; k < z; ++k) {
+					for (int l = 0; l < z_; ++l) {
+						cout << fourDimVector[i][j][k][l] << " ";
 					}
-					cout<<endl;
+					cout << endl;
 				}
-				cout<<endl;
+				cout << endl;
 			}
-			cout<<endl;
+			cout << endl;
 		}
 	}
 };
@@ -294,52 +294,52 @@ Output:
 
 -------*******-------
 {
-	{ 
-		{ 
+	{
+		{
 			{ -1 -1 -1  },
 			{ -1 -1 -1  },
 			{ -1 -1 -1  }
 		},
-		{ 
+		{
 			{ -1 -1 -1  },
 			{ -1 -1 -1  },
 			{ -1 -1 -1  }
 		},
-		{ 
+		{
 			{ -1 -1 -1  },
 			{ -1 -1 -1  },
 			{ -1 -1 -1  }
 		}
 	},
-	{ 
-		{ 
+	{
+		{
 			{ -1 -1 -1  },
 			{ -1 -1 -1  },
 			{ -1 -1 -1  }
 		},
-		{ 
+		{
 			{ -1 -1 -1  },
 			{ -1 -1 -1  },
 			{ -1 -1 -1  }
 		},
-		{ 
+		{
 			{ -1 -1 -1  },
 			{ -1 -1 -1  },
 			{ -1 -1 -1  }
 		}
 	},
-	{ 
-		{ 
+	{
+		{
 			{ -1 -1 -1  },
 			{ -1 -1 -1  },
 			{ -1 -1 -1  }
 		},
-		{ 
+		{
 			{ -1 -1 -1  },
 			{ -1 -1 -1  },
 			{ -1 -1 -1  }
 		},
-		{ 
+		{
 			{ -1 -1 -1  },
 			{ -1 -1 -1  },
 			{ -1 -1 -1  }
@@ -348,10 +348,10 @@ Output:
 };
 */
 
-int main(){
+int main() {
 	Version8 obj;
 	obj.initializationTest();
-	cout<<"\n-------\n";
+	cout << "\n-------\n";
 	Version7 obj2;
 	obj2.initializationTest();
 }
