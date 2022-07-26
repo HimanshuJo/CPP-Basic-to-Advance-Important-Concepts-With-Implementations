@@ -1,3 +1,4 @@
+/*
 The lower_bound() method in C++:
 
 	is used to return an iterator pointing to the first element in the range [first, last) 
@@ -65,49 +66,39 @@ Output: lower_bound for element 55 at index 5
 
 Input: 10 20 30 30 30 40 50
 Output: lower_bound for element 30 at index 2
+*/
 
--------
-
-// CPP program to illustrate
-// std :: lower_bound
 #include <bits/stdc++.h>
+#include<iostream>
+using namespace std;
 
 int main()
 {
-	std::vector<int> v{ 10, 20, 30, 30, 30, 40, 50 };
-
-	std::cout << "Vector contains :";
-	for (unsigned int i = 0; i < v.size(); i++)
-		std::cout << " " << v[i];
-	std::cout << "\n";
-
-	std::vector<int>::iterator low1, low2, low3;
-	
-	// std :: lower_bound
-	low1 = std::lower_bound(v.begin(), v.end(), 30);
-	low2 = std::lower_bound(v.begin(), v.end(), 35);
-	low3 = std::lower_bound(v.begin(), v.end(), 55);
-
-	// Printing the lower bounds
-	std::cout
-		<< "\nlower_bound for element 30 at position : "
-		<< (low1 - v.begin());
-	std::cout
-		<< "\nlower_bound for element 35 at position : "
-		<< (low2 - v.begin());
-	std::cout
-		<< "\nlower_bound for element 55 at position : "
-		<< (low3 - v.begin());
-
+	vector<int>v{10, 20, 30, 30, 30, 40, 50};
+	for(unsigned int i=0; i<v.size(); i++)
+		cout<<" "<<v[i];
+	cout<<"\n";
+	int num1=40;
+	vector<int>::iterator low1, low2, low3;
+	low1=lower_bound(v.begin(), v.end(), num1);
+	low2=lower_bound(v.begin(), v.end(), 35);
+	low3=lower_bound(v.begin(), v.end(), 55);
+	cout<<"\nlower_bound for element 30 at position : "<<(low1 - v.begin());
+	cout<<"\nlower_bound for element 35 at position : "<<(low2 - v.begin());
+	cout<<"\nlower_bound for element 55 at position : "<<(low3 - v.begin());
+	cout<<"\nNum elements less than "<<num1<<" : "<<(low1-v.begin());
+	cout<<"\nNum elements greater than equal to "<<num1<<" : "<<((v.size()-(low1-v.begin()))-1);
 	return 0;
 }
 
-Output: 
-Vector contains : 10 20 30 30 30 40 50
+/*
+Output:
 
-lower_bound for element 30 at position : 2
+lower_bound for element 30 at position : 5
 lower_bound for element 35 at position : 5
 lower_bound for element 55 at position : 7
+Num elements less than 40 : 5
+Num elements greater than equal to 40 : 1
 
 -------
 
@@ -116,3 +107,4 @@ Time Complexity:
 	The number of comparisons performed is logarithmic. 
 
 	Therefore, the time complexity of the above approach is O(logN), where N = size. (last – first)
+*/

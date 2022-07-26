@@ -58,7 +58,7 @@ Searching for a key is similar to insert operation,
 -------
 
 The following picture explains construction of trie using keys given in the example below,
-				   
+
 		         root
                     /   \    \
                     t   a     b
