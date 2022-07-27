@@ -6,7 +6,8 @@ You have four ways of accessing a specific item in a vector:
 
 	Using an iterator in combination with a given offset
 
-	Using std::for_each from the algorithm header of the standard C++ library. This is another way which I can recommend (it uses internally an iterator)
+	Using std::for_each from the algorithm header of the standard C++ library. 
+	This is another way which I can recommend (it uses internally an iterator)
 
 -------
 

@@ -1,6 +1,6 @@
-#include <vector> // the general-purpose vector container
-#include <iostream> // cout
-#include <algorithm> // remove and remove_if
+#include <vector>
+#include <iostream>
+#include <algorithm>
 
 bool is_odd(int i)
 {
@@ -33,7 +33,7 @@ int main()
     print(v);
 
     return 0;
-}   
+}
 
 /*
 Output:

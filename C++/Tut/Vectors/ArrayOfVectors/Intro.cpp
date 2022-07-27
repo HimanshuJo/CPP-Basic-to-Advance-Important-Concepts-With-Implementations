@@ -1,8 +1,9 @@
+/*
 Array:
 
-	An array is a collection of items stored at contiguous memory locations. 
+	An array is a collection of items stored at contiguous memory locations.
 
-	It is to store multiple items of the same type together. 
+	It is to store multiple items of the same type together.
 
 	This makes it easier to get access to the elements stored in it by the position of each element.
 
@@ -10,21 +11,20 @@ Array:
 
 Vectors:
 
-	Vectors are known as dynamic arrays with the ability to resize itself automatically when an 
+	Vectors are known as dynamic arrays with the ability to resize itself automatically when an
 		element is inserted or deleted, with their storage being handled automatically by the container automatically.
 
 -------
 
 Array of Vectors:
 
-	Therefore, array of vectors is two dimensional array with fixed number of rows 
-		where each row is vector of variable length. 
+	Therefore, array of vectors is two dimensional array with fixed number of rows
+		where each row is vector of variable length.
 
 	Each index of array stores a vector which can be traversed and accessed using iterators.
 
 		vector <data_type> V[size];
-
--------
+*/
 
 #include <iostream>
 #include <vector>
@@ -67,10 +67,12 @@ int main()
 	return 0;
 }
 
+/*
 Output:
 
-	Elements at index 0: 1 2 3 4 
-	Elements at index 1: 2 3 4 
-	Elements at index 2: 3 4 
-	Elements at index 3: 4 
+	Elements at index 0: 1 2 3 4
+	Elements at index 1: 2 3 4
+	Elements at index 2: 3 4
+	Elements at index 3: 4
 	Elements at index 4:
+*/

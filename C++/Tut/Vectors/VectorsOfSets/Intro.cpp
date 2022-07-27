@@ -1,0 +1,252 @@
+/*
+Insertion in Vector of Sets
+
+	Elements can be inserted into a vector using the push_back() function of C++ STL.
+
+	First insert elements into a set using insert().
+
+	Then insert that set into the vector using push_back().
+*/
+
+#include<iostream>
+#include<vector>
+#include<set>
+using namespace std;
+
+// Defining the number of sets
+// in the vector and number of
+// elements in each set
+#define ROW 4
+#define COL 5
+
+class Version1 {
+public:
+	void vSetTest() {
+		vector<set<int>> v;
+
+		// Elements to insert in column
+		int num = 10;
+
+		for (int i = 0; i < ROW; i++) {
+
+			// Stores the column elements
+			set<int> s;
+
+			for (int j = 0; j < COL; j++) {
+				s.insert(num);
+				num += 5;
+			}
+
+			v.push_back(s);
+		}
+
+		for (int i = 0; i < v.size(); i++) {
+
+			for (auto x : v[i])
+				cout << x << " ";
+			cout << endl;
+		}
+	}
+};
+
+/*
+Output:
+10 15 20 25 30
+35 40 45 50 55
+60 65 70 75 80
+85 90 95 100 105
+*/
+
+/*
+Removal or Deletion in a Vector of Sets
+
+	Sets can be removed from the end of a vector of sets using the pop_back() function of C++ STL.
+*/
+
+class Version2 {
+public:
+	void vSetTest() {
+		vector<set<int>> v;
+
+		// Elements to insert in column
+		int num = 10;
+
+		for (int i = 0; i < ROW; i++) {
+
+			// Vector to store
+			// column elements
+			set<int> s;
+
+			for (int j = 0; j < COL; j++) {
+				s.insert(num);
+				num += 5;
+			}
+
+			v.push_back(s);
+		}
+
+		cout << "Before Removal:" << endl;
+		for (int i = 0; i < v.size(); i++) {
+
+			for (auto x : v[i])
+				cout << x << " ";
+			cout << endl;
+		}
+
+		// Remove sets from last
+		// index of the vector
+		v.pop_back();
+		v.pop_back();
+
+		cout << endl
+		     << "After Removal:" << endl;
+
+		for (int i = 0; i < v.size(); i++) {
+
+			for (auto x : v[i])
+				cout << x << " ";
+			cout << endl;
+		}
+	}
+};
+
+/*
+Output:
+Before Removal:
+10 15 20 25 30
+35 40 45 50 55
+60 65 70 75 80
+85 90 95 100 105
+
+After Removal:
+10 15 20 25 30
+35 40 45 50 55
+*/
+
+/*
+The value of the element cannot be modified once it is added to the set,
+though it is possible to remove the value of that element. erase() function is used to
+remove a particular element from a particular set of a vector of sets.
+*/
+
+class Version4 {
+public:
+	void vSetTest() {
+
+		vector<set<int> > v;
+
+		// Elements to insert
+		// in column
+		int num = 10;
+
+		for (int i = 0; i < ROW; i++) {
+
+			// Vector to store
+			// column elements
+			set<int> s;
+
+			for (int j = 0; j < COL; j++) {
+				s.insert(num);
+				num += 5;
+			}
+
+			v.push_back(s);
+		}
+
+		cout << "Before Removal:" << endl;
+
+		for (int i = 0;
+		        i < v.size(); i++) {
+
+			for (auto x : v[i])
+				cout << x << " ";
+			cout << endl;
+		}
+
+		// Erase 70 from 3rd set
+		v[2].erase(70);
+
+		// Erase 55 from 2nd set
+		v[1].erase(55);
+
+		// Display the vector of sets
+		// after removal of sets
+		cout << endl
+		     << "After Removal:" << endl;
+
+		for (int i = 0; i < v.size(); i++) {
+
+			for (auto x : v[i])
+				cout << x << " ";
+			cout << endl;
+		}
+	}
+};
+
+/*
+Output:
+Before Removal:
+10 15 20 25 30
+35 40 45 50 55
+60 65 70 75 80
+85 90 95 100 105
+
+After Removal:
+10 15 20 25 30
+35 40 45 50
+60 65 75 80
+85 90 95 100 105
+*/
+
+/*
+Application:
+
+Given a string S, the task is to separate the given string S into three different set of characters
+i.e., vowel, consonants, or a special character.
+*/
+
+class Version5 {
+public:
+	void separateChar(string s)
+	{
+		vector<set<char> > v(3);
+
+		for (int i = 0;
+		        i < s.length(); i++) {
+
+			if (s[i] >= 'a'
+			        && s[i] <= 'z') {
+
+				// Insert vowels
+				if (s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u')
+					v[0].insert(s[i]);
+
+				// Insert consonants
+				else
+					v[1].insert(s[i]);
+			}
+			// Insert special characters
+			else
+				v[2].insert(s[i]);
+		}
+
+		for (int i = 0; i < 3; i++) {
+
+			cout << "Elements of set "
+			     << i + 1 << " :";
+
+			for (auto it : v[i]) {
+
+				cout << it << " ";
+			}
+			cout << endl;
+		}
+	}
+};
+
+/*
+Output:
+Elements of set 1 :e o
+Elements of set 2 :f g k r s
+Elements of set 3 :& @
+*/
