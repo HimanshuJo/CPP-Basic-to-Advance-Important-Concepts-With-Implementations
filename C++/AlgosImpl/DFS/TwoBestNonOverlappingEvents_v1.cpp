@@ -26,28 +26,65 @@ Output: 8
 Explanation: Choose events 0 and 2 for a sum of 3 + 5 = 8.
 */
 
-#include<iostream>
-#include<vector>
-#include<algorithm>
-using namespace std;
+/*
+TLE: 34 / 63
 
 class Solution{
 public:
-	int maxTwoEvents(vector<vector<int>>&events){
-		int n=events.size();
-		vector<vector<int>>memo(n, vector<int>(2, -1));
-		sort(events.begin(), events.end());
-		return dfs(events, 0, 0, memo);
-	}
-
+	
 	int dfs(vector<vector<int>>&nums, int idx, int k, vector<vector<int>>&memo){
 		if(k==2||idx>=nums.size()) return 0;
-		if(memo[idx][k]!=-1) return memo[idx][k];
-		vector<int>ans={nums[idx][1], INT_MAX, INT_MAX};
-		int nextIndex=upper_bound(begin(nums), end(nums), ans)-begin(nums);
-		return memo[idx][k]=max(dfs(nums, idx+1, k, memo), nums[idx][2]+dfs(nums, nextIndex, k+1, memo));
+        if(memo[idx][k]!=-1) return memo[idx][k];
+		vector<int>curr=nums[idx];
+		int maxprof=0;
+		for(int i=idx+1; i<nums.size(); ++i){
+			vector<int>nxt=nums[i];
+			if(nxt[0]>curr[1]){
+				int prof=dfs(nums, i, k+1, memo);
+				maxprof=max(maxprof, prof);
+			}
+		}
+		maxprof+=curr[2];
+		return memo[idx][k]=maxprof;;
 	}
 
+	int maxTwoEvents(vector<vector<int>>&events){
+		int n=events.size();
+		sort(events.begin(), events.end());
+		vector<vector<int>>memo(n+1, vector<int>(2, -1));
+		int fnprof=0;
+		for(int i=0; i<n; ++i){
+			int prof=dfs(events, i, 0, memo);
+			fnprof=max(fnprof, prof);
+		}
+		return fnprof;
+	}
 };
+*/
 
-int main(){}
+class Solution {
+public:
+    
+    int dfs(vector<vector<int>>&events, int sz, int idx, int k,  vector<vector<int>>&memo){
+        if(idx>=sz||idx<0) return 0;
+        if(k==2) return 0;
+        if(memo[idx][k]!=-1) return memo[idx][k];
+        int ans=INT_MIN;
+        int ntpk=dfs(events, sz, idx+1, k, memo);
+        int nwidx=-1;
+        vector<int>temp={events[idx][1], INT_MAX, INT_MAX};
+        auto it=upper_bound(events.begin(), events.end(), temp);
+        if(it!=events.end()) nwidx=it-events.begin();
+        int pk=events[idx][2]+dfs(events, sz, nwidx, k+1, memo);
+        ans=max(ans, max(pk, ntpk));
+        return memo[idx][k]=ans;
+    }
+    
+    int maxTwoEvents(vector<vector<int>>& events) {
+        vector<vector<int>>memo(1e5, vector<int>(2, -1));
+        sort(events.begin(), events.end());
+        int sz=events.size();
+        int ans=dfs(events, sz, 0, 0, memo);
+        return ans;
+    }
+};

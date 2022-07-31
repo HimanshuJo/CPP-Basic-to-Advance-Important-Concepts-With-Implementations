@@ -24,10 +24,8 @@ Input: startTime = [1,1,1], endTime = [2,3,4], profit = [5,6,4]
 Output: 6
 */
 
-#include<iostream>
-#include<vector>
-#include<algorithm>
-using namespace std;
+/*
+TLE: 22 / 30
 
 int N = 5e+7;
 
@@ -67,12 +65,36 @@ public:
 		return fnProf;
     }
 };
+*/
 
-int main(){
-    Solution obj;
-    vector<int>startTime{6,24,45,27,13,43,47,36,14,11,11,12};
-    vector<int>endTime{31,27,48,46,44,46,50,49,24,42,13,27};
-    vector<int>profit{14,4,16,12,20,3,18,6,9,1,2,8};
-    int ans=obj.jobScheduling(startTime, endTime, profit);
-    cout<<ans<<endl;
-}
+class Solution {
+public:
+    
+    int dfs(vector<vector<int>>&events, int idx, int sz, int &curT, vector<int>&memo){
+        if(idx>=sz) return 0;
+        if(memo[idx]!=-1) return memo[idx];
+        int pk=0;
+        int ntpk=dfs(events, idx+1, sz, curT, memo);
+        vector<int>temp={events[idx][1], INT_MIN, INT_MIN};
+        auto itr=lower_bound(events.begin()+idx+1, events.end(), temp);
+        int i=itr-events.begin();
+        if(events[idx][0]>=curT){
+            pk=events[idx][2]+dfs(events, i, sz, events[idx][0], memo);   
+        }
+        return memo[idx]=max(pk, ntpk);
+    }
+    
+    int jobScheduling(vector<int>& startTime, vector<int>& endTime, vector<int>& profit) {
+        int sz=startTime.size();
+        vector<vector<int>>events(sz, vector<int>(3, 0));
+        for(int i=0; i<sz; ++i){
+            events[i][0]=startTime[i];
+            events[i][1]=endTime[i];
+            events[i][2]=profit[i];
+        }
+        sort(events.begin(), events.end());
+        sz=events.size();
+        vector<int>memo(sz+1, -1);
+        return dfs(events, 0, sz, events[0][0], memo);
+    }
+};

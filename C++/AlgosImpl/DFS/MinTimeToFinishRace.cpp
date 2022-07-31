@@ -147,7 +147,7 @@ public:
                 withoutChange[i][j]=withoutChange[i][j-1]*tires[i][1];
             }
             /*
-            SInce we define it as the total time, rather than just the time for the
+            Since we define it as the total time, rather than just the time for the
             j'th lap, we have to make it prefixSum
             */
             for(int j=2; j<20; ++j){

@@ -106,45 +106,22 @@ int binarySearch(vector<int>&arr, vector<int>&M, int L, int idx){
 	Space Complexity: O(n)
 */
 
-int lisBinarySearch(vector<int>&in, const int sz){
-	/*
-		P stores the index of the predecessor of X[k] 
-		in the longest increasing subsequence ending at X[k]
-		on the range k≤i
-
-		So if Ki,j denotes the set of all indices k 
-		such that k≤i and there exists an increasing subsequence of length j ending at X[k] 
-		(that is, there exist j indices l1 < l2 < ⋯ < lj = k ending at k 
-		such that X[l1] ≤ X [l2] ≤ ⋯ ≤ X[k] then M[j] is the index for which the following holds: 
-			M[j] ∈ Ki,j and X[M[j]]=min(k∈Ki,j) X[k]
-	*/
-	vector<int>P(sz, 0);
-	/*
-		M stores the index k of the smallest value X[k] 
-		such that there is an increasing subsequence of length j
-		ending at X[k] on the range k ≤ i
-	*/
-	vector<int>M(sz+1, 0);
-	int L=0;
-	for(int i=0; i<sz; ++i){
-		int lo=binarySearch(in, M, L, i);
-		int nwL=lo;
-		P[i]=M[nwL-1];
-		M[nwL]=i;
-		if(nwL>L){
-			L=nwL;
-		}
-	}
-	vector<int>S(L, 0);
-	int k=M[L];
-	for(int x=L-1; x>=0; --x){
-		S[x]=in[k];
-		k=P[k];
-	}	
-	for(auto &vals: S)
-		cout<<vals<<" ";
-	cout<<endl;
-	return S.size();
+int longestIncreasingSubsequenceBS(vector<int>&arr, int n)
+{
+    vector<int>ans;
+    int len=1;
+    ans.push_back(arr[0]);
+    for(int i=1; i<n; ++i){
+        if(arr[i]>ans.back()){
+            ans.push_back(arr[i]);
+            len++;
+        } else{
+            auto it=lower_bound(ans.begin(), ans.end(), arr[i]);
+            int idx=it-ans.begin();
+            ans[idx]=arr[i];
+        }
+    }
+    return len;
 }
 
 int main(){
@@ -166,6 +143,6 @@ int main(){
 		cout<<vals<<" ";
 	}
 	cout<<"\n-------\n";
-	int res5=lisBinarySearch(in, sz);
+	int res5=longestIncreasingSubsequenceBS(in, sz);
 	cout<<res5<<endl;
 }

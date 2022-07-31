@@ -46,21 +46,19 @@ using ll=long long;
 class Solution {
 public:
     
-    ll dfs(vector<vector<int>>&questions, int idx, int n, ll &ans, vector<ll>&memo){
+    ll dfs(vector<vector<int>>&questions, int idx, int n, vector<ll>&memo){
         if(idx>=n) return 0;
         if(memo[idx]!=-1) return memo[idx];
-        ll ans1=questions[idx][0]+dfs(questions, idx+questions[idx][1]+1, n, ans, memo);
-        ll ans2=dfs(questions, idx+1, n, ans, memo);
-        ll currans=max(ans1, ans2);
-        ans=max(ans, currans);
-        return memo[idx]=currans;
+        ll ans=INT_MIN;
+        ll pk=questions[idx][0]+dfs(questions, idx+questions[idx][1]+1, n, memo);
+        ll ntpk=dfs(questions, idx+1, n, memo);
+        ans=max(ans, max(pk, ntpk));
+        return memo[idx]=ans;
     }
     
     long long mostPoints(vector<vector<int>>& questions) {
         int n=questions.size();
         vector<ll>memo(n+1, -1);
-        ll ans=INT_MIN;
-        dfs(questions, 0, n, ans, memo);
-        return ans;
+        return dfs(questions, 0, n, memo);
     }
 };
