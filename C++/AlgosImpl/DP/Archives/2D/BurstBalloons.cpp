@@ -70,7 +70,32 @@ That is dp[0, 1] + nums[0 - 1] * nums[2] * nums[3 + 1] + dp[3,3];
 That is dp[left, k - 1] + nums[left - 1] * nums[k] * nums[right + 1] + dp[k+1, right] ;
 */
 
-class Solution {
+class Solution1 {
+public:
+    
+    int dfs(vector<int>&nums, int i, int j, vector<vector<int>>&memo){
+        if(i>j) return 0;
+        if(memo[i][j]!=-1) return memo[i][j];
+        int ans=INT_MIN;
+        for(int ind=i; ind<=j; ++ind){
+            ans=max(ans, nums[i-1]*nums[ind]*nums[j+1]+dfs(nums, i, ind-1, memo)+dfs(nums, ind+1, j, memo));
+        }
+        return memo[i][j]=ans;
+    }
+    
+    int maxCoins(vector<int>& nums) {
+       auto it=nums.begin();
+       nums.insert(it, 1);
+       nums.push_back(1);
+       int sz=nums.size();
+       vector<vector<int>>memo(sz+1, vector<int>(sz+1, -1));
+       return dfs(nums, 1, sz-2, memo);
+    }
+};
+
+// -------*******-------
+
+class Solution2 {
 public:
 
 	int N = 510;
