@@ -31,11 +31,11 @@ Constraints:
 1 <= k <= events.length
 1 <= k * events.length <= 10^6
 1 <= startDayi <= endDayi <= 10^9
-1 <= valuei <= 106
+1 <= valuei <= 10^6
 */
 
 /*
-TLE: Sol 1
+TLE: 57 / 67
 
 class Solution {
 public:
@@ -70,87 +70,6 @@ public:
 };
 */
 
-/*
-TLE: Sol 2
-
-class Solution {
-public:
-    
-    int dfs(vector<vector<int>>&events, int idx, int tempk, int k, int sz, int &ans, vector<vector<int>>&memo){
-        if(idx>=sz||tempk==k) return memo[idx][tempk]=0;
-        if(memo[idx][k]!=-1) return memo[idx][tempk];
-        int i;
-        for(i=idx+1; i<sz; ++i){
-            if(events[i][0]>events[idx][1]) break;
-        }
-        int tempans=max(dfs(events, idx+1, tempk, k, sz, ans, memo), 
-                        dfs(events, i, tempk+1, k, sz, ans, memo)+events[idx][2]);
-        ans=max(ans, tempans);
-        return memo[idx][tempk]=tempans;
-    }
-    
-    int maxValue(vector<vector<int>>& events, int k) {
-        sort(events.begin(), events.end());
-        int sz=events.size();
-        int ans=INT_MIN;
-        vector<vector<int>>memo(sz+1, vector<int>(k+1, -1));
-        dfs(events, 0, 0, k, sz, ans, memo);
-        return ans;
-    }
-};
-*/
-
-class Solution3 {
-public:
-    
-    int dfs(vector<vector<int>>&events, int idx, int k, int sz, int &ans, vector<vector<int>>&memo){
-        if(idx>=sz||k==0) return memo[idx][k]=0;
-        if(memo[idx][k]!=-1) return memo[idx][k];
-        int i;
-        for(i=idx+1; i<sz; ++i){
-            if(events[i][0]>events[idx][1]) break;
-        }
-        int tempans=max(dfs(events, idx+1, k, sz, ans, memo), 
-                        dfs(events, i, k-1, sz, ans, memo)+events[idx][2]);
-        ans=max(ans, tempans);
-        return memo[idx][k]=tempans;
-    }
-    
-    int maxValue(vector<vector<int>>& events, int k) {
-        sort(events.begin(), events.end());
-        int sz=events.size();
-        int ans=INT_MIN;
-        vector<vector<int>>memo(sz+1, vector<int>(k+1, -1));
-        dfs(events, 0, k, sz, ans, memo);
-        return ans;
-    }
-};
-
-class Solution2 {
-public:
-    
-    int dfs(vector<vector<int>>&events, int idx, int k, int sz, int &ans, vector<vector<int>>&memo){
-        if(idx==-1) return 0;
-        if(idx>=sz||k==0) return 0;
-        if(memo[idx][k]!=-1) return memo[idx][k];
-        vector<int>temp={events[idx][1], INT_MAX, INT_MAX};
-        int i=upper_bound(events.begin()+idx+1, events.end(), temp)-events.begin();
-        int tempans=max(dfs(events, idx+1, k, sz, ans, memo), 
-                        dfs(events, i, k-1, sz, ans, memo)+events[idx][2]);
-        ans=max(ans, tempans);
-        return memo[idx][k]=tempans;
-    }
-    
-    int maxValue(vector<vector<int>>& events, int k) {
-        sort(events.begin(), events.end());
-        int sz=events.size();
-        int ans=INT_MIN;
-        vector<vector<int>>memo(sz+1, vector<int>(k+1, -1));
-        dfs(events, 0, k, sz, ans, memo);
-        return ans;
-    }
-};
-
 class Solution {
 public:
     
@@ -180,6 +99,61 @@ public:
         if(idx>=sz||k==0) return 0;
         if(memo[idx][k]!=-1) return memo[idx][k];
         int i=find(events,idx+1,events[idx][1]);
+        int tempans=max(dfs(events, idx+1, k, sz, ans, memo), 
+                        dfs(events, i, k-1, sz, ans, memo)+events[idx][2]);
+        ans=max(ans, tempans);
+        return memo[idx][k]=tempans;
+    }
+    
+    int maxValue(vector<vector<int>>& events, int k) {
+        sort(events.begin(), events.end());
+        int sz=events.size();
+        int ans=INT_MIN;
+        vector<vector<int>>memo(sz+1, vector<int>(k+1, -1));
+        dfs(events, 0, k, sz, ans, memo);
+        return ans;
+    }
+};
+
+// -------*******-------
+
+class Solution2 {
+public:
+    
+    int dfs(vector<vector<int>>&events, int idx, int k, int sz, int &ans, vector<vector<int>>&memo){
+        if(idx>=sz||k==0) return memo[idx][k]=0;
+        if(memo[idx][k]!=-1) return memo[idx][k];
+        int i;
+        for(i=idx+1; i<sz; ++i){
+            if(events[i][0]>events[idx][1]) break;
+        }
+        int tempans=max(dfs(events, idx+1, k, sz, ans, memo), 
+                        dfs(events, i, k-1, sz, ans, memo)+events[idx][2]);
+        ans=max(ans, tempans);
+        return memo[idx][k]=tempans;
+    }
+    
+    int maxValue(vector<vector<int>>& events, int k) {
+        sort(events.begin(), events.end());
+        int sz=events.size();
+        int ans=INT_MIN;
+        vector<vector<int>>memo(sz+1, vector<int>(k+1, -1));
+        dfs(events, 0, k, sz, ans, memo);
+        return ans;
+    }
+};
+
+// -------*******-------
+
+class Solution3 {
+public:
+    
+    int dfs(vector<vector<int>>&events, int idx, int k, int sz, int &ans, vector<vector<int>>&memo){
+        if(idx==-1) return 0;
+        if(idx>=sz||k==0) return 0;
+        if(memo[idx][k]!=-1) return memo[idx][k];
+        vector<int>temp={events[idx][1], INT_MAX, INT_MAX};
+        int i=upper_bound(events.begin()+idx+1, events.end(), temp)-events.begin();
         int tempans=max(dfs(events, idx+1, k, sz, ans, memo), 
                         dfs(events, i, k-1, sz, ans, memo)+events[idx][2]);
         ans=max(ans, tempans);

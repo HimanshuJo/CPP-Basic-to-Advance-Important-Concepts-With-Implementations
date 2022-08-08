@@ -47,7 +47,8 @@ We create an array of 51 elements path[51] where path[x] contains list of nodes 
 current node which their node's value are equal to x.
 
 While traversing nodes using DFS, for current node we can check all paths path[x] 
-(up to 50) where x and current node are co-prime then we try to pick the node which is close to current node as our ancestor.
+(up to 50) where x and current node are co-prime then we try to pick the node which is close to current 
+node as our ancestor.
 
 A node is close to current node if its depth is largest.
 

@@ -1,3 +1,4 @@
+// 1895. Largest Magic Square
 /*
 A k x k magic square is a k x k grid filled with integers such that every row sum, every column sum,
 and both diagonal sums are all equal. The integers in the magic square do not have to be distinct.
@@ -19,12 +20,11 @@ Constraints:
     m == grid.length
     n == grid[i].length
     1 <= m, n <= 50
-    1 <= grid[i][j] <= 106
+    1 <= grid[i][j] <= 10^6
+*/
+/*
+Algo:
 
-'''
-
-'''
-This is particularly an implementation based question.
 We have to check all the possible squares, within the grid
 
 Furthermore for each of the square we have to check, all the rows and all the columns

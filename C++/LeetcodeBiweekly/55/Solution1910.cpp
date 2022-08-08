@@ -1,7 +1,8 @@
-// Remove All Occurrences of a Substring
+// 1910. Remove All Occurrences of a Substring
 
 /*
-Given two strings s and part, perform the following operation on s until all occurrences of the substring part are removed:
+Given two strings s and part, perform the following operation on s until all occurrences of the substring 
+part are removed:
 
     Find the leftmost occurrence of the substring part and remove it from s.
 
@@ -47,76 +48,49 @@ Approach:
 
         a. Push the current character in the stack
 
-        b. If the size of the stack is at least M, then check if the top M characters of the stack form the string s2 or not
+        b. If the size of the stack is at least M, then check if the top M characters of the stack form the 
+            string s2 or not
 
             If found to be true, then remove those characters
 
 */
 
-#include <bits/stdc++.h>
-#include <strings.h>
-using namespace std;
-
-class Solution
-{
+class Solution {
 public:
-    string res;
-    string removeOccurrences(string s, string part)
-    {
-        int n = s.length();
-        int m = part.length();
-        minLength(s, n, part, m);
-        reverse(res.begin(), res.end());
-        return res;
-    }
-
-    void minLength(string str, int N,
-                   string K, int M)
-    {
-        // Initialize stack of characters
-        stack<char> stackOfChar;
-        for (int i = 0; i < N; i++)
-        {
-            // Push character into the stack
-            stackOfChar.push(str[i]);
-            // If stack size >= K.size()
-            if (stackOfChar.size() >= M)
-            {
-                // Create empty string to
-                // store characters of stack
-                string l = "";
-                // Traverse the string K in reverse
-                for (int j = M - 1; j >= 0; j--)
-                {
-                    // If any of the characters
-                    // differ, it means that K
-                    // is not present in the stack
-                    if (K[j] != stackOfChar.top())
-                    {
-                        // Push the elements
-                        // back into the stack
-                        int f = 0;
-                        while (f != l.size())
-                        {
-                            stackOfChar.push(l[f]);
-                            f++;
+    
+    void returnNewS(string &s, string &part, int strsz, int prtsz, stack<char>&stk){
+        for(int i=0; i<strsz; ++i){
+            stk.push(s[i]);
+            if(stk.size()>=prtsz){
+                string curstr="";
+                for(int x=prtsz-1; x>=0; --x){
+                    char curr=stk.top();
+                    if(curr==part[x]){
+                        stk.pop();
+                        curstr+=curr;
+                    } else{
+                        int len=curstr.size()-1;
+                        while(len>=0){
+                            stk.push(curstr[len--]);
                         }
                         break;
-                    }
-                    // Store the string
-                    else
-                    {
-                        l = stackOfChar.top() + l;
-                        // Remove top element
-                        stackOfChar.pop();
                     }
                 }
             }
         }
-        while (!stackOfChar.empty())
-        {
-            res.push_back(stackOfChar.top());
-            stackOfChar.pop();
+    }
+    
+    string removeOccurrences(string s, string part) {
+        int strsz=s.size();
+        int prtsz=part.size();
+        stack<char>stk;
+        returnNewS(s, part, strsz, prtsz, stk);
+        string ans="";
+        while(!stk.empty()){
+            ans+=stk.top();
+            stk.pop();
         }
+        reverse(ans.begin(), ans.end());
+        return ans;
     }
 };
