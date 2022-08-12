@@ -1,4 +1,4 @@
-// Describe the Painting
+// 1943. Describe the Painting
 
 /*
  * There is a long and thin painting that can be represented by a number line. 
@@ -36,31 +36,35 @@ Explanation: The painting can be described as follows:
 - [6,7) is colored {9,15} (with a sum of 24) from the first and second segments.
 - [7,8) is colored 15 from the second segment.
 - [8,10) is colored 7 from the third segment.
+
+Constraints:
+
+1 <= segments.length <= 2 * 10^4
+segments[i].length == 3
+1 <= starti < endi <= 10^5
+1 <= colori <= 10^9
+Each colori is distinct.
  */
 
-#include <std/bits.c++>
-using namespace std;
-
-class Solution
-{
+class Solution {
 public:
-    vector<vector<long long>> splitPainting(vector<vector<int>> &A)
-    {
-        map<int, long long> d;
-        for (auto &a : A)
-        {
-            d[a[0]] += a[2];
-            d[a[1]] -= a[2];
+    vector<vector<long long>> splitPainting(vector<vector<int>>& segments) {
+        sort(segments.begin(), segments.end());
+        vector<vector<long long>>res;
+        map<int, long long>temp;
+        int sz=segments.size();
+        int curstrt=0;
+        for(int i=0; i<sz; ++i){
+            temp[segments[i][0]]+=segments[i][2];
+            temp[segments[i][1]]-=segments[i][2];
         }
-        vector<vector<long long>> res;
-        int i = 0;
-        for (auto &it : d)
-        {
-            if (d[i] > 0)
-                res.push_back({i, it.first, d[i]});
-            d[it.first] += d[i];
-            i = it.first;
+        for(auto &entries: temp){
+            if(temp[curstrt]>0){
+                res.push_back({curstrt, entries.first, temp[curstrt]});
+            }
+            temp[entries.first]+=temp[curstrt];
+            curstrt=entries.first;
         }
         return res;
     }
-}
+};
