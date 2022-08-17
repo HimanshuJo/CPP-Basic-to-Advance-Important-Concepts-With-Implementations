@@ -1,4 +1,4 @@
-// Find the Middle Index in Array
+// 1991. Find the Middle Index in Array
 /*
 Given a 0-indexed integer array nums, find the leftmost middleIndex (i.e., the smallest amongst all the possible ones).
 
@@ -17,56 +17,63 @@ The sum of the numbers before index 3 is: 2 + 3 + -1 = 4
 The sum of the numbers after index 3 is: 4 = 4
 */
 
-#include <bits/stdc++.h>
-using namespace std;
-
-class Solution
-{
+class Solution {
 public:
-    int findMiddleIndex(vector<int> &nums)
-    {
-        if (nums.size() == 1)
-        {
-            return 0;
+    int findMiddleIndex(vector<int>& nums) {
+        int sz=nums.size();
+        vector<int>prefSm(sz, 0), suffSm(sz, 0);
+        int ans=-1;
+        prefSm[0]=nums[0];
+        for(int i=1; i<sz; ++i){
+            prefSm[i]=nums[i]+prefSm[i-1];
         }
-        int n = nums.size();
-        int preSm = 0;
-        vector<int> pSm;
-        vector<int> suffixSum(n);
-        for (int i = 0; i < nums.size(); ++i)
-        {
-            preSm += nums[i];
-            pSm.push_back(preSm);
+        suffSm[sz-1]=nums[sz-1];
+        for(int i=sz-2; i>=0; --i){
+            suffSm[i]=nums[i]+suffSm[i+1];
         }
-        for (auto &vals : pSm)
-        {
-            cout << vals << " ";
-        }
-        cout<<endl;
-        suffixSum[n - 1] = nums[n - 1];
-        for (int i = n - 2; i >= 0; i--)
-        {
-            suffixSum[i] = suffixSum[i + 1] + nums[i];
-        }
-        for (auto &vals : suffixSum)
-        {
-            cout << vals << " ";
-        }
-        cout<<endl;
-        for (int i = 0; i < n; ++i)
-        {
-            if (pSm[i] == suffixSum[i])
-            {
-                cout << i;
-                return i;
+        for(int i=0; i<sz; ++i){
+            int reqprefsm=0;
+            if(i>0){
+                reqprefsm=prefSm[i-1];   
+            }
+            int reqsuffsm=0;
+            if(i<sz-1){
+                reqsuffsm=suffSm[i+1];
+            }
+            if(reqprefsm==reqsuffsm){
+                ans=i;
+                break;
             }
         }
-        return -1;
+        return ans;
     }
 };
-int main()
-{
-    Solution obj;
-    vector<int> nums = {2,5};
-    obj.findMiddleIndex(nums);
-}
+
+// -------*******-------
+
+class Solution2 {
+public:
+    int findMiddleIndex(vector<int>& nums) {
+        int sz=nums.size();
+        int ans=-1;
+        for(int i=0; i<sz; ++i){
+            int curcenter=i;
+            int lftsm=0, rghtsm=0;
+            if(i>0){
+                for(int x=i-1; x>=0; --x){
+                    lftsm+=nums[x];
+                }   
+            }
+            if(i<sz-1){
+                for(int x=i+1; x<sz; ++x){
+                    rghtsm+=nums[x];
+                }   
+            }
+            if(lftsm==rghtsm){
+                ans=i;
+                break;
+            }
+        }
+        return ans;
+    }
+};

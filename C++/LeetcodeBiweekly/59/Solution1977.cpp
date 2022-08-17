@@ -1,10 +1,10 @@
-// Number of Ways to Separate Numbers
+// 1977. Number of Ways to Separate Numbers
 /*
-You wrote down many positive integers in a string called num. However, you realized that you forgot to add 
-commas to seperate the different numbers. You remember that the list of integers 
+You wrote down many positive integers in a string called num. However, you realized that you forgot to add
+commas to seperate the different numbers. You remember that the list of integers
 was non-decreasing and that no integer had leading zeros.
 
-Return the number of possible lists of integers that you could have written down 
+Return the number of possible lists of integers that you could have written down
 to get the string num. Since the answer may be large, return it modulo 109 + 7.
 
 Example 1:
@@ -35,23 +35,21 @@ Constraints:
 num consists of digits '0' through '9'.
 */
 
-/*I found it curious that a simple dynamic programming approach works if you use a fast 
+/*I found it curious that a simple dynamic programming approach works if you use a fast
 string compare function like memcmp.
 
 Array a[i][j] is the subsolution where the first number starts at i and ends at j.
 Array b[i][j] is the suffix sum of a[i][j].
-With these i and j, the second number starts at j+1. If it is longer, it can follow the 
-first number. 
-If it is shorter, it can't. The problem is when the numbers have the same length. 
+With these i and j, the second number starts at j+1. If it is longer, it can follow the
+first number.
+If it is shorter, it can't. The problem is when the numbers have the same length.
 We need to compare the two numbers fast.
 
-The trick is to compare them using memcmp, which happens to be faster than, say, 
-strncmp, or a naive comparison loop, 
-or if extracting substrings and comparing them using <=. Perhaps this is a hack. 
+The trick is to compare them using memcmp, which happens to be faster than, say,
+strncmp, or a naive comparison loop,
+or if extracting substrings and comparing them using <=. Perhaps this is a hack.
 I get less than 300 ms.*/
 
-#include <bits/stdc++.h>
-using namespace std;
 class Solution
 {
 public:

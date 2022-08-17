@@ -15,104 +15,46 @@ The first group has a top left corner at land[0][0] and a bottom right corner at
 The second group has a top left corner at land[1][1] and a bottom right corner at land[2][2].
 */
 
-#include <bits/stdc++.h>
-using namespace std;
-
-/*
 class Solution {
 public:
-    vector<vector<int>> findFarmland(vector<vector<int>>&mat) 
-    {
-        vector<vector<int>>ans;
-        int n=mat.size();
-        int m=mat[0].size();
-        vector<pair<int,int>>d={{-1,0},{1,0},{0,-1},{0,1}};
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0;j<m;j++)
-            {
-                vector<int>v;
-                if(mat[i][j]==1)
-                {
-                    mat[i][j]=0;
-                    v.push_back(i);
-                    v.push_back(j);
-                    queue<pair<int,int>>q;
-                    q.push({i,j});
-                    vector<int>res;
-                    while(q.size())
-                    {
-                        res.clear();
-                        auto temp=q.front();
-                        q.pop();
-                        int x=temp.first;
-                        int y=temp.second;
-                        res.push_back(x);
-                        res.push_back(y);
-                        for(auto it:d)
-                        {
-                            int nx=x+it.first;
-                            int ny=y+it.second;
-                            if(nx>=0&&ny>=0&&nx<n&&ny<m&&mat[nx][ny]==1)
-                            {
-                                mat[nx][ny]=0;
-                                q.push({nx,ny});
-                            }
-                        }
-                    }
-                    for(int i=0;i<res.size();i++)
-                    {
-                        v.push_back(res[i]);
-                    }
-                    ans.push_back(v);
-                }
-            }
-        }
-        return ans;
+    
+    bool isValid(vector<vector<int>>&land, int rws, int cols, int nwx, int nwy){
+        return nwx>=0&&nwy>=0&&nwx<=rws-1&&nwy<=cols-1&&land[nwx][nwy]==1;
     }
-};
-*/
-
-class Solution
-{
-public:
-    vector<vector<int>> findFarmland(vector<vector<int>> &a)
-    {
-        vector<vector<int>> ans;
-        int n = a.size();
-        int m = a[0].size();
-        int offsets[] = {0, 1, 0, -1, 0};
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < m; j++)
-            {
-                if (a[i][j] == 1)
-                {
-                    pair<int, int> first = {i, j};
-                    pair<int, int> last = first;
-                    queue<pair<int, int>> todo;
-                    todo.push({i, j});
-                    a[i][j] = 0;
-                    while (!todo.empty())
-                    {
-                        pair<int, int> p = todo.front();
-                        todo.pop();
-                        for (int k = 0; k < 4; k++)
-                        {
-                            int r = p.first + offsets[k], c = p.second + offsets[k + 1];
-                            if (r >= 0 && r < n && c >= 0 && c < m && a[r][c] == 1)
-                            {
-                                a[r][c] = 0;
-                                todo.push({r, c});
-                                last = {r, c};
-                                cout << r << " " << c << endl;
+    
+    vector<vector<int>> findFarmland(vector<vector<int>>& land) {
+        vector<vector<int>>res;
+        int rws=land.size(), cols=land[0].size();
+        queue<pair<int, int>>q;
+        vector<vector<int>>dir{{1, 0}, {-1, 0}, {0, -1}, {0, 1}};
+        for(int i=0; i<rws; ++i){
+            for(int j=0; j<cols; ++j){
+                if(land[i][j]==1){
+                    vector<int>temp;
+                    temp.push_back(i);
+                    temp.push_back(j);
+                    land[i][j]=0;
+                    q.push({i, j});
+                    while(!q.empty()){
+                        int sz=q.size();
+                        while(sz--){
+                            pair<int, int>curr=q.front();
+                            q.pop();
+                            for(auto &vals: dir){
+                                int nwx=curr.first+vals[0], nwy=curr.second+vals[1];
+                                if(isValid(land, rws, cols, nwx, nwy)){
+                                    land[nwx][nwy]=0;
+                                    temp.push_back(nwx);
+                                    temp.push_back(nwy);
+                                    q.push({nwx, nwy});
+                                }
                             }
                         }
                     }
-                    ans.push_back({first.first, first.second, last.first, last.second});
+                    res.push_back({temp[0], temp[1], temp[temp.size()-2], temp[temp.size()-1]});
                 }
             }
         }
-        return ans;
+        return res;
     }
 };

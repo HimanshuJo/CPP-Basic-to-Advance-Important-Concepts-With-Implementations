@@ -1,3 +1,6 @@
+/*
+*/
+
 #include<string>
 #include<vector>
 #include<algorithm>
@@ -99,7 +102,7 @@ Algo:
 			rightB=8, leftB=0
 */
 
-vector<int> manacherOdd1(string str){
+vector<int> manacherOdd(string str){
 	int sz=str.size();
 	str="$"+str+"^";
 	vector<int>res(sz+2);
@@ -121,26 +124,9 @@ vector<int> manacherOdd1(string str){
 	return res;
 }
 
-vector<int> mancharOdd2(string t){
-	int n=t.length();
-	vector<int>lpso(n, 0);
-	int r=0, c=0;
-	for(int i=0;i<n;i++)
-	{
-		int m=2*c-i;
-		if(i<r)
-			lpso[i]= min(lpso[m],r-i);
-		while(i-lpso[i]-1 >=0 && i+lpso[i]+1<n && t[i-lpso[i]-1] == t[i+lpso[i]+1])
-			lpso[i]++;
-		if(r<i+lpso[i])
-			r=i+lpso[i],c=i;
-	}
-	return lpso;
-}
-
 int main(){
 	string str="abcdcba";
-	vector<int>ans=manacherOdd1(str);
+	vector<int>ans=manacherOdd(str);
 	for(auto &vals: ans){
 		cout<<vals<<" ";
 	}

@@ -1,4 +1,4 @@
-// Minimum Time to Type Word Using Special Typewriter
+// 1974. Minimum Time to Type Word Using Special Typewriter
 /*
 There is a special typewriter with lowercase English letters 'a' to 'z' arranged in a circle with a pointer.
 A character can only be typed if the pointer is pointing to that character. 
@@ -49,26 +49,33 @@ The characters are printed as follows:
 - Type the character 'c' in 1 second.
 */
 
-#include<bits/stdc++.h>
-using namespace std;
-
 class Solution {
 public:
     int minTimeToType(string word) {
         int res = word.size(), point = 'a';
         for (auto ch : word) {
+            cout<<"point: "<<point<<endl;
             cout<<"ch-point: "<<ch-point<<endl;
             cout<<"26-(point-ch): "<<26-(ch-point)<<endl;
             res += min(abs(ch - point), 26 - abs(ch - point));
             point = ch;
             cout<<endl;
         }
-        cout<<res;
         return res;
     }
 };
 
-int main(){
-    Solution obj;
-    obj.minTimeToType("abc");
-}
+/*
+point: 97
+ch-point: 0
+26-(point-ch): 26
+
+point: 97
+ch-point: 1
+26-(point-ch): 25
+
+point: 98
+ch-point: 1
+26-(point-ch): 25
+
+*/

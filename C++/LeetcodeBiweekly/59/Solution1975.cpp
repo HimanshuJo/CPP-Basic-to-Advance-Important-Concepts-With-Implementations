@@ -1,4 +1,4 @@
-// Maximum Matrix Sum
+// 1975. Maximum Matrix Sum
 /*
 You are given an n x n integer matrix. You can do the following operation any number of times:
 
@@ -14,6 +14,7 @@ n == matrix.length == matrix[i].length
 2 <= n <= 250
 -10^5 <= matrix[i][j] <= 10^5
 */
+
 /*
 	If number of -ve numbers are even, it means you can ALWAYS shift -1 in a
 	fashion that you can cancel out the negative signs and make the numbers positive.
@@ -24,9 +25,6 @@ n == matrix.length == matrix[i].length
 	And notice that at the end, you will be left with one negative number.
 	*So, shift this negative sign to the smallest number
 */
-
-#include<bits/stdc++.h>
-using namespace std;
 
 class Solution {
 public:
@@ -52,7 +50,7 @@ public:
         
         return negCount%2 == 0 ? sum : sum-2*smallestMin;
 		/*		
-			Why (sum-2*smallestMin) ????
+			Why (sum-2*smallestMin)
 				In simple words : You had first added that number, 
 				so you need to subtract that addition and also in the
 				end, you need to reduce the sum with that number.

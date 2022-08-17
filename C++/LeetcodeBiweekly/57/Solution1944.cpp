@@ -24,36 +24,54 @@ Person 4 can see person 5.
 Person 5 can see no one since nobody is to the right of them.
 */
 
-#include <bits/stdc++.h>
-using namespace std;
+/*
+TLE: 31 / 42 
 
-class Solution
-{
+class Solution {
 public:
-    vector<int> canSeePersonsCount(vector<int> &A)
-    {
-        int n = A.size();
-        vector<int> res(n), stack;
-        for (int i = 0; i < n; ++i)
-        {
-            while (!stack.empty() && A[stack.back()] <= A[i]) {
-                res[stack.back()]++;
-                stack.pop_back();
+    vector<int> canSeePersonsCount(vector<int>& heights) {
+        stack<int>stk;
+        int sz=heights.size();
+        vector<int>ans(sz, 0);
+        for(int i=sz-1; i>=0; --i){
+            int curans=0;
+            if(stk.size()>=1){
+                int curr=stk.top();
+                stack<int>tmpstk=stk;
+                while(!tmpstk.empty()){
+                    int currtp=tmpstk.top();
+                    if(curr<=currtp){
+                        curans++;
+                        curr=currtp;
+                        if(curr>heights[i]) break;
+                    }
+                    tmpstk.pop();
+                }
             }
-            if (!stack.empty())
-                res[stack.back()]++;
-            stack.push_back(i);
+            ans[i]=curans;
+            stk.push(heights[i]);
         }
-        for (auto &num : res) {
-            cout << num << " ";
+        return ans;
+    }
+};
+*/
+
+class Solution {
+public:
+    vector<int> canSeePersonsCount(vector<int>& heights) {
+        int sz=heights.size();
+        vector<int>res(sz, 0);
+        stack<int>stk;
+        for(int i=0; i<sz; ++i){
+            while(!stk.empty()&&heights[stk.top()]<=heights[i]){
+                res[stk.top()]++;
+                stk.pop();
+            }
+            if(!stk.empty()){
+                res[stk.top()]++;
+            }
+            stk.push(i);
         }
         return res;
     }
 };
-
-int main()
-{
-    Solution obj;
-    vector<int> heights = {3, 1, 5, 8, 6};
-    obj.canSeePersonsCount(heights);
-}
