@@ -1,4 +1,4 @@
-// Largest Rectangular Area in a Histogram
+// 84. Largest Rectangle in Histogram
 /*
 Find the largest rectangular area possible in a given histogram where the 
 largest rectangle can be made of a number of contiguous bars. 

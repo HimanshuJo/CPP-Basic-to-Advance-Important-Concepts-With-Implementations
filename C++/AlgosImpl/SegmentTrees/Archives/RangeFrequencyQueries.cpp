@@ -34,32 +34,63 @@ Constraints:
 At most 10^5 calls will be made to query
 */
 
-/*
-Solution2:
-
-#include<vector>
-#include<map>
-using namespace std;
-
 class RangeFreqQuery {
 public:
-    unordered_map<int, vector<int>>mp;
+    
+    map<int, int>st[400001];
+    int n;
+    
+    int getMid(int start, int end){
+        return start+(end-start)/2;
+    }
+    
+    int getFreqUtil(int ss, int se, int qs, int qe, int sidx, int val){
+        if(se<qs||ss>qe) return 0;
+        if(ss>=qs&&se<=qe) return st[sidx][val];
+        int mid=getMid(ss, se);
+        int left=getFreqUtil(ss, mid, qs, qe, 2*sidx+1, val);
+        int right=getFreqUtil(mid+1, se, qs, qe, 2*sidx+2, val);
+        return left+right;
+    }
+    
+    int getFreq(int n, int qs, int qe, int val){
+        if(qs<0||qe>n-1||qs>qe){
+            return -1;
+        }
+        return getFreqUtil(0, n-1, qs, qe, 0, val);
+    }
+    
+    void constructStUtil(vector<int>&arr, int ss, int se, int sidx){
+        if(ss==se){
+            st[sidx][arr[ss]]=1;
+            return;
+        }
+        int mid=getMid(ss, se);
+        constructStUtil(arr, ss, mid, 2*sidx+1);
+        constructStUtil(arr, mid+1, se, 2*sidx+2);
+        st[sidx]=st[2*sidx+1];
+        for(auto &it: st[2*sidx+2]){
+            st[sidx][it.first]+=it.second;
+        }
+    }
+    
+    void constructSt(vector<int>&arr){
+        constructStUtil(arr, 0, n-1, 0);
+    }
+    
     RangeFreqQuery(vector<int>& arr) {
-        for(int i=0; i<arr.size(); ++i){
-			mp[arr[i]].push_back(i);
-		}
+        n=arr.size();
+        constructSt(arr);
     }
     
     int query(int left, int right, int value) {
-        int a=lower_bound(mp[value].begin(), mp[value].end(), left)-mp[value].begin();
-		int b=upper_bound(mp[value].begin(), mp[value].end(), right)-mp[value].begin();
-		return b-a;
+        return getFreq(n, left, right, value);
     }
 };
 
-*/
+// -------*******-------
 
-class RangeFreqQuery {
+class RangeFreqQuery2 {
 public:
     
     int n;
@@ -108,8 +139,20 @@ public:
     }
 };
 
-/**
- * Your RangeFreqQuery object will be instantiated and called as such:
- * RangeFreqQuery* obj = new RangeFreqQuery(arr);
- * int param_1 = obj->query(left,right,value);
- */
+// -------*******-------
+
+class RangeFreqQuery3 {
+public:
+    unordered_map<int, vector<int>>mp;
+    RangeFreqQuery(vector<int>& arr) {
+        for(int i=0; i<arr.size(); ++i){
+            mp[arr[i]].push_back(i);
+        }
+    }
+    
+    int query(int left, int right, int value) {
+        int a=lower_bound(mp[value].begin(), mp[value].end(), left)-mp[value].begin();
+        int b=upper_bound(mp[value].begin(), mp[value].end(), right)-mp[value].begin();
+        return b-a;
+    }
+};

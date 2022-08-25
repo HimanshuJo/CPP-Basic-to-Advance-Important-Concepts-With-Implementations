@@ -35,7 +35,7 @@ nums1 and nums2 are permutations of [0, 1, ..., n - 1]
 */
 
 /*
-TLE:
+TLE: 20 / 148
 
 class Solution {
 public:
@@ -118,9 +118,15 @@ public:
         int n=nums1.size();
         vector<int>indexMap(n, 0);
         for(int i=0; i<n; ++i){
+            /*
+                for each val in nums2 mapping its index
+            */
             indexMap[nums2[i]]=i;
         }
         for(int i=0; i<n; ++i){
+            /*
+                set nums2 val at retrieve val at map at val at current index in nums1
+            */
             nums2[indexMap[nums1[i]]]=i;
             nums1[i]=i;
         }

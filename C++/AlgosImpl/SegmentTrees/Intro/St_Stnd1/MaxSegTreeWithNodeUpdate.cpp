@@ -33,8 +33,8 @@ int maxUtil(int* st, int ss, int se, int qs, int qe, int node) {
 		return -1;
 	}
 	int mid = getMid(ss, se);
-	return max(maxUtil(st, ss, mid, qs, qe, 2 * node + 1), 
-		       maxUtil(st, mid + 1, se, qs, qe, 2 * node + 2));
+	return max(maxUtil(st, ss, mid, qs, qe, 2 * node + 1),
+	           maxUtil(st, mid + 1, se, qs, qe, 2 * node + 2));
 }
 
 int getMax(int* st, int n, int qs, int qe) {
