@@ -130,7 +130,6 @@ public:
 			if (abs(vals.first - vals.second) & 1) {
 				reverseBetween(head, vals.first + 1, vals.second + 1);
 			}
-			//cout<<vals.first<<" "<<vals.second<<endl;
 		}
 		return head;
 	}

@@ -1,5 +1,4 @@
 // 1943. Describe the Painting
-
 /*
  * There is a long and thin painting that can be represented by a number line. 
  * The painting was painted with multiple overlapping segments where each segment was painted with a 

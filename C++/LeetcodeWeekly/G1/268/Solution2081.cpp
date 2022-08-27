@@ -77,11 +77,6 @@ public:
         long long res=0;
         for(int i=0; n>0&&i<10; ++i){
             for(int j=0; n>0&&j<mirror1.size(); ++j){
-                /*
-                cout<<"i "<<i<<" j "<<j<<" firstMul "<<firstMul
-                    <<" mirror1[j] "<<mirror1[j]<<" : "<<firstMul*i+mirror1[j]*10+i<<endl;
-                cout<<"***---***"<<endl;
-                */
                 mirror.push_back(firstMul*i+mirror1[j]*10+i);
                 if(i!=0&&isMirror(mirror.back(), k)){
                     res+=mirror.back();
@@ -89,14 +84,6 @@ public:
                 }
             }
         }
-        /*
-        cout<<"mirror "<<endl;
-        for(auto &vals: mirror){
-            cout<<vals<<" ";
-        }
-        cout<<endl;
-        cout<<"-------\n";
-        */
         swap(mirror1, mirror2);
         swap(mirror2, mirror);
         return res+(n==0?0:generate(dig+1, n, k, firstMul*10));
@@ -111,13 +98,6 @@ public:
                 --n;
             }
         }
-        /*
-        cout<<"mirror2 orig "<<endl;
-        for(auto &vals: mirror2){
-            cout<<vals<<" ";
-        }
-        cout<<endl;
-        */
         return res+generate(2, n, k, 10);
     }
 };

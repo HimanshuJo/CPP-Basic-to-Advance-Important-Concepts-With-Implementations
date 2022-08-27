@@ -1,11 +1,11 @@
 // 2008. Maximum Earnings From Taxi
 /*
-There are n points on a road you are driving your taxi on. The n points on the road are labeled from 1 to n
-in the direction you are going, and you want to drive from point 1 to point n to make money by picking up passengers.
-You cannot change the direction of the taxi.
+There are n points on a road you are driving your taxi on. The n points on the road are labeled 
+from 1 to n in the direction you are going, and you want to drive from point 1 to point n to 
+make money by picking up passengers. You cannot change the direction of the taxi.
 
-The passengers are represented by a 0-indexed 2D integer array rides, where rides[i] = [starti, endi, tipi] denotes
-the ith passenger requesting a ride from point starti to point endi who is willing to give a tipi dollar tip.
+The passengers are represented by a 0-indexed 2D integer array rides, where rides[i] = [starti, endi, tipi] 
+denotes the ith passenger requesting a ride from point starti to point endi who is willing to give a tipi dollar tip.
 
 For each passenger i you pick up, you earn endi - starti + tipi dollars. You may only drive at most one passenger at a time.
 
@@ -18,7 +18,6 @@ Example 1:
 Input: n = 5, rides = [[2,5,4],[1,5,1]]
 Output: 7
 Explanation: We can pick up passenger 0 to earn 5 - 2 + 4 = 7 dollars.
-
 Example 2:
 
 Input: n = 20, rides = [[1,6,1],[3,10,2],[10,12,3],[11,12,2],[12,15,2],[13,18,1]]
@@ -28,131 +27,53 @@ Explanation: We will pick up the following passengers:
 - Drive passenger 2 from point 10 to point 12 for a profit of 12 - 10 + 3 = 5 dollars.
 - Drive passenger 5 from point 13 to point 18 for a profit of 18 - 13 + 1 = 6 dollars.
 We earn 9 + 5 + 6 = 20 dollars in total.
-*/
+ 
 
-/*
-Solution 2:
+Constraints:
+
+1 <= n <= 10^5
+1 <= rides.length <= 3 * 10^4
+rides[i].length == 3
+1 <= starti < endi <= n
+1 <= tipi <= 10^5
+*/
 
 class Solution {
 public:
-    long long memo[(int)1e5];
-    long long dfs(vector<vector<int>>&rides, int sz, int idx)
-    {
-        if(idx>=sz) return 0;
-        if(memo[idx]!=-1) return memo[idx];
-        for(int i=idx+1; i<nn; i++)
-        {
-            if(rides[i][0]>=rides[idx][1])
-                break;
-        }
-        long long incl=rides[idx][1]-rides[idx][0]+rides[idx][2]+recur(rides,nn,i);
-        long long excl=dfs(rides, sz, idx+1);
-        return memo[idx]=max(incl, excl);
-    }
     
-    long long maxTaxiEarnings(int n, vector<vector<int>>& rides) {
-        sort(rides.begin(),rides.end());
-        int sz=rides.size();
-        memset(memo,-1, sizeof memo);
-        return dfs(rides, sz, 0);
-    }
-};
-*/
-
-/*
-Solution 3:
-
-#include<vector>
-#include<algorithm>
-#include<iostream>
-using namespace std;
-
-class Solution {
-public:
-
-    long long dfs(vector<vector<int>>&rides, int idx, vector<int>&memo) {
-        if (idx < rides.size() && memo[idx] != -1) {
-            return memo[idx];
-        }
-        vector<int>curr = rides[idx];
-        long long maxProf = 0;
-        for (int i = idx + 1; i < rides.size(); ++i) {
-            vector<int>nxt = rides[i];
-            if (nxt[0] >= curr[1]) {
-                long long prof = dfs(rides, i, memo);
-                maxProf = max(maxProf, prof);
-            }
-        }
-        maxProf += (curr[1] - curr[0] + curr[2]);
-        return memo[idx] = maxProf;;
-    }
-
-    long long maxTaxiEarnings(int n, vector<vector<int>>& rides) {
-        vector<int>memo(n + 1, -1);
-        sort(rides.begin(), rides.end());
-        long long fnprof = 0;
-        for (int i = 0; i < rides.size(); ++i) {
-            long long prof = dfs(rides, i, memo);
-            fnprof = max(fnprof, prof);
-        }
-        return fnprof;
-    }
-};
-
-int main() {
-    int n = 5;
-    vector<vector<int>>rides = {{2, 5, 4}, {1, 5, 1}};
-    Solution obj;
-    cout << obj.maxTaxiEarnings(n, rides);
-}
-*/
-
-#include <bits/stdc++.h>
-using namespace std;
-
-class Solution
-{
-    long long memo[100005];
-
-    int binarySearch(vector<vector<int>> &rides, int val)
-    {
-        int left = 0, right = rides.size() - 1;
-        int ans = rides.size();
-        while (left <= right)
-        {
-            int mid = s + (e - s) / 2;
-            if (rides[mid][0] >= val)
-            {
-                ans = mid;
-                right = mid - 1;
-            }
-            else
-            {
-                left = mid + 1;
+    long long binarySearch(vector<vector<int>>&rides, int curend, int idx){
+        int left=idx, right=rides.size()-1;
+        int ans=-1;
+        while(left<=right){
+            int mid=left+(right-left)/2;
+            if(rides[mid][0]>=curend){
+                ans=mid;
+                right=mid-1;
+            } else{
+                left=mid+1;
             }
         }
         return ans;
     }
-
-    long long dfs(int idx, vector<vector<int>> &rides)
-    {
-        if (idx == rides.size())
-        {
-            return 0;
-        }
-        if (memo[idx] != -1)
-            return memo[idx];
-        int nwidx = binarySearch(rides, rides[idx][1]);
-        long long incl = rides[idx][1] - rides[idx][0] + rides[idx][2] + dfs(nwidx, rides);
-        long long excl = dfs(idx + 1, rides);
-        return memo[idx] = max(incl, excl);
+    
+    long long dfs(int n, vector<vector<int>>&rides, int sz, int idx, vector<long long>&memo){
+        if(idx>=sz) return 0;
+        if(memo[idx]!=-1) return memo[idx];
+        long long ans=INT_MIN;
+        long long ntpk=0, pk=0;
+        ntpk=dfs(n, rides, sz, idx+1, memo);
+        int curend=rides[idx][1];
+        int nwidx=-1;
+        nwidx=binarySearch(rides, curend, idx);
+        pk=rides[idx][1]-rides[idx][0]+rides[idx][2]+(nwidx!=-1?dfs(n, rides, sz, nwidx, memo):0);
+        ans=max(ans, max(pk, ntpk));
+        return memo[idx]=ans;
     }
-
-public:
-    long long maxTaxiEarnings(int n, vector<vector<int>> &rides)
-    {
-        memset(memo, -1, sizeof memo);
+    
+    long long maxTaxiEarnings(int n, vector<vector<int>>& rides) {
+        int sz=rides.size();
         sort(rides.begin(), rides.end());
-        return dfs(0, rides);
+        vector<long long>memo(sz+1, -1);
+        return dfs(n, rides, sz, 0, memo);
     }
 };

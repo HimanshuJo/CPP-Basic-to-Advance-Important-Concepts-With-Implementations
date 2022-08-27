@@ -84,6 +84,3 @@ public:
 		return (min(ans, min(maxbt+1, (n-tmpminbt))));
     }
 };
-
-int main(){}
-

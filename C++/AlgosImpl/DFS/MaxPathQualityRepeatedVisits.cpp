@@ -56,7 +56,3 @@ public:
 		visited[node]--;
 	}
 };
-
-int main(){
-
-}

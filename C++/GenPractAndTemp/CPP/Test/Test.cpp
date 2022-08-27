@@ -1,30 +1,7 @@
-#include<vector>
 #include<iostream>
+#include<vector>
+#include<cmath>
 using namespace std;
-
-bool isValid(vector<int>&in, vector<int>&cursubseq){
-	int sz=cursubseq.size();
-	for(int i=0; i<sz-1; ++i){
-		int left=in[cursubseq[i]]^cursubseq[i+1];
-		int right=in[cursubseq[i+1]]^cursubseq[i];
-		if(left>right) return false;
-	}
-	return true;
-}
-
-void dfs(vector<int>&in, int n, int idx,vector<int>cursubseq, int &ans){
-	if(idx>=n){
-		if(isValid(in, cursubseq)){
-			int sz_=cursubseq.size();
-			ans=max(ans, sz_);
-		}
-		return;
-	}
-	cursubseq.push_back(idx);
-	dfs(in, n, idx+1, cursubseq, ans);
-	cursubseq.pop_back();
-	dfs(in, n, idx+1, cursubseq, ans);
-}
 
 int main(){
 	ios_base::sync_with_stdio(false);
@@ -32,15 +9,93 @@ int main(){
 	int t;
 	cin>>t;
 	while(t--){
-		int n;
-		cin>>n;
-		vector<int>in(n);
-		for(int i=0; i<n; ++i){
-			cin>>in[i];
+		vector<vector<char>>in(2, vector<char>(2));
+		for(int i=0; i<2; ++i){
+			for(int j=0; j<2; ++j){
+				cin>>in[i][j];
+			}
 		}
-		vector<int>cusubseq;
-		int ans=INT_MIN;
-		dfs(in, n, 0, cusubseq, ans);
+		int ans=INT_MAX;
+		vector<vector<char>>temp=in;
+		char currcolr=temp[0][0];
+		int curcount=0;
+		for(int i=0; i<2; ++i){
+			for(int j=0; j<2; ++j){
+				if(temp[i][j]!=currcolr){
+					curcount++;
+					char nxtcolor=temp[i][j];
+					temp[i][j]=currcolr;
+					for(int ii=0; ii<2; ++ii){
+						for(int jj=0; jj<2; ++jj){
+							if(temp[ii][jj]==nxtcolor){
+								temp[ii][jj]=currcolr;
+							}
+						}
+					}
+				}
+			}
+		}
+		ans=min(ans, curcount);
+		temp=in;
+		currcolr=temp[0][1];
+		curcount=0;
+		for(int i=0; i<2; ++i){
+			for(int j=0; j<2; ++j){
+				if(temp[i][j]!=currcolr){
+					curcount++;
+					char nxtcolor=temp[i][j];
+					temp[i][j]=currcolr;
+					for(int ii=0; ii<2; ++ii){
+						for(int jj=0; jj<2; ++jj){
+							if(temp[ii][jj]==nxtcolor){
+								temp[ii][jj]=currcolr;
+							}
+						}
+					}
+				}
+			}
+		}
+		ans=min(ans, curcount);
+		temp=in;
+		currcolr=temp[1][0];
+		curcount=0;
+		for(int i=0; i<2; ++i){
+			for(int j=0; j<2; ++j){
+				if(temp[i][j]!=currcolr){
+					curcount++;
+					char nxtcolor=temp[i][j];
+					temp[i][j]=currcolr;
+					for(int ii=0; ii<2; ++ii){
+						for(int jj=0; jj<2; ++jj){
+							if(temp[ii][jj]==nxtcolor){
+								temp[ii][jj]=currcolr;
+							}
+						}
+					}
+				}
+			}
+		}
+		ans=min(ans, curcount);
+		temp=in;
+		currcolr=temp[1][1];
+		curcount=0;
+		for(int i=0; i<2; ++i){
+			for(int j=0; j<2; ++j){
+				if(temp[i][j]!=currcolr){
+					curcount++;
+					char nxtcolor=temp[i][j];
+					temp[i][j]=currcolr;
+					for(int ii=0; ii<2; ++ii){
+						for(int jj=0; jj<2; ++jj){
+							if(temp[ii][jj]==nxtcolor){
+								temp[ii][jj]=currcolr;
+							}
+						}
+					}
+				}
+			}
+		}
+		ans=min(ans, curcount);
 		cout<<ans<<endl;
 	}
 }

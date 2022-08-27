@@ -1,73 +1,72 @@
-// Maximum sum such that no two elements are adjacent
+// Maximum sum of non-adjacent elements
 /*
-Given an array of positive numbers, find the maximum sum of a subsequence with the constraint that no 
-2 numbers in the sequence should be adjacent in the array. So 3 2 7 10 should return 13 
-(sum of 3 and 10) or 3 2 5 10 7 should return 15 (sum of 3, 5 and 7).
+Problem Statement:
 
-Answer the question in most efficient way.
+	You are given an array/list of ‘N’ integers. 
 
-Input : arr[] = {5, 5, 10, 100, 10, 5}
-Output : 110
+	You are supposed to return the maximum sum of the subsequence with the 
+	constraint that no two elements are adjacent in the given array/list.
 
-Input : arr[] = {1, 2, 3}
-Output : 4
+Note:
 
-Input : arr[] = {1, 20, 3}
-Output : 20
-*/
-/*
-Solution2:
-
-#include <bits/stdc++.h>
-using namespace std;
-
-int FindMaxSum(vector<int> arr, int n)
-{
-	int incl = arr[0];
-	int excl = 0;
-	int prev_incl=incl;
-	int i;
-
-	for (i = 1; i < n; i++)
-	{
-		incl = excl + arr[i];
-		excl = max(excl, prev_incl);
-		prev_incl=incl;
-	}
-	return (max(incl, excl));
-}
-
-int main()
-{
-	vector<int> arr = {1, 20, 3};
-	cout<<FindMaxSum(arr, arr.size());
-}
+	A subsequence of an array/list is obtained by deleting some number of elements 
+	(can be zero) from the array/list, leaving the remaining elements in their original order.
 */
 
-#include<iostream>
-#include<vector>
-using namespace std;
+#include<climits>
 
-int dfs(vector<int>&in, vector<int>&memo, int idx, int sz){
-	if(idx>=sz){
-		return 0;
-	}
-	if(memo[idx]!=-1) return memo[idx];
-	int res=INT_MIN;
-	res=max(dfs(in, memo, idx+1, sz), in[idx]+dfs(in, memo, idx+2, sz));
-	return memo[idx]=res;
+// TC: O(N)
+// SC: O(N) + auxiliary space
+int dfs(vector<int>&nums, const int sz, int idx, vector<int>&memo){
+    if(idx>=sz) return 0;
+    if(memo[idx]!=0) return memo[idx];
+    int ans=INT_MIN;
+    int pk=nums[idx]+dfs(nums, sz, idx+2, memo);
+    int ntpk=dfs(nums, sz, idx+1, memo);
+    ans=max(ans, max(pk, ntpk));
+    return memo[idx]=ans;
 }
 
-int maxSumNoTwoAdjEleSame(vector<int>&in, int sz){
-	int idx=0;
-	vector<int>memo(sz+1, -1);
-	int ans=dfs(in, memo, idx, sz);
-	return ans;
+int maximumNonAdjacentSum(vector<int> &nums){
+    int sz=nums.size();
+    vector<int>memo(sz, 0);
+    int ans=dfs(nums, sz, 0, memo);
+    return ans;
 }
 
-int main(){
-	vector<int>in{5,  5, 10, 40, 50, 35};
-	int sz=in.size();
-	int ans=maxSumNoTwoAdjEleSame(in, sz);
-	cout<<ans<<endl;
+// TC: O(N)
+// SC: O(N)
+int maximumNonAdjacentSum2(vector<int> &nums){
+    int sz=nums.size();
+    vector<int>dp(sz, 0);
+    for(int idx=0; idx<sz; ++idx){
+        int pk=nums[idx], ntpk=0;
+        if(idx>=2){
+            pk+=dp[idx-2];
+        }
+        if(idx-1>=0)
+            ntpk=dp[idx-1];
+        dp[idx]=max(pk, ntpk);
+    }
+    return dp[sz-1];
+}
+
+// TC: O(N)
+// SC: O(1)
+int maximumNonAdjacentSum3(vector<int> &nums){
+    int sz=nums.size();
+    int prev1=0, prev2=0;
+    int curr=INT_MIN;
+    for(int idx=0; idx<sz; ++idx){
+        int pk=nums[idx], ntpk=0;
+        if(idx>=2){
+            pk+=prev2;
+        }
+        if(idx-1>=0)
+            ntpk=prev1;
+        curr=max(pk, ntpk);
+        prev2=prev1;
+        prev1=curr;
+    }
+    return prev1;
 }

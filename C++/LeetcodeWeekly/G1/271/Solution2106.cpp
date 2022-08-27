@@ -20,6 +20,50 @@ The optimal way is to:
 You moved 3 steps and harvested 3 + 6 = 9 fruits in total.
 */
 
+/*
+TLE: 34 / 202
+
+class Solution {
+public:
+
+    void dfs(map<int, int>&mp, int currPos, int remainingK, int &maxProf, int currTotal, vector<bool>&seen){
+        maxProf=max(maxProf, currTotal);
+        for(auto &entries: mp){
+            int dist=abs(currPos-entries.first);
+            int fruitCount=entries.second;
+            if(remainingK>=dist&&!seen[entries.first]){
+                currTotal+=fruitCount;
+                seen[entries.first]=true;
+                dfs(mp, entries.first, remainingK-dist, maxProf, currTotal, seen);
+                seen[entries.first]=false;
+                currTotal-=fruitCount;
+            }
+        }
+    }
+
+    int maxTotalFruits(vector<vector<int>>& fruits, int startPos, int k) {
+        map<int, int>mp;
+        for(auto &vals: fruits){
+            mp[vals[0]]=vals[1];
+        }
+        if(fruits.size()==1){
+            if(fruits[0][0]==startPos)
+                return fruits[0][1];
+            else{
+                if(startPos+k==fruits[0][0]||startPos-k==fruits[0][0]) return fruits[0][1];
+                return 0;
+            }
+        }
+        auto it=mp.end();
+        it--;
+        int maxInd=(*it).first;
+        int maxProf=0;
+        vector<bool>seen(maxInd, false);
+        dfs(mp, startPos, k, maxProf, 0, seen);
+        return maxProf;
+    }
+};
+*/
 
 int MX=2e5+2;
 

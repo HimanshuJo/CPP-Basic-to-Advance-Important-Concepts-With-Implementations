@@ -1,19 +1,19 @@
 // 2232. Minimize Result by Adding Parentheses to Expression
 /*
-You are given a 0-indexed string expression of the form "<num1>+<num2>" 
+You are given a 0-indexed string expression of the form "<num1>+<num2>"
 where <num1> and <num2> represent positive integers.
 
-Add a pair of parentheses to expression such that after the addition of parentheses, 
-expression is a valid mathematical expression and evaluates to the smallest possible value. 
-The left parenthesis must be added to the left of '+' and the right parenthesis must 
+Add a pair of parentheses to expression such that after the addition of parentheses,
+expression is a valid mathematical expression and evaluates to the smallest possible value.
+The left parenthesis must be added to the left of '+' and the right parenthesis must
 be added to the right of '+'.
 
-Return expression after adding a pair of parentheses such that expression evaluates 
-to the smallest possible value. If there are multiple answers that yield the same result, 
+Return expression after adding a pair of parentheses such that expression evaluates
+to the smallest possible value. If there are multiple answers that yield the same result,
 return any of them.
 
-The input has been generated such that the original value of expression, 
-and the value of expression after adding any pair of parentheses that meets 
+The input has been generated such that the original value of expression,
+and the value of expression after adding any pair of parentheses that meets
 the requirements fits within a signed 32-bit integer.
 
 Example 1:
@@ -40,13 +40,13 @@ Constraints:
 expression consists of digits from '1' to '9' and '+'.
 expression starts and ends with digits.
 expression contains exactly one '+'.
-The original value of expression, and the value of expression after adding any pair of 
+The original value of expression, and the value of expression after adding any pair of
 parentheses that meets the requirements fits within a signed 32-bit integer.
 */
 
 class Solution {
 public:
-    
+
     int eval(string expr)
     {
         string xxx;
@@ -92,7 +92,7 @@ public:
         {
             if (tok[i] == '+')
             {
-                return eval(tok.substr(0, i)) + eval(tok.substr(i+1, tok.length()-i-1));
+                return eval(tok.substr(0, i)) + eval(tok.substr(i + 1, tok.length() - i - 1));
             }
         }
 
@@ -100,60 +100,60 @@ public:
         {
             if (tok[i] == '*')
             {
-                return eval(tok.substr(0, i)) * eval(tok.substr(i+1, tok.length()-i-1));
+                return eval(tok.substr(0, i)) * eval(tok.substr(i + 1, tok.length() - i - 1));
             }
         }
         return stoi(tok.c_str());
     }
-    
+
     string minimizeResult(string expression) {
-        int sz=expression.size();
+        int sz = expression.size();
         unordered_map<string, string>mp;
-        int plusidx=0;
-        for(int i=0; i<sz; ++i){
-            if(expression[i]=='+'){
-                plusidx=i;
+        int plusidx = 0;
+        for (int i = 0; i < sz; ++i) {
+            if (expression[i] == '+') {
+                plusidx = i;
                 break;
             }
         }
-        int currexpr=INT_MAX;
-        string ans="";
-        string left=expression.substr(0, plusidx);
-        string right=expression.substr(plusidx+1, (sz-plusidx)-1);
-        string openb="(";
-        string closeb=")";
-        string star="*";
-        int rsz=right.size(), lsz=left.size();
-        for(int i=0; i<=lsz-1; ++i){
-            string templ=left;
+        int currexpr = INT_MAX;
+        string ans = "";
+        string left = expression.substr(0, plusidx);
+        string right = expression.substr(plusidx + 1, (sz - plusidx) - 1);
+        string openb = "(";
+        string closeb = ")";
+        string star = "*";
+        int rsz = right.size(), lsz = left.size();
+        for (int i = 0; i <= lsz - 1; ++i) {
+            string templ = left;
             templ.insert(i, openb);
-            for(int j=rsz; j>0; --j){
-                string tempr=right;
+            for (int j = rsz; j > 0; --j) {
+                string tempr = right;
                 tempr.insert(j, closeb);
-                string combstr="";
-                combstr+=templ;
-                combstr+='+';
-                combstr+=tempr;
-                int sz_=combstr.length();
-                string temp__=combstr;
-                for(int x=0; x<sz_-1; ++x){
-                    if(isdigit(combstr[x])&&combstr[x+1]=='('){
-                        combstr.insert(x+1, star);
+                string combstr = "";
+                combstr += templ;
+                combstr += '+';
+                combstr += tempr;
+                int sz_ = combstr.length();
+                string temp__ = combstr;
+                for (int x = 0; x < sz_ - 1; ++x) {
+                    if (isdigit(combstr[x]) && combstr[x + 1] == '(') {
+                        combstr.insert(x + 1, star);
                         break;
                     }
                 }
-                sz_=combstr.length();
-                for(int x=sz_-1; x>0; --x){
-                    if(isdigit(combstr[x])&&combstr[x-1]==')'){
+                sz_ = combstr.length();
+                for (int x = sz_ - 1; x > 0; --x) {
+                    if (isdigit(combstr[x]) && combstr[x - 1] == ')') {
                         combstr.insert(x, star);
                         break;
                     }
                 }
-                mp[combstr]=temp__;
-                int curvals=eval(combstr);
-                if(curvals<currexpr){
-                    ans=combstr;
-                    currexpr=curvals;
+                mp[combstr] = temp__;
+                int curvals = eval(combstr);
+                if (curvals < currexpr) {
+                    ans = combstr;
+                    currexpr = curvals;
                 }
             }
         }
