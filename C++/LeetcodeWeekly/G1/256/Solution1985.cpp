@@ -1,4 +1,4 @@
-// Find the Kth Largest Integer in the Array
+// 1985. Find the Kth Largest Integer in the Array
 /*
 You are given an array of strings nums and an integer k. 
 Each string in nums represents an integer without leading zeros.
@@ -19,13 +19,11 @@ The 3rd largest integer in nums is "2".
 
 Constraints:
 
-1 <= k <= nums.length <= 104
+1 <= k <= nums.length <= 10^4
 1 <= nums[i].length <= 100
 nums[i] consists of only digits.
 nums[i] will not have any leading zeros.
 */
-#include<bits/stdc++.h>
-using namespace std;
 
 class Solution {
 public:
@@ -38,10 +36,3 @@ public:
         return nums[k-1];
     }
 };
-
-int main(){
-    Solution obj;
-    vector<string>nums={"233","97"};
-    int k=1;
-    obj.kthLargestNumber(nums, k);
-}

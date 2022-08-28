@@ -1,5 +1,4 @@
-// Maximum Product Difference Between Two Pairs
-
+// 1913. Maximum Product Difference Between Two Pairs
 /*
  * The product difference between two pairs (a, b) and (c, d) is defined as (a * b) - (c * d).
 

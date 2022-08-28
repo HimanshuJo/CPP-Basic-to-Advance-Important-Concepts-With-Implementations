@@ -1,5 +1,4 @@
-// Number of wonderful Substrings
-
+// 1915. Number of wonderful Substrings
 /*
  * A wonderful string is a string where at most one letter appears an odd number of times.
 
@@ -46,10 +45,9 @@
 
     Constraints:
 
-        1 <= word.length <= 105
+        1 <= word.length <= 10^5
         word consists of lowercase English letters from 'a' to 'j'.
  */
-
 /*
  * Intuition:
  *

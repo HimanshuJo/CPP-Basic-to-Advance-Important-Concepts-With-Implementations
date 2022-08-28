@@ -1,9 +1,9 @@
 // 2035. Partition Array Into Two Arrays to Minimize Sum Difference
 /*
-You are given an integer array nums of 2 * n integers. 
+You are given an integer array nums of 2 * n integers.
 
-You need to partition nums into two arrays of length n to minimize the absolute 
-difference of the sums of the arrays. 
+You need to partition nums into two arrays of length n to minimize the absolute
+difference of the sums of the arrays.
 
 To partition nums, put each element of nums into one of the two arrays.
 
@@ -35,15 +35,15 @@ Algorithm
 
 High Level Approach:
 
-*  We divide the input array into two arbitary parts. 
-*  Then, We take one subset from each part, such that, sum of size of both subset = n. 
+*  We divide the input array into two arbitary parts.
+*  Then, We take one subset from each part, such that, sum of size of both subset = n.
 *  And with that subset we try to minimise the absolute difference.
 
 -------
 
 Detailed:
 
-    Divide the original array in two arbitary parts, each of size n. 
+    Divide the original array in two arbitary parts, each of size n.
 
     LeftPart: [0, n-1], RightPart[n, 2*n-1]
 
@@ -63,15 +63,15 @@ Detailed:
 
         Similarly, for right part.
 
-        Requirement: 
+        Requirement:
 
-            We need to divide the original array in two parts of size n, each. 
+            We need to divide the original array in two parts of size n, each.
             Such that the absolute difference of sum is minimised.
 
 -------
 
-Let say from left part we take a subset of size sz (Let's say its sum is a), 
-then from right part we need to take a subset of size of n-sz (Let's say its sum is b). 
+Let say from left part we take a subset of size sz (Let's say its sum is a),
+then from right part we need to take a subset of size of n-sz (Let's say its sum is b).
 
 Then, Part1Sum = a+b.
 
@@ -94,10 +94,10 @@ This technique commonly known as Meet In Middle. Commonly used when 25 <= array_
 TLE: 74/201
 
 class Solution {
-    
+
     vector<vector<int>>res__;
     public:
-    
+
     void dfs(vector<int>&nums, int sz, int idx, vector<int>&allsubseqs){
         if(idx==sz){
             if(allsubseqs.size()==sz/2){
@@ -106,11 +106,11 @@ class Solution {
             return;
         }
         allsubseqs.push_back(idx);
-        dfs(nums, sz, idx+1, allsubseqs);   
+        dfs(nums, sz, idx+1, allsubseqs);
         allsubseqs.pop_back();
         dfs(nums, sz, idx+1, allsubseqs);
     }
-    
+
     int minimumDifference(vector<int>& nums) {
         int sz=nums.size();
         vector<int>allsubseqs;
@@ -140,9 +140,9 @@ class Solution {
                     }
                     if(!flag){
                         int tochk=abs(cursm-nxtsm);
-                        res=min(res, tochk);   
+                        res=min(res, tochk);
                     }
-                }   
+                }
             }
         }
         return res;

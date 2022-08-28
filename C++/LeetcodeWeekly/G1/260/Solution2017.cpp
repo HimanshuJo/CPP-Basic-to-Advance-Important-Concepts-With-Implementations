@@ -27,6 +27,7 @@ Explanation: The optimal path taken by the first robot is shown in red, and the 
 The cells visited by the first robot are set to 0.
 The second robot will collect 0 + 1 + 3 + 3 + 0 = 7 points.
 */
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -42,15 +43,6 @@ public:
             res = min(res, max(top, bottom));
             bottom += g[1][i];
         }
-        cout<<res<<endl;
         return res;
     }
 };
-
-int main()
-{
-    Solution obj;
-    vector<vector<int>> grid = {{20, 3, 20, 17, 2, 12, 15, 17, 4, 15},
-                                {20, 10, 13, 14, 15, 5, 2, 3, 14, 3}};
-    obj.gridGame(grid);
-}

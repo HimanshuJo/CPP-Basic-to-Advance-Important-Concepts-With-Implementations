@@ -1,4 +1,4 @@
-// Array With Elements Not Equal to Average of Neighbors
+// 1968. Array With Elements Not Equal to Average of Neighbors
 /*
 You are given a 0-indexed array nums of distinct integers. You want to rearrange the 
 elements in the array such that every element in the rearranged array is not 
@@ -28,9 +28,6 @@ When i=2, nums[i] = 6, and the average of its neighbors is (7+2) / 2 = 4.5.
 When i=3, nums[i] = 2, and the average of its neighbors is (6+0) / 2 = 3.
 */
 
-#include<bits/stdc++.h>
-using namespace std;
-
 class Solution {
 public:
     vector<int> rearrangeArray(vector<int>& nums) {
@@ -51,7 +48,9 @@ public:
     }
 };
 
-class Solution{
+// -------*******-------
+
+class Solution2{
     public:
         vector<int> rearrangeArray(vector<int> &nums){
             sort(nums.begin(),nums.end());
@@ -68,9 +67,3 @@ class Solution{
             return ans;
         }
 };
-
-int main(){
-    Solution obj;
-    vector<int>nums={1,2,3,4,5};
-    obj.rearrangeArray(nums);
-}

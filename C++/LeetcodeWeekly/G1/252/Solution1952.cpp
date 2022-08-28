@@ -1,4 +1,4 @@
-// Three Divisors
+// 1952. Three Divisors
 /*
 Given an integer n, return true if n has exactly three positive divisors. Otherwise, return false.
 
@@ -10,8 +10,6 @@ Input: n = 2
 Output: false
 Explantion: 2 has only two divisors: 1 and 2.
 */
-#include <bits/stdc++.h>
-using namespace std;
 
 class Solution
 {

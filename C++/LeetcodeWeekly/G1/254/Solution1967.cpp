@@ -1,4 +1,4 @@
-// Number of Strings That Appear as Substrings in Word
+// 1967. Number of Strings That Appear as Substrings in Word
 /*
 Given an array of strings patterns and a string word, return the number of strings in patterns 
 that exist as a substring in word.
@@ -16,8 +16,6 @@ Explanation:
 - "d" does not appear as a substring in "abc".
 3 of the strings in patterns appear as a substring in word.
 */
-#include<bits/stdc++.h>
-using namespace std;
 
 class Solution {
 public:
@@ -32,10 +30,3 @@ public:
         return res;
     }
 };
-
-int main(){
-    Solution obj;
-    vector<string>patterns={"a","b","c"};
-    string word="aaaaabbbbb";
-    cout<<obj.numOfStrings(patterns,word);
-}

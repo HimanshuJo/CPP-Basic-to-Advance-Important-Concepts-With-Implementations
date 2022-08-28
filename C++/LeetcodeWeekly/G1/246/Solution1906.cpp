@@ -1,4 +1,4 @@
-// Minimum Absolute Difference Queries
+// 1906. Minimum Absolute Difference Queries
 
 /*
  * The minimum absolute difference of an array a is defined as the minimum value of
@@ -34,7 +34,6 @@
 	- queries[3] = [0,3]: The subarray is [1,3,4,8] and the minimum absolute difference is |3-4| = 1.
 
  */
-
 /*
  * Naive Approach:
  * 	For each of the query, we have to traverse the array between the range {l, r}

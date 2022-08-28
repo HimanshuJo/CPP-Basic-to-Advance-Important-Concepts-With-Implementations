@@ -1,4 +1,4 @@
-//  Minimum Difference Between Highest and Lowest of K Scores
+// 1984. Minimum Difference Between Highest and Lowest of K Scores
 /*
 You are given a 0-indexed integer array nums, where nums[i] represents the 
 score of the ith student. You are also given an integer k.
@@ -21,8 +21,7 @@ Explanation: There are six ways to pick score(s) of two students:
 - [9,4,1,7]. The difference between the highest and lowest score is 7 - 1 = 6.
 The minimum possible difference is 2.
 */
-/*
-// 19ms
+
 class Solution {
 public:
     int minimumDifference(vector<int> &nums, int k)
@@ -36,14 +35,10 @@ public:
         return minDiff;
     }
 };
-*/
 
+// -------*******-------
 
-#include <bits/stdc++.h>
-using namespace std;
-
-// 1462 ms
-class Solution
+class Solution2
 {
 public:
     int minimumDifference(vector<int> &nums, int k)
@@ -80,11 +75,3 @@ public:
         return minDiff;
     }
 };
-
-int main()
-{
-    Solution obj;
-    vector<int> nums = {1, 2, 3, 4, 5, 6, 7, 8};
-    int k = 4;
-    obj.minimumDifference(nums, k);
-}

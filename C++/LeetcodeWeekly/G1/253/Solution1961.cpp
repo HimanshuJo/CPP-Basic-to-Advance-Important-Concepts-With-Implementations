@@ -1,4 +1,4 @@
-// Check If String Is a Prefix of Array
+// 1961. Check If String Is a Prefix of Array
 /*
 Given a string s and an array of strings words, determine whether s is a prefix string of words.
 
@@ -20,9 +20,6 @@ Output: false
 Explanation:
 It is impossible to make s using a prefix of arr.
 */
-
-#include<bits/stdc++.h>
-using namespace std;
 
 class Solution {
 public:
@@ -60,6 +57,8 @@ public:
     }
 };
 
+// -------*******-------
+
 class Solution2{
     public:
     bool isPrefixString(string s, vector<string>& words) {
@@ -70,15 +69,6 @@ class Solution2{
                     cout<<"false";
                     return false;
                 }
-        cout<<(i==s.size()?"true":"false");
         return i == s.size();
     }
 };
-
-int main(){
-    Solution obj;
-    Solution2 obj2;
-    vector<string> words={"i"};
-    obj.isPrefixString("iloveleetcode",words);
-    obj2.isPrefixString("iloveleetcode",words);
-}

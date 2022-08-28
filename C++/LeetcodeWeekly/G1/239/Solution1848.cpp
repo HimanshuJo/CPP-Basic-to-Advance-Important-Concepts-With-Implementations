@@ -32,31 +32,6 @@ Constraints:
 0 <= start < nums.length
 target is in nums.
 */
-/*
-Brute Force:
-
-class Solution {
-public:
-    int getMinDistance(vector<int>& nums, int target, int start) {
-        int sz=nums.size();
-        if(sz==1) return (abs(start-0));
-        unordered_map<int, vector<int>>mp;
-        for(int i=0; i<sz; ++i){
-            if(nums[i]==target){
-                mp[nums[i]].push_back(i);
-            }
-        }
-        vector<int>tocheck=mp[target];
-        int sz2=tocheck.size();
-        if(sz2==1) return (abs(start-tocheck[0]));
-        int ans=INT_MAX;
-        for(auto &vals: tocheck){
-            ans=min(ans, abs(vals-start));
-        }
-        return ans;
-    }
-};
-*/
 
 class Solution {
 public:

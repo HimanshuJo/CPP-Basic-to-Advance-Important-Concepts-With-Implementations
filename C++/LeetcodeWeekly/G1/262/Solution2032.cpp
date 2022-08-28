@@ -115,7 +115,7 @@ public:
 
 // -------*******-------
 
-class Solution {
+class Solution2 {
 public:
     
     vector<int> twoOutOfThreeGen(vector<vector<int>>&nums){

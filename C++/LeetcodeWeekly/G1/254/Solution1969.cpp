@@ -1,4 +1,4 @@
-//Minimum Non-Zero Product of the Array Elements
+// 1969. Minimum Non-Zero Product of the Array Elements
 /*
 You are given a positive integer p. Consider an array nums (1-indexed) that consists of the 
 integers in the inclusive range [1, 2p - 1] in their binary representations. 
@@ -11,7 +11,7 @@ For example, if x = 1101 and y = 0011, after swapping the 2nd bit from the right
 we have x = 1111 and y = 0001.
 
 Find the minimum non-zero product of nums after performing the above operation 
-any number of times. Return this product modulo 109 + 7.
+any number of times. Return this product modulo 10^9 + 7.
 
 Note: The answer should be the minimum product before the modulo operation is done.
 
@@ -27,8 +27,6 @@ Explanation: nums = [001, 010, 011, 100, 101, 110, 111]
 The array product is 1 * 6 * 1 * 6 * 1 * 6 * 7 = 1512, which is the minimum possible product.
 */
 
-#include<bits/stdc++.h>
-using namespace std;
 class Solution
 {
 public:
@@ -40,14 +38,10 @@ public:
         p = (p * p) % m;
         return y % 2 ? (p * (x % m)) % m : p;
     }
+
     int minNonZeroProduct(int p)
     {
         long long cnt = (1ll << p) - 1, mod = 1000000007;
         return cnt % mod * modPow(cnt - 1, cnt / 2, mod) % mod;
     }
 };
-
-int main(){
-    Solution obj;
-    cout<<obj.minNonZeroProduct(3);
-}

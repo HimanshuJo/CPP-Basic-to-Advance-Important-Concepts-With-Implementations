@@ -1,5 +1,4 @@
-// The Number of Full Rounds You Have Played
-
+// 1904. The Number of Full Rounds You Have Played
 /*
  * A new online video game has been released, and in this video game, there are 15-minute rounds
  * scheduled every quarter-hour period. This means that at HH:00, HH:15, HH:30 and HH:45,
@@ -47,7 +46,6 @@
 	Explanation: You played 4 full rounds each hour except for the last hour
 	where you played 3 full rounds.
  */
-
 /*
  * Solution:
  *
