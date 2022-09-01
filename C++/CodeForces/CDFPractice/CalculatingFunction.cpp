@@ -1,5 +1,5 @@
+// A. Calculating Function
 /*
-
 For a positive integer n let's define a function f:
 
 f(n)=-1+2-3+..+(-1)^n * n
@@ -33,20 +33,16 @@ Note
 f(4)=-1+2-3+4=2
 
 f(5)=-1+2-3+4-5=-3
-
 */
 
 #include <iostream>
-
 using namespace std;
 
 int main()
 {
     long long n;
     cin >> n;
-
     long long res = 0;
-
     if (n % 2 == 0)
         res = n / 2;
     else
@@ -56,6 +52,5 @@ int main()
         remain *= (-1);
         res = remain;
     }
-
     cout << res;
 }

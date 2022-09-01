@@ -1,8 +1,8 @@
+// A. Domino Piling
 /*
-
-You are given a rectangular board of M×N squares. 
-Also you are given an unlimited number of standard domino pieces of 2×1 squares. 
-You are allowed to rotate the pieces. You are asked to place as many dominoes as possible on the 
+You are given a rectangular board of M×N squares.
+Also you are given an unlimited number of standard domino pieces of 2×1 squares.
+You are allowed to rotate the pieces. You are asked to place as many dominoes as possible on the
 board so as to meet the following conditions:
 
 1. Each domino completely covers two squares.
@@ -24,7 +24,6 @@ Input
 
 Output
 4
-
 */
 
 #include <iostream>
@@ -36,19 +35,14 @@ int main()
 {
     int limit = 2;
     vector<int> list;
-
     for (int i = 0; i < limit; ++i)
     {
         int block;
         cin >> block;
         list.push_back(block);
     }
-
     double total = (list.at(0) * list.at(1)) / 2;
-
     int res = (int)floor(total);
-
     cout << res;
-
     return 0;
 }

@@ -1,6 +1,5 @@
+// B. Beautiful Array
 /*
-B. Beautiful Array
-
 Stanley defines the beauty of an array a of length n, which contains non-negative integers, as follows:
 
 		∑i=1n⌊ai/k⌋,

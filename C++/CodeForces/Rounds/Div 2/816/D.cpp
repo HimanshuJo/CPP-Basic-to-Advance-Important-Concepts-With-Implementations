@@ -1,6 +1,5 @@
+// D. 2+ doors
 /*
-D. 2+ doors
-
 The Narrator has an integer array a of length n, but he will only tell you the size n and q statements, 
 each of them being three integers i,j,x, which means that ai∣aj=x, where | denotes the bitwise OR operation.
 

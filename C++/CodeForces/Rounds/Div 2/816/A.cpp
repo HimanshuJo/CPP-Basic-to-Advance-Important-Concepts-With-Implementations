@@ -1,8 +1,7 @@
 // https://codeforces.com/contest/1715
 // https://codeforces.com/blog/entry/104261
+// A. Crossmarket
 /*
-A. Crossmarket
-
 Stanley and Megan decided to shop in the "Crossmarket" grocery store, which can be represented as a 
 matrix with n rows and m columns.
 

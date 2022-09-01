@@ -1,6 +1,5 @@
+// C. Monoblock
 /*
-C. Monoblock
-
 Stanley has decided to buy a new desktop PC made by the company "Monoblock", 
 and to solve captcha on their website, he needs to solve the following task.
 

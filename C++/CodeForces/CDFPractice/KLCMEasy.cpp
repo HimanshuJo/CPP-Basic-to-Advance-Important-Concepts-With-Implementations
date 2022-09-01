@@ -1,5 +1,5 @@
+// C1. KLCM Easy
 /*
-
 You are given a positive integer n. Find k positive integers a1,a2,…,ak, such that:
 
 a1+a2+…+ak=n
@@ -16,7 +16,8 @@ output
 1 1 1
 4 2 2
 2 6 6
-
+*/
+/*
 Algo:
 
     Most important to notice in the problem is
@@ -42,7 +43,7 @@ Algo:
 
                 so, the first value we can take is 1
 
-                so, the next two values will be 
+                so, the next two values will be
 
                         (n - 1) / 2
 
@@ -95,27 +96,20 @@ Algo:
 
 #define ll long long
 #include<iostream>
-
 using namespace std;
 
 int main() {
-    
     ll int t;
     cin >> t;
-
     while (t--) {
         ll int n, k;
         cin >> n >> k;
-
         int z = k - 3;
-
         while (z > 0) {
             cout << 1 << " ", z--;
         }
-
         n = n - (k - 3);
         if (n < 0) continue;
-
         if (n % 2 == 0) {
             ll int k  = n / 2;
             if (k % 2 == 1) {
@@ -124,7 +118,7 @@ int main() {
                 cout << n / 2 << " " << n / 4 << " " << n / 4 << "\n";
             }
         } else {
-            cout << 1 << " " << (n - 1) / 2 << " " << (n - 1) / 2 <<"\n";
+            cout << 1 << " " << (n - 1) / 2 << " " << (n - 1) / 2 << "\n";
         }
     }
 }

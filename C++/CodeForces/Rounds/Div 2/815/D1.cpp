@@ -1,6 +1,5 @@
+// D1. Xor-Subsequence (easy version)
 /*
-D1. Xor-Subsequence (easy version)
-
 It is the easy version of the problem. The only difference is that in this version ai≤200.
 
 You are given an array of n integers a0,a1,a2,…an−1. Bryap wants to find the longest 

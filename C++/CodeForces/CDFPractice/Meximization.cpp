@@ -1,9 +1,11 @@
+// A. Meximization
 /*
 You are given an integer n and an array a1,a2,…,an. You should reorder the elements of the array a in 
 such way that the sum of MEX on prefixes (i-th prefix is a1,a2,…,ai) is maximized.
 
 Formally, you should find an array b1,b2,…,bn, such that the sets of elements of arrays a and b are equal 
-(it is equivalent to array b can be found as an array a with some reordering of its elements) and ∑i=1nMEX(b1,b2,…,bi) is maximized.
+(it is equivalent to array b can be found as an array a with some reordering of its elements) and 
+∑i=1nMEX(b1,b2,…,bi) is maximized.
 
 MEX of a set of nonnegative integers is the minimal nonnegative integer such that it is not in the set.
 

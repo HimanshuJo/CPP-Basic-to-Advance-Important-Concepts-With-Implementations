@@ -1,5 +1,5 @@
+// A. Next Round
 /*
-
 "Contestant who earns a score equal to or greater than the k-th place finisher's score will advance to the next round,
 as long as the contestant earns a positive score..." — an excerpt from contest rules.
 
@@ -25,7 +25,6 @@ Input
 
 Output
 6
-
 /**/
 
 #include <iostream>
@@ -40,14 +39,12 @@ int main()
     cin >> part;
     cin >> place;
     vector<int> list;
-
     for (int i = 0; i < part; ++i)
     {
         int particip;
         cin >> particip;
         list.push_back(particip);
     }
-
     for (int num : list)
     {
         if (num > 0 && num >= list.at(place - 1))
@@ -55,8 +52,6 @@ int main()
             res++;
         }
     }
-
     cout << res;
-
     return 0;
 }

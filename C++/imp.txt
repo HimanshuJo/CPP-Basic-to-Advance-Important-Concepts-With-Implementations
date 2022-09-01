@@ -1,8 +1,14 @@
-The back waves push the front waves,
-the front waves die on the beach.
-The back waves continue to push forward,
-still die on the beach.
+can BS
+	can Greedy
+		can BFS
+			can DP
+				can PQ
+					can Stack
+						can Dequeue (standard, two pointers)
+							THEN ONLY BRUTE FORCE
 
--------
-
-X7SAG-U67K2-KZ45E-ZEL7C-W5LRS
+can BFS
+	can DFS (standard, Topo)
+		can UF
+			can Seg Tree
+				THEN ONLY BRUTE FORCE
