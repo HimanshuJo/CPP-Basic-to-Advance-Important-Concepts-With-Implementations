@@ -48,14 +48,14 @@ public:
         }
         int mx=-1;
         if(memo.find(combs)!=memo.end()) return memo[combs];
-            for(int x=1; x<=numSlots; ++x){
-                if(combs[x]!=2){
-                    combs[x]++;
-                    int res=(nums[idx]&x)+dfs(nums, combs, numSlots, sz, idx+1, memo);
-                    mx=max(mx, res);
-                    combs[x]--;
-                }
-            }   
+        for(int x=1; x<=numSlots; ++x){
+            if(combs[x]!=2){
+                combs[x]++;
+                int res=(nums[idx]&x)+dfs(nums, combs, numSlots, sz, idx+1, memo);
+                mx=max(mx, res);
+                combs[x]--;
+            }
+        }   
         return memo[combs]=mx;
     }
     

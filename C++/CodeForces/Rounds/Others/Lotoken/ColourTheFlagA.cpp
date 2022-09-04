@@ -1,19 +1,17 @@
-// Color the flag
-
+// A. Color the flag
 /*
-
 Today we will be playing a red and white colouring game 
 (no, this is not the Russian Civil War; these are just the colours of the Canadian flag).
 
 You are given an n×m grid of "R", "W", and "." characters. 
-    "R" is red, "W" is white and "." is blank. 
+"R" is red, "W" is white and "." is blank. 
     
-    The neighbours of a cell are those that share an edge with it 
-    (those that only share a corner do not count).
+The neighbours of a cell are those that share an edge with it 
+(those that only share a corner do not count).
 
 Your job is to colour the blank cells red or white so that every red cell only has 
-    white neighbours (and no red ones) and every white cell only has 
-    red neighbours (and no white ones). You are not allowed to recolour already coloured cells.
+white neighbours (and no red ones) and every white cell only has 
+red neighbours (and no white ones). You are not allowed to recolour already coloured cells.
 
 Input
 
@@ -70,7 +68,6 @@ W
 R
 W
 R
-
 */
 
 /*
