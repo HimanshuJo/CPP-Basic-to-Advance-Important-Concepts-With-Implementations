@@ -45,7 +45,7 @@ void dfs2(int curnode, vector<vector<int>>&transposeGr, vector<int>&seen){
     }
 }
 
-int stronglyConnectedComponents(int v, vector<vector<int>> &edges)
+int stronglyConnectedComponents(int v, vector<vector<int>>&edges)
 {
     vector<vector<int>>gr(v);
     for(auto &vals: edges){
