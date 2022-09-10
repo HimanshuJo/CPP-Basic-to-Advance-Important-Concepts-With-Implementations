@@ -45,7 +45,6 @@ using namespace std;
 #define N 100000+1
 #define inf 1000000
 
-// array to store the distances of the vertices from the nearest source
 int dist[N];
 
 int visited[N];
@@ -57,11 +56,9 @@ int sourceCust[N];
 deque<pair<int, int>> BFSQueue;
 
 void BFS(vector<int>graph[], int currVert){
-    // since we're running a BFS for each vertex, therefore we've to clear it first
     while (!BFSQueue.empty()){
         BFSQueue.pop_back();
     }
-    // pushing back starting vertices
     BFSQueue.push_back({currVert, 0});
     while (!BFSQueue.empty()){
         int s=BFSQueue.front().first;
@@ -100,7 +97,6 @@ void nearestTown(vector<int>graph[], int n, int sources[], int sizeOfSources){
         cout << i << " " << dist[i] << endl;
     }
 }
-
 
 void addEdge(vector<int> graph[], int u, int v){
     graph[u].push_back(v);

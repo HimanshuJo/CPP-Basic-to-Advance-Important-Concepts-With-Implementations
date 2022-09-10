@@ -44,50 +44,35 @@ so the overall time complexity is O(M! * MN).
 Since M and N are at most 8 and 8! * 8^2 = 2,580,480 ~= 2.6e6, such solution should be able to pass.
 */
 
-
-#include <bits/stdc++.h>
-using namespace std;
-
-class Solution
-{
-    // Calculating compatibility scores of ith student and jth mentor
-    int cal(int i, int j, vector<vector<int>> &arr1, vector<vector<int>> &arr2)
-    {
-        int cnt = 0;
-        for (int k = 0; k < arr1[0].size(); k++)
-        {
-            if (arr1[i][k] == arr2[j][k])
-            {
-                cnt++;
+class Solution {
+public:
+    
+    int score(vector<vector<int>>&students, vector<vector<int>>&mentors, int idx, int ment){
+        int count=0;
+        for(int x=0; x<students[0].size(); ++x){
+            if(students[idx][x]==mentors[ment][x]){
+                count++;
             }
         }
-        return cnt;
+        return count;
     }
-
-    int helper(int i, int m, vector<vector<int>> &arr1, vector<vector<int>> &arr2, vector<bool> &vis)
-    {
-        if (i == m)
-        {
-            return 0;
-        }
-        int ans = 0;
-        for (int j = 0; j < m; j++)
-        {
-            if (!vis[j])
-            {
-                vis[j] = 1;
-                ans = max(ans, cal(i, j, arr1, arr2) + helper(i + 1, m, arr1, arr2, vis));
-                vis[j] = 0; // Backtracking
+    
+    int dfs(vector<vector<int>>&students, vector<vector<int>>&mentors, int idx, int sz, vector<int>&seen){
+        if(idx>=sz) return 0;
+        int ans=INT_MIN;
+        for(int ment=0; ment<sz; ++ment){
+            if(!seen[ment]){
+                seen[ment]=1;
+                ans=max(ans, score(students, mentors, idx, ment)+dfs(students, mentors, idx+1, sz, seen));
+                seen[ment]=0;
             }
         }
         return ans;
     }
-
-public:
-    int maxCompatibilitySum(vector<vector<int>> &students, vector<vector<int>> &mentors)
-    {
-        int m = students.size();
-        vector<bool> vis(m, 0); // To keep track of which mentor is already paired up
-        return helper(0, m, students, mentors, vis);
+    
+    int maxCompatibilitySum(vector<vector<int>>& students, vector<vector<int>>& mentors) {
+        int sz=students.size();
+        vector<int>seen(sz+1, 0);
+        return dfs(students, mentors, 0, sz, seen);
     }
 };

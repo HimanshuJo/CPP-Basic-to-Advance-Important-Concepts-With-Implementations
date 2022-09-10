@@ -43,7 +43,7 @@ public:
                 q.pop();
                 if (i == n - 1){
                     cout<<step;
-                    return step; // Reached to last index
+                    return step;
                 }
                 vector<int> &next = indicesOfValue[arr[i]];
                 next.push_back(i - 1);

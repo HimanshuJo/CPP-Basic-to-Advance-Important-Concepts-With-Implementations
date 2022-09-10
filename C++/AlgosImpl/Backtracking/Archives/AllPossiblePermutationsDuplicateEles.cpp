@@ -3,10 +3,7 @@
 #include <algorithm>
 using namespace std;
 
-void backtrack(vector<int> &nums,
-               vector<int> &curr,
-               vector<vector<int>> &ans,
-               vector<bool> &visited)
+void backtrack(vector<int> &nums, vector<int> &curr, vector<vector<int>> &ans, vector<bool> &visited)
 {
     if ((int)curr.size() == (int)nums.size())
     {

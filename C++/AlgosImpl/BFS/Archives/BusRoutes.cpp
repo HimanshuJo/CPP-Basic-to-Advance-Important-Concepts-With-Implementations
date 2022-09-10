@@ -3,15 +3,15 @@ You are given an array routes representing bus routes where routes[i] is a bus r
 
     For example, if routes[0] = [1, 5, 7], this means that the
 
-    	0th bus travels in the sequence 1 -> 5 -> 7 -> 1 -> 5 -> 7 -> 1 -> ... forever.
+        0th bus travels in the sequence 1 -> 5 -> 7 -> 1 -> 5 -> 7 -> 1 -> ... forever.
 
-	You will start at the bus stop source (You are not on any bus initially), and you want to go to the bus stop target. 
+    You will start at the bus stop source (You are not on any bus initially), and you want to go to the bus stop target. 
 
-	You can travel between bus stops by buses only.
+    You can travel between bus stops by buses only.
 
-	Return the least number of buses you must take to travel from source to target. 
+    Return the least number of buses you must take to travel from source to target. 
 
-	Return -1 if it is not possible.
+    Return -1 if it is not possible.
 
 Example 1:
 
@@ -33,68 +33,57 @@ Constraints:
     sum(routes[i].length) <= 10^5
     0 <= routes[i][j] < 10^6
     0 <= source, target < 10^6
-
 */
 
 #include<bits/stdc++.h>
 using namespace std;
 
 class Solution{
-    public:
-        int numBusesToDestination(vector<vector<int>> &routes, int S, int T){
-            map<int, vector<int>>busStpInWhchRt;
-            int rtSz=routes.size();
-            for (int i=0; i<rtSz; ++i){
-                vector<int>curr=routes[i];
-                for (auto &busStps: curr){
-                    busStpInWhchRt[busStps].push_back(i);
-                }
+public:
+    int numBusesToDestination(vector<vector<int>> &routes, int S, int T){
+        map<int, vector<int>>busStpInWhchRt;
+        int rtSz=routes.size();
+        for(int i=0; i<rtSz; ++i){
+            vector<int>curr=routes[i];
+            for(auto &busStps: curr){
+                busStpInWhchRt[busStps].push_back(i);
             }
-            for (auto &entry: busStpInWhchRt){
-                cout<<entry.first<<" : ";
-                for (auto &nums: entry.second){
-                    cout<<nums<<" ";
-                }
-                cout<<"\n";
-            }
-            cout<<"-------"<<endl;
-            set<int>visBusStp;
-            set<int>visRoutes;
-            queue<int>busStpsQueue;
-            busStpsQueue.push(S);
-            int res=0;
-            while (!busStpsQueue.empty()){
-                int queueSz=busStpsQueue.size();
-                set<int>nextBusStps;
-                for (int i=0; i<queueSz; ++i){
-                    int currBusStp=busStpsQueue.front();
-                    if (currBusStp==T){
-                        cout<<res<<endl;
-                        return res;
-                    }
-                    busStpsQueue.pop();
-                    if (visBusStp.count(currBusStp)==1){
-                        continue;
-                    }
-                    visBusStp.emplace(currBusStp);
-                    vector<int>currBusStpRoutes=busStpInWhchRt[currBusStp];
-                    for (auto &entries: currBusStpRoutes){
-                        if (visRoutes.count(entries)!=1){
-                            for (auto &busStps: routes[entries]){
-                                nextBusStps.emplace(busStps);
-                            }
-                            visRoutes.emplace(entries);
-                        }
-                    }
-                }
-                for (auto &entries: nextBusStps){
-                    busStpsQueue.push(entries);
-                }
-                res++;
-            }
-            cout<<-1;
-            return -1;
         }
+        set<int>visBusStp;
+        set<int>visRoutes;
+        queue<int>busStpsQueue;
+        busStpsQueue.push(S);
+        int res=0;
+        while(!busStpsQueue.empty()){
+            int queueSz=busStpsQueue.size();
+            set<int>nextBusStps;
+            for(int i=0; i<queueSz; ++i){
+                int currBusStp=busStpsQueue.front();
+                if(currBusStp==T){
+                    return res;
+                }
+                busStpsQueue.pop();
+                if(visBusStp.count(currBusStp)==1){
+                    continue;
+                }
+                visBusStp.emplace(currBusStp);
+                vector<int>currBusStpRoutes=busStpInWhchRt[currBusStp];
+                for(auto &entries: currBusStpRoutes){
+                    if(visRoutes.count(entries)!=1){
+                        for(auto &busStps: routes[entries]){
+                            nextBusStps.emplace(busStps);
+                        }
+                        visRoutes.emplace(entries);
+                    }
+                }
+            }
+            for(auto &entries: nextBusStps){
+                busStpsQueue.push(entries);
+            }
+            res++;
+        }
+        return -1;
+    }
 };
 
 int main(){

@@ -36,34 +36,6 @@ n == nums.length
 1 <= nums[i] <= 15
 */
 
-/*
-Solution2:
-
-class Solution {
-public:
-    int maximumANDSum(vector<int>& nums, int numSlots) {
-        int n=nums.size();
-        vector<vector<vector<int>>>memo(n+1, vector<vector<int>>((1LL<<(numSlots+1))-1,
-                                             vector<int>((1LL<<(numSlots+1))-1, -1)));
-        auto solve=[&](int idx, int mask1, int mask2, auto &self)->int{
-            if(idx==n) return 0;
-            if(memo[idx][mask1][mask2]!=-1) return memo[idx][mask1][mask2];
-            int res=0;
-            for(int j=0; j<numSlots; ++j){
-                if((mask1>>j)&1) continue;
-                res=max(res, (nums[idx]&(j+1))+self(idx+1, mask1|(1LL<<j), mask2, self));
-            }
-            for(int j=0; j<numSlots; ++j){
-                if((mask2>>j)&1) continue;
-                res=max(res, (nums[idx]&(j+1))+self(idx+1, mask1, mask2|(1LL<<j), self));
-            }
-            return memo[idx][mask1][mask2]=res;
-        };
-        return (solve(0, 0, 0, solve));
-    }
-};
-*/
-
 class Solution {
 public:
     
@@ -90,5 +62,31 @@ public:
         map<vector<int>, int>memo;
         int res=dfs(nums, combs, numSlots, sz, 0, memo);
         return res;
+    }
+};
+
+// -------*******-------
+
+class Solution2 {
+public:
+    int maximumANDSum(vector<int>& nums, int numSlots) {
+        int n=nums.size();
+        vector<vector<vector<int>>>memo(n+1, vector<vector<int>>((1LL<<(numSlots+1))-1,
+                                             vector<int>((1LL<<(numSlots+1))-1, -1)));
+        auto solve=[&](int idx, int mask1, int mask2, auto &self)->int{
+            if(idx==n) return 0;
+            if(memo[idx][mask1][mask2]!=-1) return memo[idx][mask1][mask2];
+            int res=0;
+            for(int j=0; j<numSlots; ++j){
+                if((mask1>>j)&1) continue;
+                res=max(res, (nums[idx]&(j+1))+self(idx+1, mask1|(1LL<<j), mask2, self));
+            }
+            for(int j=0; j<numSlots; ++j){
+                if((mask2>>j)&1) continue;
+                res=max(res, (nums[idx]&(j+1))+self(idx+1, mask1, mask2|(1LL<<j), self));
+            }
+            return memo[idx][mask1][mask2]=res;
+        };
+        return (solve(0, 0, 0, solve));
     }
 };

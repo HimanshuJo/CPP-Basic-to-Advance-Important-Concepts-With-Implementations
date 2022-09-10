@@ -7,17 +7,21 @@ destination vertex ‘dst’, print all paths from given ‘src’ to ‘dst’.
 Algorithm :  
 
 create a queue which will store path(s) of type vector
-initialise the queue with first path starting from src
+initialize the queue with first path starting from src
 
 Now run a loop till queue is not empty
-   get the frontmost path from queue
-   check if the lastnode of this path is destination
-       if true then print the path
-   run a loop for all the vertices connected to the
+   Get the front-most path from queue
+   
+   Check if the last-node of this path is destination
+    	if true then print the path
+   
+   Run a loop for all the vertices connected to the
    current vertex i.e. lastnode extracted from path
+      
       if the vertex is not visited in current path
-         a) create a new path from earlier path and 
-             append this vertex
+      
+         a) create a new path from earlier path and append this vertex
+      
          b) insert this new path to queue
 */
 

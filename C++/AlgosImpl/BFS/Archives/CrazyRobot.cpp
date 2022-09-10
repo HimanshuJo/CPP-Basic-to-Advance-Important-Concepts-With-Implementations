@@ -104,7 +104,8 @@ What we basically need is a way to determine:
 Promote that one step further. The state is winning if there exists such a direction that all 
 neighbouring free cells except in this direction are winning states. 
 
-Rephrase it. The state is winning if it has at least one winning state neighbour and no more than one non-winning state neighbour.
+Rephrase it. The state is winning if it has at least one winning state neighbour and no more than 
+one non-winning state neighbour.
 
 Let's store the number of non-winning neighbouring states for each cell. 
 Initially, it's the number of neighbouring free cells. 

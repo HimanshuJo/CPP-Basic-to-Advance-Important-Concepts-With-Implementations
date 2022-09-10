@@ -1,3 +1,22 @@
+// Maximum Bipartite Matching
+/*
+A matching in a Bipartite Graph is a set of the edges chosen in such a way that no two edges share an endpoint.
+
+A maximum matching is a matching of maximum size (maximum number of edges). 
+In a maximum matching, if any edge is added to it, it is no longer a matching. 
+There can be more than one maximum matchings for a given Bipartite Graph. 
+
+Why do we care? 
+
+There are many real world problems that can be formed as Bipartite Matching. 
+For example, consider the following problem:
+
+“There are M job applicants and N jobs. Each applicant has a subset of jobs that he/she is interested in. 
+Each job opening can only accept one applicant and a job applicant can be appointed for only one job. 
+
+Find an assignment of jobs to applicants in such that as many applicants as possible get jobs.”
+*/
+
 #include<iostream>
 #include<string.h>
 using namespace std;

@@ -82,7 +82,6 @@ public:
                 a[0][i] = 1;
             }
         }
-
         while (!q.empty())
         {
             int ss = q.size();

@@ -1,8 +1,7 @@
 #include<iostream>
 #include<vector>
-#include<set>
-#include<queue>
 #include<algorithm>
+#include<cmath>
 using namespace std;
 
 int main(){
@@ -13,20 +12,17 @@ int main(){
     while(t--){
         int n;
         cin>>n;
-        vector<int>in(n, 0);
+        vector<int>in(n);
         for(int i=0; i<n; ++i){
             cin>>in[i];
         }
-        int res=0;
-        for(int i=1; i<n; ++i){
-            res=max(res, in[i-1]-in[i]);
+        vector<pair<int, int>>allcombs;
+        for(int i=0; i<n; ++i){
+            allcombs.push_back({in[i], i});
         }
-        for(int i=1; i<n; ++i){
-            res=max(res, in[i]-in[0]);
-        }
-        for(int i=0; i<n-1; ++i){
-            res=max(res, in[n-1]-in[i]);
-        }
-        cout<<res<<"\n";
+        sort(allcombs.begin(), allcombs.end());
+        auto it=allcombs.rbegin();
+        int ans=(it->second)+1;
+        cout<<ans<<"\n";
     }
 }

@@ -71,7 +71,6 @@ void eulerTree(int u, int &indx)
 	}
 }
 
-// Function to print Euler Tour of tree
 void printEulerTour(int root, int N)
 {
 	int index = 0;
@@ -83,13 +82,9 @@ void printEulerTour(int root, int N)
 int main()
 {
 	int N = 4;
-
 	add_edge(1, 2);
 	add_edge(2, 3);
 	add_edge(2, 4);
-
-	// Consider 1 as root and print
-	// Euler tour
 	printEulerTour(1, N);
 
 	return 0;

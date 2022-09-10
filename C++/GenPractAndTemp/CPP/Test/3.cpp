@@ -1,9 +1,10 @@
 #include<iostream>
 #include<vector>
-#include<set>
-#include<queue>
 #include<algorithm>
-#define endl "\n"
+#include<cmath>
+#include<cstring>
+#include<queue>
+#include<string>
 using namespace std;
 
 int main(){
@@ -12,40 +13,41 @@ int main(){
     int t;
     cin>>t;
     while(t--){
-        int n, m;
-        cin>>n>>m;
-        if(n==1){
-            cout<<"YES\n";
-            cout<<m<<endl;
-        } else if(n>m||((m&1)==1&&(n&1)==0)){
-            cout<<"NO\n";
-        } else if(n==m){
-            cout<<"YES\n";
-            for(int i=0; i<n; ++i){
-                cout<<1<<" ";
-            }
-            cout<<endl;
-        } else if((m&1)==0&&m/2==n){
-            cout<<"YES\n";
-            for(int i=0; i<n; ++i){
-                cout<<2<<" ";
-            }
-            cout<<endl;
-        } else if((m&1)==0&&(n&1)==0){
-            cout<<"YES\n";
-            for(int i=2; i<n; ++i){
-                cout<<1<<" ";
-            }
-            cout<<(m-n+2)/2<<" "<<(m-n+2)/2;
-            cout<<endl;
-        } else if((n&1)==1){
-            cout<<"YES\n";
-            for(int i=1; i<n; ++i){
-                cout<<1<<" ";
-            }
-            cout<<(m-n+1)<<endl;
-        } else{
-            cout<<"NO\n";
+        int n;
+        cin>>n;
+        vector<int>A(n), B(n);
+        for(int i=0; i<n; ++i){
+            cin>>A[i];
         }
+        for(int i=0; i<n; ++i){
+            cin>>B[i];
+        }
+        priority_queue<int, vector<int>>pq1, pq2;
+        for(auto &vals: A){
+            pq1.push(vals);
+        }
+        for(auto &vals: B){
+            pq2.push(vals);
+        }
+        int ans=0;
+        while(!pq1.empty()&&!pq2.empty()){
+            int curAtp=pq1.top(), curBtp=pq2.top();
+            if(curAtp==curBtp){
+                pq1.pop();
+                pq2.pop();
+                continue;
+            }
+            ans++;
+            if(curAtp<curBtp){
+                int nwnm=(to_string(curBtp)).length();
+                pq2.pop();
+                pq2.push(nwnm);
+            } else{
+                int nwnum=(to_string(curAtp)).length();
+                pq1.pop();
+                pq1.push(nwnum);
+            }
+        }
+        cout<<ans<<"\n";
     }
 }

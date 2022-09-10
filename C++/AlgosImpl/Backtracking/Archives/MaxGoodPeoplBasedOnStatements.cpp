@@ -39,54 +39,32 @@ Let's take person 2 as the key.
             - Following that person 2 is bad and lied, there will be two good persons in the group.
 We can see that at most 2 persons are good in the best case, so we return 2.
 Note that there is more than one way to arrive at this conclusion.
+
+Input: statements = [[2,0],[0,2]]
+Output: 1
+Explanation: Each person makes a single statement.
+- Person 0 states that person 1 is bad.
+- Person 1 states that person 0 is bad.
+Let's take person 0 as the key.
+- Assuming that person 0 is a good person:
+    - Based on the statement made by person 0, person 1 is a bad person and was lying.
+    - Following that person 0 is a good person, there will be only one good person in the group.
+- Assuming that person 0 is a bad person:
+    - Based on the statement made by person 0, and since person 0 is bad, they could be:
+        - telling the truth. Following this scenario, person 0 and 1 are both bad.
+            - Following that person 0 is bad but told the truth, there will be no good persons in the group.
+        - lying. In this case person 1 is a good person.
+            - Following that person 0 is bad and lied, there will be only one good person in the group.
+We can see that at most, one person is good in the best case, so we return 1.
+Note that there is more than one way to arrive at this conclusion.
+
+Constraints:
+
+n == statements.length == statements[i].length
+2 <= n <= 15
+statements[i][j] is either 0, 1, or 2.
+statements[i][i] == 2
 */
-/*
-Solution 2: BitMasking
-
-class Solution{
-public:
-
-    int ans=0;
-    vector<int>badPersons;
-    vector<int>goodPersons;
-    int maximumGood(vector<vector<int>>&statements){
-        int n=statements.size();
-        goodPersons.resize(n), badPersons.resize(n);
-        for(int i=0; i<n; ++i){
-            int goodMask=1<<i;
-            int badMask=0<<i;
-            for(int j=0; j<n; ++j){
-                if(statements[i][j]==2){
-                    continue;
-                }
-                if(statements[i][j]==1){
-                    goodMask|=(1<<j);
-                } else{
-                    badMask|=(1<<j);
-                }
-            }
-            goodPersons[i]=goodMask, badPersons[i]=badMask;
-        }
-        dfs(0, 0, 0, 0, 0, n);
-        return ans;
-    }
-
-    void dfs(int idx, int goodMask, int badMask, int currMask, int cnt, int n){
-        if(idx==n){
-            if(goodMask==currMask&&((goodMask&badMask)==0)){
-                ans=max(ans, cnt);
-            }
-            return;
-        }
-        dfs(idx+1, goodMask, badMask|(1<<idx), currMask, cnt, n);
-        dfs(idx+1, goodMask|goodPersons[idx], badMask|badPersons[idx], currMask|(1<<idx), cnt+1, n);
-    }
-};
-*/
-
-#include<iostream>
-#include<vector>
-using namespace std;
 
 class Solution{
 public:
@@ -128,8 +106,45 @@ public:
     }
 };
 
-int main(){
-    vector<vector<int>>statements{{2,1,2}, {1,2,2}, {2,0,2}};
-    Solution obj;
-    cout<<obj.maximumGood(statements);
-}
+// -------*******-------
+
+class Solution{
+public:
+
+    int ans=0;
+    vector<int>badPersons;
+    vector<int>goodPersons;
+    
+    void dfs(int idx, int goodMask, int badMask, int currMask, int cnt, int n){
+        if(idx==n){
+            if(goodMask==currMask&&((goodMask&badMask)==0)){
+                ans=max(ans, cnt);
+            }
+            return;
+        }
+        dfs(idx+1, goodMask, badMask|(1<<idx), currMask, cnt, n);
+        dfs(idx+1, goodMask|goodPersons[idx], badMask|badPersons[idx], currMask|(1<<idx), cnt+1, n);
+    }
+
+    int maximumGood(vector<vector<int>>&statements){
+        int n=statements.size();
+        goodPersons.resize(n), badPersons.resize(n);
+        for(int i=0; i<n; ++i){
+            int goodMask=1<<i;
+            int badMask=0<<i;
+            for(int j=0; j<n; ++j){
+                if(statements[i][j]==2){
+                    continue;
+                }
+                if(statements[i][j]==1){
+                    goodMask|=(1<<j);
+                } else{
+                    badMask|=(1<<j);
+                }
+            }
+            goodPersons[i]=goodMask, badPersons[i]=badMask;
+        }
+        dfs(0, 0, 0, 0, 0, n);
+        return ans;
+    }
+};

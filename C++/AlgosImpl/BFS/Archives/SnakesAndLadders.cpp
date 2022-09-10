@@ -35,7 +35,7 @@ This is the lowest possible number of moves to reach the last square, so return 
 */
 
 /*
-The trick is to find the coornidate of the square with number s.
+The trick is to find the coordinate of the square with number s.
 If you can find the coordinate of given square with number s then it's just a plain vanilla bfs.
 Since rows are starting from bottom, just dividing 's' by 'n' won't work. So, to get actual rows from bottom,
 we need to subtract it from 'n-1' (-1 because of '0' based indexing). Hence,

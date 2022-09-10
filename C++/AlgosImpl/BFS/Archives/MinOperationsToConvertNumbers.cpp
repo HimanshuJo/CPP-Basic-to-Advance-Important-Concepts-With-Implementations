@@ -71,8 +71,8 @@ public:
 	            if(node>1000 || node<0 || visited[node])
 	                continue;
 	            visited[node]=true;
-	            for(int i=0;i<nums.size();i++){
-	                int a=node+nums[i],b=node-nums[i],c=node^nums[i];
+	            for(int i=0; i<nums.size(); i++){
+	                int a=node+nums[i], b=node-nums[i], c=node^nums[i];
 	                for(auto j:{a,b,c})
                     	q.push(j);
 	            }

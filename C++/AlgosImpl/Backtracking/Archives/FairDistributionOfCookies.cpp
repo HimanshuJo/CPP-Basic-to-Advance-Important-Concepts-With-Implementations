@@ -45,8 +45,8 @@ Constraints:
 class Solution {
 public:
     
-    void dfs(vector<int>&cookies, vector<int>&temp, int currst, int sz, int k, int &ans){
-        if(currst>=sz){
+    void dfs(vector<int>&cookies, vector<int>&temp, int idx, int sz, int k, int &ans){
+        if(idx>=sz){
             int curmax=INT_MIN;
             for(int i=0; i<k; ++i){
                 curmax=max(curmax, temp[i]);
@@ -55,9 +55,9 @@ public:
             return;
         }
         for(int i=0; i<k; ++i){
-            temp[i]+=cookies[currst];
-            dfs(cookies, temp, currst+1, sz, k, ans);
-            temp[i]-=cookies[currst];
+            temp[i]+=cookies[idx];
+            dfs(cookies, temp, idx+1, sz, k, ans);
+            temp[i]-=cookies[idx];
         }
     }
     

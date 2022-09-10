@@ -25,8 +25,7 @@ check for the optimal distance condition.
 We use double ended queue to store the node.
 
 While performing BFS if a edge having weight = 0 is found node is pushed at front of 
-double ended queue and if a edge having weight = 1 is found, 
-it is pushed at back of double ended queue.
+double ended queue and if a edge having weight = 1 is found, it is pushed at back of double ended queue.
 
 The approach is similar to Dijkstra that the if the shortest distance to node 
 is relaxed by the previous node then only it will be pushed in the queue.

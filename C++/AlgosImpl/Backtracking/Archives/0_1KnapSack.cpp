@@ -1,73 +1,49 @@
-#include<bits/stdc++.h>
-using ll = long long;
-#define rep1(i, n) for (int i = 0; i <= n; ++i)
-#define rep2(w, W) for (ll w = 0; w <= W; ++w)
-const int rw=1000;
-const int cl=1000;
+/*
+Given weights and values of n items, put these items in a knapsack of capacity W
+to get the maximum total value in the knapsack.
+In other words, given two integer arrays val[0..n-1] and wt[0..n-1] which
+represent values and weights associated with n items respectively.
+
+Also given an integer W which represents knapsack capacity, find out the maximum value
+subset of val[] such that sum of the weights of this subset is smaller than or equal to W.
+You cannot break an item, either pick the complete item or don’t pick it (0-1 property).
+*/
+
+#include <bits/stdc++.h>
 using namespace std;
 
-// Utility function that returns maximum of two integers
-ll max(ll a, ll b) {
-	return (a > b) ? a : b;
-}
-
-// void printKnapSackCust(ll W, ll wt[], ll val[], ll n){
-// 	int index;
-// 	ll weight;
-// 	ll dp[rw][cl];
-// 	for (int i=0; i<=n; ++i){
-// 		for (int weight=0; weight<=W; ++weight){
-// 			if (i==0||weight==0){
-// 				dp[i][(int)weight]=0;
-// 			} else if (wt[i-1]<=weight){
-// 				dp[i][(int)weight]=max(val[i-1]+dp[i-1][(int)(weight-wt[i-1])], dp[i-1][(int)weight]);
-// 			} else {
-// 				dp[i][(int)weight]=dp[i-1][(int)weight];
-// 			}
-// 		}
-// 	}
-// }
-
-void printKnapSack(ll W, ll wt[], ll val[], ll n) {
-	int i;
-	ll w;
-	ll dp[rw][cl];
-	rep1(i, n) {
-		rep2(w, W) {
-			if (i == 0 || w == 0) {
-				dp[i][(int)w] = 0;
-			} else if (wt[i - 1] <= w) {
-				dp[i][(int)w] = max(val[i - 1] + 
-									dp[i - 1][(int)(w - wt[i - 1])], 
-									dp[i - 1][(int)w]);
-			} else {
-				dp[i][(int)w] = dp[i - 1][(int)w];
-			}
-		}
+int dfs(int W, int wt[], int val[], int i, int** memo)
+{
+	if (i < 0)
+		return 0;
+	if (memo[i][W] != -1)
+		return memo[i][W];
+	if (wt[i] > W) {
+		return memo[i][W] = dfs(W, wt, val, i - 1, memo);
 	}
-	ll res = dp[(int)n][(int)W];
-	cout << res << "\n";
-	w = W;
-	for (i = n; i > 0 && res > 0; --i) {
-		// either the result comes from the top
-		// dp[i - 1][(int)w] or from 
-		// (val[i - 1] + dp[i - 1][(int)w - wt[i - 1]])
-		// If it comes from the later one that means the item is included
-		if (res == dp[i - 1][w]) {
-			continue;
-		} else {
-			cout << wt[i - 1] << " ";
-			res = res - val[i - 1];
-			w = w - wt[i - 1];
-		}
+	else {
+		return memo[i][W] = max(val[i] + dfs(W - wt[i], wt, val, i - 1, memo), dfs(W, wt, val, i - 1, memo));
 	}
 }
 
-int main() {
-	ll val[] = {1000000000L, 1000000000L, 1000000000L, 1000000000L, 1000000000L};
-	ll wt[] = {1L, 1L, 1L, 1L, 1L};
-	ll W = 5;
-	ll n = 5;
-	printKnapSack(W, wt, val, n);
+int knapSack(int W, int wt[], int val[], int n)
+{
+	int** memo;
+	memo = new int*[n];
+	for (int i = 0; i < n; i++)
+		memo[i] = new int[W + 1];
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < W + 1; j++)
+			memo[i][j] = -1;
+	return dfs(W, wt, val, n - 1, memo);
+}
+
+int main()
+{
+	int val[] = { 60, 100, 120 };
+	int wt[] = { 10, 20, 30 };
+	int W = 50;
+	int n = sizeof(val) / sizeof(val[0]);
+	cout << knapSack(W, wt, val, n);
 	return 0;
 }

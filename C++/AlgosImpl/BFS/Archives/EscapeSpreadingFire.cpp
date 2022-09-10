@@ -16,7 +16,7 @@ Return the maximum number of minutes that you can stay in your initial position
 before moving while still safely reaching the safehouse. 
 
 If this is impossible, return -1. If you can always reach the safehouse regardless 
-of the minutes stayed, return 109.
+of the minutes stayed, return 10^9.
 
 Note that even if the fire spreads to the safehouse immediately after you 
 have reached it, it will be counted as safely reaching the safehouse.
