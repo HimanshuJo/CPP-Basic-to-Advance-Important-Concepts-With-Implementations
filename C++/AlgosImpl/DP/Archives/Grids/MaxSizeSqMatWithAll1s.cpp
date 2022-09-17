@@ -26,8 +26,6 @@ Algorithm:
 // Time Complexity: O(m*n) where m is number of rows and n is number of columns in the given matrix.
 // Auxiliary Space: O(m*n) where m is number of rows and n is number of columns in the given matrix.
 
-// C++ code for Maximum size square
-// sub-matrix with all 1s
 #include <bits/stdc++.h>
 #define bool int
 #define R 6

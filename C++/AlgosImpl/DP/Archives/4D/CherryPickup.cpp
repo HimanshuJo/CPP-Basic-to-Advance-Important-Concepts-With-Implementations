@@ -21,7 +21,7 @@ Explanation: The player started at (0, 0) and went down, down, right right to re
 4 cherries were picked up during this single trip, and the matrix becomes [[0,1,-1],[0,0,-1],[0,0,0]].
 Then, the player went left, up, up, left to return home, picking up one more cherry.
 The total number of cherries picked up is 5, and this is the maximum possible.
- */
+*/
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -31,12 +31,12 @@ class Solution {
 		
 		int memo[51][51][51][51];
 
-		bool areValidCoords(int r1, int c1, int r2, int c2, vector<vector<int>>&grid, int n){
+		bool notValidCoords(int r1, int c1, int r2, int c2, vector<vector<int>>&grid, int n){
 			return (r1>n-1||c1>n-1||r2>n-1||c2>n-1||grid[r1][c1]==-1||grid[r2][c2]==-1||r1<0||r2<0||c1<0||c2<0);
 		}
 
 		int dfs(int r1, int c1, int r2, int c2, vector<vector<int>>&grid, int n){
-			if(areValidCoords(r1, c1, r2, c2, grid, n)) return INT_MIN;
+			if(notValidCoords(r1, c1, r2, c2, grid, n)) return INT_MIN;
 			if(r1==c1&&c1==n-1) return grid[r1][c1];
 			if(memo[r1][c1][r2][c2]!=-1) return memo[r1][c1][r2][c2];
 			int currCherry=0;

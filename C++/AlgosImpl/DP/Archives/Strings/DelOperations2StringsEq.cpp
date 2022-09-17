@@ -1,5 +1,5 @@
 /*
-Given two strings word1 and word2, return the minimum number of steps required to 
+Given two strings word1 and word2, return the minimum number of steps required to
 make word1 and word2 the same.
 
 In one step, you can delete exactly one character in either string.
@@ -20,29 +20,29 @@ Output: 4
 Approach #1 Using Longest Common Subsequence [Time Limit Exceeded]
 Algorithm
 
-In order to determine the minimum number of delete operations needed, we can make use of the length of the 
-longest common sequence among the two given strings s1 and s2, say given by lcs. 
-If we can find this lcs value, we can easily determine the required result as m + n - 2*lcs. 
+In order to determine the minimum number of delete operations needed, we can make use of the length of the
+longest common sequence among the two given strings s1 and s2, say given by lcs.
+If we can find this lcs value, we can easily determine the required result as m + n - 2*lcs.
 Here, m and n refer to the length of the two given strings s1 and s2.
 
-The above equation works because in case of complete mismatch(i.e. if the two strings can't be equalized at all), 
-the total number of delete operations required will be m + n. 
-Now, if there is a common sequence among the two strings of length lcs, we need to do lcs lesser deletions in both 
+The above equation works because in case of complete mismatch(i.e. if the two strings can't be equalized at all),
+the total number of delete operations required will be m + n.
+Now, if there is a common sequence among the two strings of length lcs, we need to do lcs lesser deletions in both
 the strings leading to a total of 2lcs lesser deletions, which then leads to the above equation.
 
 In order to find the length of the longest common sequence, we make use of a recursive function lcs(s1,s2,i,j)
-which returns the length of the longest common sequence among the strings s1 and s2 considering their 
-lengths upto i and j respectively. 
+which returns the length of the longest common sequence among the strings s1 and s2 considering their
+lengths upto i and j respectively.
 
 For evaluating the function, we check if the characters s1[m-1] and s2[n-1] for equality.
-If they match, we can consider the corresponding strings upto 1 lesser lengths since the 
-last characters have already been 
-considered and add 1 to the result to be returned for strings of 1 lesser lengths. 
+If they match, we can consider the corresponding strings upto 1 lesser lengths since the
+last characters have already been
+considered and add 1 to the result to be returned for strings of 1 lesser lengths.
 Thus, we make the function call lcs(s1, s2, i-1, j-1).
 
-If the last characters don't match, we have two options, either we can consider the second last 
-character of s1 and the last character of s2, or we can consider the second last character of s2 
-and the last character of s1. We need to consider the larger result obtained out of the two considerations 
+If the last characters don't match, we have two options, either we can consider the second last
+character of s1 and the last character of s2, or we can consider the second last character of s2
+and the last character of s1. We need to consider the larger result obtained out of the two considerations
 for getting the required length.
 
 Thus, the function call lcs(s1,s2,m,n) returns the required lcs value.
@@ -74,11 +74,11 @@ Space complexity : O(max(m,n)). The depth of the recursion tree will go upto max
 Approach #2 Longest Common Subsequence with Memoization [Accepted]
 Algorithm
 
-We can observe that in the last approach, while determining the lcs value, a lot of redundant function calls are made, 
+We can observe that in the last approach, while determining the lcs value, a lot of redundant function calls are made,
 since the same m and n values to be used for the function calls could be obtained going through many different paths.
-We can remove this redundancy by making use of a memo array to store the value to be returned for 
-these function calls if they have been called once 
-with the corresponding parameters. 
+We can remove this redundancy by making use of a memo array to store the value to be returned for
+these function calls if they have been called once
+with the corresponding parameters.
 
 Thus, memo[i][j] is used to store the result for the function call lcs(s1,s2,i,j).
 
@@ -102,7 +102,7 @@ class Solution{
 
 Complexity Analysis
 
-Time complexity : O(m*n). memo array of size mxn needs to be filled once. 
+Time complexity : O(m*n). memo array of size mxn needs to be filled once.
 Here, m and n refer to the length of the strings s1 and s2 respectively.
 
 Space complexity : O(m*n). memo array of size mmxnn is used. Also, The depth of the recursion tree will go upto max(m,n).
@@ -112,37 +112,37 @@ Space complexity : O(m*n). memo array of size mmxnn is used. Also, The depth of 
 Approach #3 Using Longest Common Subsequence- Dynamic Programming [Accepted]
 Algorithm
 
-Another method to obtain the value of lcs is to make use of Dynamic Programming. 
+Another method to obtain the value of lcs is to make use of Dynamic Programming.
 
 We'll look at the implemenation and carry-on alongside the idea behind it.
-We make use of a 2-D dp, in which dp[i][j] represents the length of the 
-longest common subsequence among the strings s1 and s2 considering their lengths 
+We make use of a 2-D dp, in which dp[i][j] represents the length of the
+longest common subsequence among the strings s1 and s2 considering their lengths
 upto (i-1)^th index and (j-1)^{th} index only respectively. We fill the dp array in row-by-row order.
 
 In order to fill the entry for dp[i][j], we can have two cases:
 
-The characters s1[i-1] and s2[j-1] match with each other. 
-In this case, the entry for dp[i][j] will be one more than the entry obtained for the strings considering their 
-lengths upto one lesser index, since the matched character adds one to the length of LCS formed 
+The characters s1[i-1] and s2[j-1] match with each other.
+In this case, the entry for dp[i][j] will be one more than the entry obtained for the strings considering their
+lengths upto one lesser index, since the matched character adds one to the length of LCS formed
 till the current indices.
 
-Thus, the dp[i][j] entry is updated as dp[i][j] = 1 + dp[i-1][j-1]=1+dp[i−1][j−1]. 
+Thus, the dp[i][j] entry is updated as dp[i][j] = 1 + dp[i-1][j-1]=1+dp[i−1][j−1].
 Note that dp[i-1][j-1] has been used because the matched character belongs to both s1 and s2.
 
-The characters s1[i-1] and s2[j-1] don't match with each other. 
-In this case, we can't increment the current entry as compared to entries corresponding to the previous indices, 
-but we need to replicate the previous entry again to indicate that the length of LCS upto the current indices also 
-remains the same. 
+The characters s1[i-1] and s2[j-1] don't match with each other.
+In this case, we can't increment the current entry as compared to entries corresponding to the previous indices,
+but we need to replicate the previous entry again to indicate that the length of LCS upto the current indices also
+remains the same.
 
-But, which entry to pick up? Now, since the current character hasn't matched, we have got two options. 
-We can remove the current character from consideration from either s1 or s2 and use the corresponding dp 
-entries given by 
-dp[i-1][j] and dp[i][j-1] respectively. 
+But, which entry to pick up? Now, since the current character hasn't matched, we have got two options.
+We can remove the current character from consideration from either s1 or s2 and use the corresponding dp
+entries given by
+dp[i-1][j] and dp[i][j-1] respectively.
 
-Since we are considering the length of LCS upto the current indices we need to pick up 
+Since we are considering the length of LCS upto the current indices we need to pick up
 the larger entry out of these two to update the current dpdp entry.
 
-At the end, again, we obtain the number of deletions required as m + n - 2*dp[m][n], 
+At the end, again, we obtain the number of deletions required as m + n - 2*dp[m][n],
 where m and n refer to the lengths of s1 and s2. dp[m][n] now refers to the length of LCS among the two given strings.
 
 class Solution {
@@ -162,31 +162,31 @@ class Solution {
 
 Complexity Analysis
 
-Time complexity : O(m*n). memo array of size mxn needs to be filled once. 
+Time complexity : O(m*n). memo array of size mxn needs to be filled once.
 Here, m and n refer to the length of the strings s1 and s2 respectively.
 
-Space complexity : O(m*n). memo array of size mmxnn is used. Also, The depth of the recursion tree will go upto max(m,n).
+Space complexity : O(m*n). memo array of size mxn is used. Also, The depth of the recursion tree will go upto max(m,n).
 */
 
 #include<bits/stdc++.h>
 using namespace std;
 
 class Solution {
-  public:
-    int minDistance(string s1, string s2) {
-      vector < vector < int >> dp(s1.length() + 1, vector < int > (s2.length() + 1, 0));
-      for (int i = 0; i <= s1.length(); ++i) {
-        for (int j = 0; j <= s2.length(); ++j) {
-          if (i == 0 || j == 0) continue;
-          if (s1[i - 1] == s2[j - 1]) dp[i][j] = 1 + dp[i - 1][j - 1];
-          else dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
-        }
-      }
-      return s1.length() + s2.length() - 2 * dp[s1.length()][s2.length()];
-    }
+public:
+	int minDistance(string s1, string s2) {
+		vector<vector<int>>dp(s1.length() + 1, vector<int>(s2.length() + 1, 0));
+		for(int i = 0; i <= s1.length(); ++i) {
+			for(int j = 0; j <= s2.length(); ++j) {
+				if(i == 0 || j == 0) continue;
+				if(s1[i - 1] == s2[j - 1]) dp[i][j] = 1 + dp[i - 1][j - 1];
+				else dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+			}
+		}
+		return s1.length() + s2.length() - 2 * dp[s1.length()][s2.length()];
+	}
 };
 
 int main() {
-    Solution obj;
-    obj.minDistance("sea", "ea");
+	Solution obj;
+	obj.minDistance("sea", "ea");
 }

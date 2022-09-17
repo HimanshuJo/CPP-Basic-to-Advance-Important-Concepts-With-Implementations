@@ -2,7 +2,15 @@
 #include<vector>
 #include<algorithm>
 #include<cmath>
+#include<string>
+#include<queue>
+#include<unordered_map>
+#include<map>
+#include<unordered_set>
+#include<set>
+#define endl "\n"
 using namespace std;
+using ll=long long;
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -10,19 +18,16 @@ int main(){
     int t;
     cin>>t;
     while(t--){
-        int n;
-        cin>>n;
-        vector<int>in(n);
-        for(int i=0; i<n; ++i){
-            cin>>in[i];
+        ll a, b, c;
+        cin>>a>>b>>c;
+        ll timefrele1=abs(a-1);
+        ll timefrele2=abs(b-c)+abs(1-c);
+        if(timefrele1==timefrele2){
+            cout<<3<<endl;
+        } else if(timefrele2<timefrele1){
+            cout<<2<<endl;
+        } else{
+            cout<<1<<endl;
         }
-        vector<pair<int, int>>allcombs;
-        for(int i=0; i<n; ++i){
-            allcombs.push_back({in[i], i});
-        }
-        sort(allcombs.begin(), allcombs.end());
-        auto it=allcombs.rbegin();
-        int ans=(it->second)+1;
-        cout<<ans<<"\n";
     }
 }

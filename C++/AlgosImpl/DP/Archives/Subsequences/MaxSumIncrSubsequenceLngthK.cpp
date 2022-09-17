@@ -14,7 +14,6 @@ n = 8 k = 3
 A=[8 5 9 10 5 6 21 8] 
 Output : 40 
 Possible Increasing subsequence of Length 3 with maximum possible sum is 9 10 21
-
 */
 
 /*

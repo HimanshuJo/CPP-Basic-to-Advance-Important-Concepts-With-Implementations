@@ -1,6 +1,7 @@
 // C. Road Optimization
 /*
-The Government of Mars is not only interested in optimizing space flights, but also wants to improve the road system of the planet.
+The Government of Mars is not only interested in optimizing space flights, but also wants to improve the
+road system of the planet.
 
 One of the most important highways of Mars connects Olymp City and Kstolop, the capital of Cydonia. 
 In this problem, we only consider the way 
@@ -15,7 +16,9 @@ be passed in ai minutes and is
 active until you encounter the next along the road. There is a road sign at the start of the road 
 (i. e. in the point with coordinate 0), which sets the initial speed limit.
 
-If you know the location of all the signs, it's not hard to calculate how much time it takes to drive from Kstolop to Olymp City. 
+If you know the location of all the signs, it's not hard to calculate how much time it takes to drive from 
+Kstolop to Olymp City.
+
 Consider an example:
 
 Here, you need to drive the first three kilometers in five minutes each, then one kilometer in eight minutes, 
@@ -27,7 +30,8 @@ It cannot remove the sign at the start of the road, otherwise,
 there will be no limit at the start. By removing these signs, the Government also wants to make the time needed 
 to drive from Kstolop to Olymp City as small as possible.
 
-The largest industrial enterprises are located in Cydonia, so it's the priority task to optimize the road traffic from Olymp City. 
+The largest industrial enterprises are located in Cydonia, so it's the priority task to optimize the road traffic 
+from Olymp City. 
 So, the Government of Mars wants you to remove the signs in the way described above.
 
 Output

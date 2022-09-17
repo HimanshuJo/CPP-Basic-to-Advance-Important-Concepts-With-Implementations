@@ -1,33 +1,15 @@
-// C++ program to print all primes less than N
-#include <iostream>
+// Shortest distance between a given source and a destination
+#include<iostream>
+#include<vector>
+#include<queue>
+#include<algorithm>
+#include<map>
+#include<unordered_map>
 using namespace std;
 
-// function check whether a number is prime or not
-bool isPrime(int n)
-{
-	// Corner case
-	if (n <= 1)
-		return false;
-
-	// Check from 2 to n-1
-	for (int i = 2; i < n; i++)
-		if (n % i == 0)
-			return false;
-
-	return true;
-}
-
-// Function to print primes
-void printPrime(int n)
-{
-	for (int i = 2; i <= n; i++)
-		if (isPrime(i))
-			cout << i << " ";
-}
-
-// Driver Code
-int main()
-{
-	int n = 16;
-	printPrime(n);
+int main(){
+	vector<vector<int>>vec{{5, 1}, {6, 8}, {9, 1}};
+	vector<int>temp={9, INT_MAX, INT_MAX};
+	auto it=upper_bound(vec.begin(), vec.end(), temp);
+	cout<<it-vec.begin();
 }

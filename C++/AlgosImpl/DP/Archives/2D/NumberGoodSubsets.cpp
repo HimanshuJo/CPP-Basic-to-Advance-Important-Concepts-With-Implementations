@@ -73,7 +73,7 @@ We need to handle 1's separately as they can be present in any frequency and wil
 the prime factor criteria.
 
 So we can store the frequency of ones, and at the end, take any number of ones from the
-amount avaiable and create goodSubsets,
+amount available and create goodSubsets,
 the total number of ways to do this is : 2^numOnes * goodSubsets(0, 0)
 */
 

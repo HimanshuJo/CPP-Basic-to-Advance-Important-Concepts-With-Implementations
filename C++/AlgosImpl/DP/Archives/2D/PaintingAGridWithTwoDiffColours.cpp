@@ -1,21 +1,21 @@
 // 1931. Painting a Grid With Three Different Colors
 /*
- * You are given two integers m and n. Consider an m x n grid where each cell is initially white.
- * You can paint each cell red, green, or blue. All cells must be painted.
+You are given two integers m and n. Consider an m x n grid where each cell is initially white.
+You can paint each cell red, green, or blue. All cells must be painted.
 
-    Return the number of ways to color the grid with no two adjacent cells having the same color.
-    Since the answer can be very large, return it modulo 10^9 + 7.
+Return the number of ways to color the grid with no two adjacent cells having the same color.
+Since the answer can be very large, return it modulo 10^9 + 7.
 
-    Example 1:
+Example 1:
 
-    Input: m = 1, n = 1
-    Output: 3
-    Explanation: The three possible colorings are shown in the image above.
+Input: m = 1, n = 1
+Output: 3
+Explanation: The three possible colorings are shown in the image above.
 
-    Example 3:
+Example 3:
 
-    Input: m = 5, n = 5
-    Output: 580986
+Input: m = 5, n = 5
+Output: 580986
 */
 
 /*
@@ -25,10 +25,12 @@ each 2 bits store a color (1=Red, 2=Green, 3=Blue, 0=White), so there is total 4
 Complexity
 
     Time: O(N * 3^M * 2^M), where N <= 1000 is number of columns, M <= 5 is number of columns.
-        There is total: N * 3^M states in dp params, each state has up to (2^M) neighbors to calculate.
-        Why up to 2^M neighbors each state? Because choose color of cell (0, c) has up to 2 ways
-        (different color from cell(0, c-1)),
-        choose color of cell (1, c) has up to ways (different color from both cell(1, c-1) and cell(0, c))... until M rows.
+          
+          There is total: N * 3^M states in dp params, each state has up to (2^M) neighbors to calculate.
+        
+          Why up to 2^M neighbors each state? Because choose color of cell (0, c) has up to 2 ways
+         (different color from cell(0, c-1)),
+         choose color of cell (1, c) has up to ways (different color from both cell(1, c-1) and cell(0, c))... until M rows.
 
     Space:
         C++: O(N * 4^M + 4^M * 2^M), because in C++ we use memory 4^M=1024 to store colors of states.

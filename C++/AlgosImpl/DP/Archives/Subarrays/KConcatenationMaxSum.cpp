@@ -31,7 +31,7 @@ Constraints:
 */
 
 /*
-TLE:
+TLE: 38 / 42
 
 class Solution {
 public:
@@ -89,7 +89,7 @@ i.e answer = {prefix + sum_of_elements(A2) + sum_of_elements(A3) +
                        sum_of_elements(A6) + sum_of_elements(A7) + suffix} , 
 
             which in simplified form becomes {prefix + sum_of_elements(A)*(k-2) + suffix}.
-*/
+*/  
 
 using ll=long long;
 

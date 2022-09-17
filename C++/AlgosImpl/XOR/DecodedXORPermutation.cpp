@@ -27,7 +27,7 @@ encoded.length == n - 1
 */
 
 /*
-TLE:
+TLE: 33 / 63
 
 class Solution {
 public:

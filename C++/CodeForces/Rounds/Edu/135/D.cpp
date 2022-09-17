@@ -77,7 +77,7 @@ Since we want dp[l][r] to be the best outcome for Alice, we do the following.
 For any Alice move, we choose the worse of the Bob moves — the maximum of dp[l′][r′]. 
 Among the Alice's moves we choose the better one — the minimum one.
 
-Overall complexity: O(n2) per testcase.
+Overall complexity: O(n^2) per testcase.
 */
 
 #include<iostream>

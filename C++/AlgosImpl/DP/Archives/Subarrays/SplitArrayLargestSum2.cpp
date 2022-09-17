@@ -149,7 +149,6 @@ public:
                         break;
                     }
                 }
-
                 memo[currIndex][subarrayCount] = minimumLargestSplitSum;
             }
         }

@@ -10,7 +10,7 @@
 */
 
 /*
-Brute Force:
+TLE: 75 / 78
 
 class Solution {
 public:
@@ -59,19 +59,13 @@ public:
     
     int dfs(vector<vector<char>>&matrix, int rw, int col, vector<vector<int>>&memo){
         if(isNotValidBoundary(matrix, rw, col)) return 0;
+        if(matrix[rw][col]=='0') return 0;
         if(memo[rw][col]!=-1) return memo[rw][col];
-        if(matrix[rw][col]=='0'){
-            memo[rw][col]=0;
-            return memo[rw][col];
-        }
         int curres1=dfs(matrix, rw+1, col, memo);
         int curres2=dfs(matrix, rw, col+1, memo);
         int curres3=dfs(matrix, rw+1, col+1, memo);
         int minn=min(curres1, min(curres2, curres3));
-        if(minn>0){
-            memo[rw][col]=1+minn;
-        } else memo[rw][col]=1;
-        return memo[rw][col];
+        return memo[rw][col]=1+minn;
     }
     
     int maximalSquare(vector<vector<char>>& matrix) {

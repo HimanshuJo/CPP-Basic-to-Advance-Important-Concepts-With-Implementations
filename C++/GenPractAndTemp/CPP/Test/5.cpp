@@ -1,68 +1,53 @@
 #include<iostream>
-#include<string.h>
+#include<vector>
+#include<algorithm>
+#include<cmath>
+#include<string>
+#include<queue>
+#include<unordered_map>
+#include<map>
+#include<unordered_set>
+#include<set>
+#define endl "\n"
+using ll=long long;
 using namespace std;
 
-#define M 6
-#define N 6
-
-// Returns true if a matching for a vertex u is possible
-bool bpm(bool bpGraph[M][N], int u, bool seen[], int matchR[]){
-	// Trying every job
-	for(int v=0; v<N; ++v){
-		/*
-			If an applicant is interested in the job v and v is not visited
-		*/
-		if(bpGraph[u][v]&&!seen[v]){
-			seen[v]=true;
-			/*
-				If job v is not assigned to an applicant OR previously assigned
-				applicant for job v(which is matchR[v]) has an alternate job available
-
-				Since v is marked as visited in the above line, matchR[v] in the following
-				recursive calls will not get the job v again
-			*/
-			if(matchR[v]<0||bpm(bpGraph, matchR[v], seen, matchR)){
-				matchR[v]=u;
-				return true;
-			}
-		}
-	}
-	return false;
+ll query(ll vertA, ll vertB){
+    cout<<"? "<<vertA<<" "<<vertB<<endl;
+    ll x;
+    cin>>x;
+    return x;
 }
 
-int maxBPM(bool bpGraph[M][N]){
-	/*
-		Keeping track of the applicants assigned to the jobs. The value of matchR[i]
-		is the applicant number assigned to job i
-
-		The value of -1 indicate nobody is assigned
-	*/
-	int matchR[N];
-	memset(matchR, -1, sizeof(matchR));
-	int res=0;
-	for(int u=0; u<M; ++u){
-		bool seen[N];
-		memset(seen, 0, sizeof(seen));
-		if(bpm(bpGraph, u, seen, matchR)){
-			res++;
-		}
-	}
-	return res;
+bool isValid(ll mid, int bgn){
+    ll pth1=query(bgn, mid);
+    ll pth2=query(mid, bgn);
+    return pth1==pth2;
 }
 
-int main()
-{
-    // Let us create a bpGraph
-    // shown in the above example
-    bool bpGraph[M][N] = {{0, 1, 1, 0, 0, 0},
-                          {1, 0, 0, 1, 0, 0},
-                          {0, 0, 1, 0, 0, 0},
-                          {0, 0, 1, 1, 0, 0},
-                          {0, 0, 0, 0, 0, 0},
-                          {0, 0, 0, 0, 0, 1}};
- 
-    cout << "Maximum number of applicants that can get job is "
-         << maxBPM(bpGraph);
- 
-    return 0;
+int main(){
+    int max_queries=50;
+    int bgn=1;
+    ll ans=0;
+    ll l=2, r=max_queries/2;
+    ll pth1=0, pth2=0;
+    bool flag=false;
+    while(l<=r){
+        ll mid=l+(r-l)/2;
+        pth1=query(bgn, mid);
+        if(pth1==-1){
+            flag=true;
+            ans=mid-1;
+            break;
+        }
+        if(isValid(mid, bgn)){
+            pth1=query(bgn, mid);
+            pth2=query(mid, bgn);
+            l=mid+1;
+        } else{
+            r=mid-1;
+        }
+    }
+    if(!flag) ans=pth1+pth2;
+    cout<<"! "<<ans<<endl;
 }

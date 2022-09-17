@@ -1,6 +1,6 @@
 // Find two numbers from their sum and XOR
 /*
-Given the sum and xor of two numbers X and Y s.t. sum and xor \in [0, 2^{64}-1],
+Given the sum and xor of two numbers X and Y s.t. sum and xor in [0, 2^{64}-1],
 we need to find the numbers minimizing the value of X.
 
 Examples :
@@ -66,8 +66,7 @@ using namespace std;
 // of two numbers and generates the two
 // numbers such that the value of X is
 // minimized
-void compute(unsigned long int S,
-             unsigned long int X)
+void compute(unsigned long int S, unsigned long int X)
 {
 	unsigned long int A = (S - X) / 2;
 
@@ -103,7 +102,6 @@ void compute(unsigned long int S,
 	cout << "a = " << a << endl << "b = " << b;
 }
 
-// Driver function
 int main()
 {
 	unsigned long int S = 17, X = 13;

@@ -35,7 +35,7 @@ Explanation: The string is already balanced.
 Constraints:
 
 n == s.length
-2 <= n <= 106
+2 <= n <= 10^6
 n is even.
 s[i] is either '[' or ']'.
 The number of opening brackets '[' equals n / 2, and the number of closing brackets ']' equals n / 2.

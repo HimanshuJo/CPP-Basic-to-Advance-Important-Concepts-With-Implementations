@@ -132,4 +132,3 @@ int main(){
 	}
 	cout<<ans;
 }
-
