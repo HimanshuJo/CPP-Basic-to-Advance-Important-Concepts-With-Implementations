@@ -71,8 +71,11 @@ int maxBPM(bool bpGraph[M][N]){
 
 int main()
 {
-    // Let us create a bpGraph
-    // shown in the above example
+    /*
+    	Participant			Jobs
+    		0               0  1  2  3  4  5
+    	   ...				...
+    */
     bool bpGraph[M][N] = {{0, 1, 1, 0, 0, 0},
                           {1, 0, 0, 1, 0, 0},
                           {0, 0, 1, 0, 0, 0},

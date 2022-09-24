@@ -23,7 +23,8 @@ Example 2:
 Input: favorite = [1,2,0]
 Output: 3
 Explanation: 
-Each employee is the favorite person of at least one other employee, and the only way the company can invite them is if they invite every employee.
+Each employee is the favorite person of at least one other employee, and the only way the company can invite them 
+is if they invite every employee.
 The seating arrangement will be the same as that in the figure given in example 1:
 - Employee 0 will sit between employees 2 and 1.
 - Employee 1 will sit between employees 0 and 2.

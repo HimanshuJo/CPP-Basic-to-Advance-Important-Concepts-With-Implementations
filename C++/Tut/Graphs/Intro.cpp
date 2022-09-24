@@ -3,9 +3,7 @@ using namespace std;
 
 int main()
 {
-    vector<vector<int>> num{{1, 2},
-                            {3, 4},
-                            {5, 6}};
+    vector<vector<int>> num{{1, 2}, {3, 4}, {5, 6}};
     unordered_map<int, vector<int>> gr;
     int sz = num.size();
     for (int i = 0; i < sz; ++i)
@@ -50,7 +48,7 @@ int main()
 
         std::cout << "]\n";
     }
-    // option 3: range-based loop for map, 
+    // option 3: range-based loop for map,
     // subscript operator for vector
     std::cout << "----------------\n";
     for (const auto &pair : gr)
@@ -64,8 +62,7 @@ int main()
     }
 }
 
--------
-
+/*
 Output:
 
 key: 6  value: [  5  ]
@@ -88,42 +85,4 @@ key: 4  value: [  3  ]
 key: 3  value: [  4  ]
 key: 1  value: [  2  ]
 key: 2  value: [  1  ]
-
--------
-
-IInd way:
-
-#include <bits/stdc++.h>
-using namespace std;
-
-int main()
-{
-    vector<vector<int>> num{{1, 2},
-                            {3, 4},
-                            {5, 6}};
-    unordered_map<int, vector<int>> gr;
-    int sz = num.size();
-    for (int i = 0; i < sz; ++i)
-    {
-        gr[num[i][0]].push_back(num[i][1]);
-        gr[num[i][1]].push_back(num[i][0]);
-    }
-    for (const auto &pair : gr)
-    {
-        std::cout << "key: " << pair.first << "  value: [  ";
-
-        for (int d : pair.second)
-            std::cout << d << "  ";
-
-        std::cout << "]\n";
-    }
-}
-
-Output:
-
-key: 6  value: [  5  ]
-key: 5  value: [  6  ]
-key: 4  value: [  3  ]
-key: 3  value: [  4  ]
-key: 2  value: [  1  ]
-key: 1  value: [  2  ]
+*/

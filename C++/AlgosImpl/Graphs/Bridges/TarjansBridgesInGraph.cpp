@@ -10,33 +10,33 @@ A bridge in any graph is defined as an edge which, when removed, makes the graph
 */
 
 void dfs(int node, int &timer, int parent, vector<int>&low, vector<int>&disc,
-         vector<vector<int>>&adj, vector<bool>&seen, vector<vector<int>>&res){
-         seen[node]=true;
-         low[node]=disc[node]=timer++;
-         for(auto &nei: adj[node]){
-             if(nei==parent) continue;
-             if(seen[nei]==false){
-                 dfs(nei, timer, node, low, disc, adj, seen, res);
-                 /*
-                 	the child's low could have been updated to a new min via a back edge,
-                 	so on returning parent's low should also be updated accordingly
-                 */
-                 low[node]=min(low[node], low[nei]);
-                 // check for a bridge edge
-                 if(low[nei]>disc[node]){
-                     vector<int>temp;
-                     temp.push_back(node);
-                     temp.push_back(nei);
-                     res.push_back(temp);
-                 }
-             } else{
-             	/*
-             		to reach this child from the parent, there was another way, that way might have taken
-             		less time
-             	*/
-                 low[node]=min(low[node], disc[nei]);
-             }
-         }
+    vector<vector<int>>&adj, vector<bool>&seen, vector<vector<int>>&res){
+    seen[node]=true;
+    low[node]=disc[node]=timer++;
+    for(auto &nei: adj[node]){
+        if(nei==parent) continue;
+        if(seen[nei]==false){
+            dfs(nei, timer, node, low, disc, adj, seen, res);
+            /*
+                the child's low could have been updated to a new min via a back edge,
+                so on returning parent's low should also be updated accordingly
+            */
+            low[node]=min(low[node], low[nei]);
+            // check for a bridge edge
+            if(low[nei]>disc[node]){
+                vector<int>temp;
+                temp.push_back(node);
+                temp.push_back(nei);
+                res.push_back(temp);
+            }
+        } else{
+            /*
+                to reach this child from the parent, there was another way, that way might have taken
+                less time
+            */
+            low[node]=min(low[node], disc[nei]);
+        }
+    }
 }
 
 vector<vector<int>> findBridges(vector<vector<int>> &edges, int v, int e) {

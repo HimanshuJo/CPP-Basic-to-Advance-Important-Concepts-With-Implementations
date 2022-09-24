@@ -23,7 +23,12 @@ For example, suppose the board is [[-1,4],[-1,3]], and on the first move,
 your destination square is 2. You follow the ladder to square 3, but do not follow the subsequent ladder to 4.
 Return the least number of moves required to reach the square n2. If it is not possible to reach the square, return -1.
 
-Input: board = [[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1],[-1,35,-1,-1,13,-1],[-1,-1,-1,-1,-1,-1],[-1,15,-1,-1,-1,-1]]
+Input: board = [[-1,-1,-1,-1,-1,-1],
+                [-1,-1,-1,-1,-1,-1],
+                [-1,-1,-1,-1,-1,-1],
+                [-1,35,-1,-1,13,-1],
+                [-1,-1,-1,-1,-1,-1],
+                [-1,15,-1,-1,-1,-1]]
 Output: 4
 Explanation: 
 In the beginning, you start at square 1 (at row 5, column 0).

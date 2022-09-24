@@ -1,14 +1,11 @@
-#include<iostream>
 #include<vector>
-#include<algorithm>
-#include<cmath>
-#include<string>
-#include<queue>
+#include<iostream>
 #include<unordered_map>
 #include<map>
-#include<unordered_set>
-#include<set>
+#include<queue>
+#include<algorithm>
 #define endl "\n"
+using ll=long long;
 using namespace std;
 
 int main(){
@@ -17,35 +14,28 @@ int main(){
     int t;
     cin>>t;
     while(t--){
-        int n;
-        cin>>n;
-        string s;
-        cin>>s;
-        unordered_map<int, char>mp;
-        char bgn='a';
-        for(int i=1; i<=26; ++i){
-            mp[i]=bgn++;
-        }
-        string res="";
-        int sz=s.size();
-        int idx=sz-1;
-        while(idx>=0){
-            if(s[idx]!='0'){
-                string temp="";
-                temp+=s[idx];
-                res+=mp[stoi(temp)];
-            } else{
-                string temp="";
-                idx--;
-                temp+=s[idx];
-                idx--;
-                temp+=s[idx];
-                reverse(temp.begin(), temp.end());
-                res+=mp[stoi(temp)];
+        int n, x, y;
+        cin>>n>>x>>y;
+        int curmax=max(x, y);
+        int curmin=min(x, y);
+        if((x==0&&y==0)||((n-1)%curmax!=0)||curmin!=0){
+            cout<<-1<<endl;
+        } else{
+            vector<int>ans;
+            int bgn=1;
+            int count=max(x, y);
+            while(true){
+                for(int i=0; i<count; ++i){
+                    ans.push_back(bgn);
+                    if(ans.size()==n-1) break;
+                }
+                if(ans.size()==n-1) break;
+                bgn=ans.size()+2;
             }
-            idx--;
+            for(auto &vals: ans){
+                cout<<vals<<" ";
+            }
+            cout<<endl;
         }
-        reverse(res.begin(), res.end());
-        cout<<res<<endl;
     }
 }

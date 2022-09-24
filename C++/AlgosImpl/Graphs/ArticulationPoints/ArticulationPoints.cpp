@@ -49,8 +49,8 @@ In the DFS tree, a vertex u is articulation point if any of the following condit
 
 	1. u is the root of the DFS tree, and it has at least two children.
 
-    2.  u is not the root of the DFS tree, and it has a child v such that no vertex in the 
-        subtree rooted with v has a back edge to any of u's ancestors in the DFS tree.
+    2. u is not the root of the DFS tree, and it has a child v such that no vertex in the 
+       subtree rooted with v has a back edge to any of u's ancestors in the DFS tree.
 
 Note: A leaf in a DFS Tree is never an articulation point.
 
@@ -62,10 +62,10 @@ In DFS traversal, maintain a parent array where parent[i] stores the parent of v
  
 For condition 1:
 
-For every vertex u, count its children. If the currently visited vertex u is the root, 
-i.e., parent[u] = NULL and has more than two children, it is an articulation point.
+	For every vertex u, count its children. If the currently visited vertex u is the root, 
+	i.e., parent[u] = NULL and has more than two children, it is an articulation point.
 
-3. For condition 2:
+For condition 2:
 
 	Maintain an array disc[] to store vertices discovery time.
 
