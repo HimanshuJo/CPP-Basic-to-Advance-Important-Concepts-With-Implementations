@@ -56,7 +56,7 @@ int connectedComponents(int n, vector<vector<int>>&edges){
 
 int main(){
 	int n=8;
-	vector<vector<int>>edges{{1, 0},  {0, 2}, {5, 3}, {3, 4}, {6, 7}};
+	vector<vector<int>>edges{{1, 0}, {0, 2}, {5, 3}, {3, 4}, {6, 7}};
 	int cnt=connectedComponents(n, edges);
 	cout<<cnt<<endl;
 }

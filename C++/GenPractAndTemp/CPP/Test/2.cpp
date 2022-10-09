@@ -14,28 +14,27 @@ int main(){
     int t;
     cin>>t;
     while(t--){
-        int n, x, y;
-        cin>>n>>x>>y;
-        int curmax=max(x, y);
-        int curmin=min(x, y);
-        if((x==0&&y==0)||((n-1)%curmax!=0)||curmin!=0){
-            cout<<-1<<endl;
-        } else{
-            vector<int>ans;
-            int bgn=1;
-            int count=max(x, y);
-            while(true){
-                for(int i=0; i<count; ++i){
-                    ans.push_back(bgn);
-                    if(ans.size()==n-1) break;
-                }
-                if(ans.size()==n-1) break;
-                bgn=ans.size()+2;
-            }
-            for(auto &vals: ans){
-                cout<<vals<<" ";
-            }
-            cout<<endl;
-        }
+        int N, K;
+        cin>>N>>K;
+		vector<int>in(N+1);
+		for(int i=N-K+1; i<=N; ++i){
+			cin>>in[i];
+		}
+		if(K==1) cout<<"Yes"<<endl;
+		else{
+			vector<long long>seq(N+1);
+			for(int i=N-K+2; i<=N; ++i){
+				seq[i]=in[i]-in[i-1];
+			}
+			if(!is_sorted(seq.begin()+N-K+2, seq.end())){
+				cout<<"No"<<endl;
+			} else{
+				if(in[N-K+1]>seq[N-K+2]*(N-K+1)){
+					cout<<"No"<<endl;
+				} else{
+					cout<<"Yes"<<endl;
+				}
+			}
+		}
     }
 }

@@ -56,7 +56,7 @@ Constraints:
 1 <= full, partial <= 10^5
 */
 /*
-TLE:
+TLE: 10 / 77
 
 class Solution {
 public:
@@ -131,8 +131,7 @@ public:
 				newFlowers-=requi;
 			} else break;
 			if(i==n-1){
-				ans=ans>long(n)*full?ans:
-				    long(n)*full;
+				ans=ans>long(n)*full?ans:long(n)*full;
 			}
 		}
 		if(ans==0) return long(full)*n;
