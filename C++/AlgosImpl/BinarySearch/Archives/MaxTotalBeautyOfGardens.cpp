@@ -56,12 +56,12 @@ Constraints:
 1 <= full, partial <= 10^5
 */
 /*
-TLE: 10 / 77
+TLE: 14 / 77
 
 class Solution {
 public:
     
-    long long dfs(vector<int>&orig, vector<int>flowers, long long newFlowers, int target, int full, int partial, int idx, int sz){
+    long long dfs(vector<int>&orig, vector<int>flowers, long long newFlowers, int target, int full, int partial, int idx, int sz, map<pair<int, vector<int>>, long long>&memo){
         if(idx==sz||newFlowers==0){
             long long curans=0, cnt=0, cmpF=0, minn=LONG_MAX;
             for(int i=0; i<sz; ++i){
@@ -74,26 +74,28 @@ public:
             curans=(cmpF*full)+(minn*partial);
             return curans;
         }
+        if(memo.find({idx, flowers})!=memo.end()) return memo[{idx, flowers}];
         long long npk=LONG_MIN;
-        npk=max(npk, dfs(orig, flowers, newFlowers, target, full, partial, idx+1, sz));
+        npk=max(npk, dfs(orig, flowers, newFlowers, target, full, partial, idx+1, sz, memo));
         long long pk=LONG_MIN;
         long long tempans=LONG_MIN;
         if(flowers[idx]<target){
             flowers[idx]++;
             tempans=max(tempans, 
-                        max(dfs(orig, flowers, newFlowers-1, target, full, partial, idx+1, sz), 
-                            dfs(orig, flowers, newFlowers-1, target, full, partial, idx, sz)));   
+                        max(dfs(orig, flowers, newFlowers-1, target, full, partial, idx+1, sz, memo), 
+                            dfs(orig, flowers, newFlowers-1, target, full, partial, idx, sz, memo)));   
         } else{
-            tempans=max(tempans, dfs(orig, flowers, newFlowers, target, full, partial, idx+1, sz));
+            tempans=max(tempans, dfs(orig, flowers, newFlowers, target, full, partial, idx+1, sz, memo));
         }
         pk=max(pk, tempans);
-        return max(pk, npk);
+        return memo[{idx, flowers}]=max(pk, npk);
     }
     
     long long maximumBeauty(vector<int>& flowers, long long newFlowers, int target, int full, int partial) {
         int sz=flowers.size();
-        return (dfs(flowers, flowers, newFlowers, target, full, partial, 0, sz)==-1?(long long)full*sz:
-               dfs(flowers, flowers, newFlowers, target, full, partial, 0, sz));
+        map<pair<int, vector<int>>, long long>memo;
+        return (dfs(flowers, flowers, newFlowers, target, full, partial, 0, sz, memo)==-1?(long long)full*sz:
+               dfs(flowers, flowers, newFlowers, target, full, partial, 0, sz, memo));
     }
 };
 */
@@ -126,7 +128,7 @@ public:
 			int curFlowerCount=target-1<flowers[k]+(newFlowers-suffixSum[k])/(n-k)?target-1:
 			                   flowers[k]+(newFlowers-suffixSum[k])/(n-k);
 			ans=ans>long(i)*full+(long)(partial)*curFlowerCount?ans:
-			    long(i)*full+(long)(partial)*curFlowerCount;
+			        long(i)*full+(long)(partial)*curFlowerCount;
 			if(requi<=newFlowers){
 				newFlowers-=requi;
 			} else break;

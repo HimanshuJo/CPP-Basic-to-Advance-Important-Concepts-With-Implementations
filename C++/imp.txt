@@ -24,3 +24,16 @@ False Assumptions
 -------
 
 git remote set-url origin https://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@github.com/HimanshuJo/esbaz-serv.git
+
+-------
+
+older than 5 minutes
+
+Get-Process | select -Property ProcessName, StartTime | ? { (($_.StartTime -ne $null) -and (([DateTime]::Now - $_.StartTime).TotalMinutes -ge 5) -and ($_.ProcessName -eq "iexplore")) } | Stop-Process
+
+-------
+
+block inbound
+
+$fwp = New-Object -ComObject hnetcfg.fwpolicy2
+$fwp.BlockAllInboundTraffic(1) = 1

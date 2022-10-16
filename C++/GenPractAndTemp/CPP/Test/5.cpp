@@ -1,48 +1,47 @@
-#include <bits/stdc++.h>
- 
+#include<iostream>
+#include<vector>
+#include<algorithm>
 using namespace std;
- 
-void solve()
-{
-	int n, k;
-	cin >> n >> k;
-	vector<long long> s(n + 1);
-	for (int i = n - k + 1; i <= n; ++i)
-		cin >> s[i];
-	if (k == 1)
-	{
-		cout << "YES" << endl;
-		return;
+using ll=long long;
+#define endl "\n"
+
+int main(){
+	ios_base::sync_with_stdio(false);
+	cin.tie(nullptr);
+	int t;
+	cin>>t;
+	while(t--){
+		int n, q;
+		cin>>n>>q;
+		vector<int>ai(n), ki(q);
+		for(int i=0; i<n; ++i){
+			cin>>ai[i];
+		}
+		for(int i=0; i<q; ++i){
+			cin>>ki[i];
+		}
+		vector<ll>aicmb;
+		aicmb.push_back(0);
+		for(int i=0; i<n; ++i){
+			aicmb.push_back(aicmb.back()+ai[i]);
+		}
+		vector<ll>prefmaxx;
+		for(int i=0; i<n; ++i){
+			if(i==0){
+				prefmaxx.push_back(ai[i]);
+			} else{
+				prefmaxx.push_back(max((ll)ai[i], prefmaxx.back()));
+			}
+		}
+		vector<ll>ans(q);
+		for(int i=0; i<q; ++i){
+			auto it=upper_bound(prefmaxx.begin(), prefmaxx.end(), ki[i]);
+			int idx=it-prefmaxx.begin();
+			ans[i]=aicmb[idx];
+		}
+		for(auto &vals: ans){
+			cout<<vals<<" ";
+		}
+		cout<<endl;
 	}
-	vector<long long> a(n + 1);
-	for (int i = n - k + 2; i <= n; ++i)
-		a[i] = s[i] - s[i - 1];
-	if (!std::is_sorted(a.begin() + n - k + 2, a.end()))
-	{
-		cout << "NO" << endl;
-		return;
-	}
-	for(auto &vals: s){
-		cout<<vals<<" ";
-	}
-	cout<<endl;
-	for(auto &vals: a){
-		cout<<vals<<" ";
-	}
-	cout<<endl;
-	cout<<n-k+2<<" "<<a[n-k+2]<<" "<<n-k+1<<" "<<s[n-k+1]<<endl;
-	if (s[n - k + 1] > a[n - k + 2] * (n - k + 1))
-	{
-		cout << "NO" << endl;
-		return;
-	}
-	cout << "YES" << endl;
-}
- 
-int main()
-{
-	int tests;
-	cin >> tests;
-	while (tests--) solve();
-	return 0;
 }

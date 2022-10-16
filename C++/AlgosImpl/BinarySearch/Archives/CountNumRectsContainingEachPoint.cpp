@@ -116,3 +116,35 @@ public:
         return res;
     }
 };
+
+// -------*******-------
+
+class Solution2 {
+public:
+    
+    vector<int> countRectangles(vector<vector<int>>& rectangles, vector<vector<int>>& points) {
+        vector<vector<int>>rectmp(101);
+        for(auto &rentries: rectangles){
+            rectmp[rentries[1]].push_back(rentries[0]);
+        }
+        for(int i=0; i<=100; ++i){
+            sort((rectmp[i]).begin(), (rectmp[i]).end());
+        }
+        int sz=points.size();
+        int sz_=rectangles.size();
+        vector<int>res(sz, 0);
+        int idx=0;
+        for(auto &pentries: points){
+            int count=0;
+            for(int i=pentries[1]; i<=100; ++i){
+                if(rectmp[i].size()!=0){
+                    int idx=lower_bound(rectmp[i].begin(), rectmp[i].end(), pentries[0])-rectmp[i].begin();
+                    count+=rectmp[i].size()-idx;
+                }
+            }
+            res[idx]=count;
+            idx++;
+        }
+        return res;
+    }
+};
