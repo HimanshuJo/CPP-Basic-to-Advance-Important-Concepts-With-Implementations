@@ -33,12 +33,14 @@ Constraints:
 1 ≤ A[i] ≤ 10^18
 */
 
-#include <bits/stdc++.h>
+#include<vector>
+#include<algorithm>
+#include<iostream>
 using namespace std;
 
 class Solution{
 public:
-	
+    
     void reverseInGroups(vector<long long>& arr, int n, int k){
         if(k>=n){
             reverse(arr.begin(), arr.end());
@@ -47,6 +49,9 @@ public:
             int sz=arr.size();
             int bgn=0, end=(bgn+k)-1;
             while(bgn<=sz-1&&end<=sz-1){
+                /*
+                    First swap the first sub-array
+                */
                 int tmpb=bgn, tmped=end;
                 if(tmped==tmpb+1){
                     swap(arr[tmpb], arr[tmped]);
@@ -55,45 +60,45 @@ public:
                         swap(arr[tmpb], arr[tmped]);
                         tmpb++;
                         tmped--;
-						if(tmpb>tmped) break;
+                        if(tmpb>tmped) break;
                     }   
                 }
-                int prevb=bgn, prevend=end;
+                int prevend=end;
                 bgn=(bgn+k);
                 end=(bgn+k)-1;
                 if(bgn>=sz){
                     int tmpb=prevend+1, tmped=n-1;
                     if(tmpb<=sz-1){
-     				    if(tmped==tmpb+1){
-        					swap(arr[tmpb], arr[tmped]);
-        					break;
-        				} else{
+                        if(tmped==tmpb+1){
+                            swap(arr[tmpb], arr[tmped]);
+                            break;
+                        } else{
                             while(tmpb!=tmped){
                                 swap(arr[tmpb], arr[tmped]);
                                 tmpb++;
                                 tmped--;
-								if(tmpb>tmped) break;
+                                if(tmpb>tmped) break;
                             }
                             break;   
-        				}   
+                        }   
                     }
                 }
                 if(end>=sz){
                     int tmpb=bgn, tmped=n-1;
-    				if(tmped==tmpb+1){
-    					swap(arr[tmpb], arr[tmped]);
-    					break;
-    				} else if(tmped==tmpb){
-    				    break;
-    				} else{
+                    if(tmped==tmpb+1){
+                        swap(arr[tmpb], arr[tmped]);
+                        break;
+                    } else if(tmped==tmpb){
+                        break;
+                    } else{
                         while(tmpb!=tmped){
                             swap(arr[tmpb], arr[tmped]);
                             tmpb++;
                             tmped--;
-							if(tmpb>tmped) break;
+                            if(tmpb>tmped) break;
                         }
                         break;   
-    				}
+                    }
                 }
             }   
         }
@@ -109,7 +114,6 @@ int main() {
         vector<long long> arr; 
         int k;
         cin >> k; 
-
         for(long long i = 0; i<n; i++)
         {
             long long x;
@@ -118,7 +122,6 @@ int main() {
         }
         Solution ob;
         ob.reverseInGroups(arr, n, k);
-        
         for(long long i = 0; i<n; i++){
             cout << arr[i] << " "; 
         }

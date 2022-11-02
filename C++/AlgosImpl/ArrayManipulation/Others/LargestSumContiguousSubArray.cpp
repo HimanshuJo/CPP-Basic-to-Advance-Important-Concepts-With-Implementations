@@ -1,27 +1,39 @@
-// C++ program to print largest contiguous array sum
-#include <iostream>
-#include <climits>
+/*
+    Find the largest contiguous array sum of an array
+
+    E.g. arr{1, 2, 3, 4, 5}
+
+         Output: 15 (1+2+3+4+5)
+
+         arr{-2, -3, 4, -1, -2, 1, 5, -3}
+
+         Output: 7 (4-1-2+1+5)
+*/
+
+#include<iostream>
+#include<vector>
 using namespace std;
 
-int maxSubArraySum(int a[], int size)
-{
-    int finalMax = INT_MIN, currMax = 0;
-    for (int i = 0; i < size; i++)
-    {
-        currMax = currMax + a[i];
-        if (finalMax < currMax)
-            finalMax = currMax;
-        currMax = currMax < 0 ? a[i] < 0 ? 0 : a[i] : currMax; 
+int findLargestContiguousArraySum(vector<int>&in){
+    int fnmax=INT_MIN, curmax=0, sz=in.size();
+    for(int i=0; i<sz; ++i){
+        curmax+=in[i];
+        if(fnmax<curmax){
+            fnmax=curmax;
+        }
+        curmax=curmax<0?in[i]<0?0:in[i]:curmax;
     }
-    return finalMax;
+    return fnmax;
 }
 
-/*Driver program to test maxSubArraySum*/
-int main()
-{
-    int a[] = {-2, -3, 4, -1, -2, 1, 5, -3};
-    int n = sizeof(a) / sizeof(a[0]);
-    int max_sum = maxSubArraySum(a, n);
-    cout << "Maximum contiguous sum is " << max_sum;
-    return 0;
+int main(){
+    vector<int>in{-2, -3, 4, -1, -2, 1, 5, -3};
+    vector<int>in2{1, 2, 3, 4, 5};
+    vector<int>in3{6, 7, 8, 9, 0};
+    int largestContiguousArrSm=findLargestContiguousArraySum(in);
+    int largestContigousArrSm2=findLargestContiguousArraySum(in2);
+    int largestContigousArrSm3=findLargestContiguousArraySum(in3);
+    cout<<largestContiguousArrSm<<endl;
+    cout<<largestContigousArrSm2<<endl;
+    cout<<largestContigousArrSm3<<endl;
 }

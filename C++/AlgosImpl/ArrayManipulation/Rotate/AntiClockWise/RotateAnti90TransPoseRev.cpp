@@ -1,58 +1,85 @@
-// C++ program for left
-// rotation of matrix by 90 degree
-// without using extra space
-#include <bits/stdc++.h>
+/*
+    Rotate an array 90 degree anti clockwise.
+
+    In essence, all the rows in the array should become column and all the columns should automatically be converted
+    to rows in reverse order but in the left direction.
+
+    E.g. Original array:
+
+            1 2 3 4
+            5 6 7 8
+            9 10 11 12
+            13 14 15 16
+
+        Rotated array:
+
+            4 8 12 16
+            3 7 11 15
+            2 6 10 14
+            1 5 9  13
+*/
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
 using namespace std;
-#define R 4
-#define C 4
 
-// After transpose we swap
-// elements of column
-// one by one for finding left
-// rotation of matrix
-// by 90 degree
-void reverseColumns(int arr[R][C])
-{
-	for (int i = 0; i < C; i++)
-		for (int j = 0, k = C - 1; j < k; j++, k--)
-			swap(arr[j][i], arr[k][i]);
+void transpose(vector<vector<int>>&vec){
+    int rws=vec.size(), cols=vec[0].size();
+    for(int i=0; i<rws; ++i){
+        for(int j=i; j<cols; ++j){
+            swap(vec[i][j], vec[j][i]);
+        }
+    }
 }
 
-// Function for do transpose of matrix
-void transpose(int arr[R][C])
-{
-	for (int i = 0; i < R; i++)
-		for (int j = i; j < C; j++)
-			swap(arr[i][j], arr[j][i]);
+void reverseIndividualColumns(vector<vector<int>>&vec){
+    int cols=vec[0].size();
+    int rws=vec.size();
+    for(int i=0; i<cols; ++i){
+        int left=0, right=rws-1;
+        while(left<right){
+            swap(vec[left][i], vec[right][i]);
+            left++, right--;
+        }
+    }
 }
 
-// Function for print matrix
-void printMatrix(int arr[R][C])
-{
-	for (int i = 0; i < R; i++) {
-		for (int j = 0; j < C; j++)
-			cout << arr[i][j] << " ";
-		cout << '\n';
-	}
+void rotate90AntiClockWise(vector<vector<int>>&vec){
+    transpose(vec);
+    cout<<"After matrix transpose "<<endl;
+    int rws=vec.size(), cols=vec[0].size();
+    for(int i=0; i<rws; ++i){
+        for(int j=0; j<cols; ++j){
+            cout<<vec[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+    cout<<"-------*******-------"<<endl;
+    reverseIndividualColumns(vec);
 }
 
-// Function to anticlockwise
-// rotate matrix by 90 degree
-void rotate90(int arr[R][C])
-{
-	transpose(arr);
-	reverseColumns(arr);
+int main(){
+    int count=1;
+    vector<vector<int>>vec(4, vector<int>(4, 0));
+    for(int i=0; i<4; ++i){
+        for(int j=0; j<4; ++j){
+            vec[i][j]=count;
+            count++;
+        }
+    }
+    for(int i=0; i<4; ++i){
+        for(int j=0; j<4; ++j){
+            cout<<vec[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+    rotate90AntiClockWise(vec);
+    cout<<"Final Matrix"<<endl;
+    for(int i=0; i<4; ++i){
+        for(int j=0; j<4; ++j){
+            cout<<vec[i][j]<<" ";
+        }
+        cout<<endl;
+    }
 }
-
-// Driven code
-int main()
-{
-	int arr[R][C] = { { 134, 42, 333, 414 },
-					{ 54, 66, 237, 458 },
-					{ 69, 10, 131, 312 },
-					{ 13, 14, 125, 416 } };
-	rotate90(arr);
-	printMatrix(arr);
-	return 0;
-}
-

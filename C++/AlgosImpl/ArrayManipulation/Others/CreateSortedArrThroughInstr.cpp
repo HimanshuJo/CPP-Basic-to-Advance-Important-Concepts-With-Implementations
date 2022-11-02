@@ -40,91 +40,117 @@ Insert 5 with cost min(3, 1) = 1, now nums = [1,2,3,5,6].
 Insert 4 with cost min(3, 2) = 2, now nums = [1,2,3,4,5,6].
 The total cost is 0 + 0 + 0 + 0 + 1 + 2 = 3.
 */
-/*
-#include<bits/stdc++.h>
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
 using namespace std;
 
-class Solution{
+class Solution1{
     public:
     int createSortedArray(vector<int>&instructions){
         int mod=1e9+7;
-        vector<int>nums;
-        int ans=0;
-        vector<int>::iterator low, up;
-        for (auto &ins: instructions){
-            sort(nums.begin(), nums.end());
-            low=lower_bound(nums.begin(), nums.end(), ins);
-            up=upper_bound(nums.begin(), nums.end(), ins);
-            int numsLThanIns=low-nums.begin();
-            int numsBThanIns=nums.size()-(up-nums.begin());
-            if (numsLThanIns>nums.size()-1){
-                numsLThanIns=nums.size()-1;
+        vector<int>ans;
+        int fnans=0;
+        for(auto &vals: instructions){
+            sort(ans.begin(), ans.end());
+            auto it1=lower_bound(ans.begin(), ans.end(), vals);
+            auto it2=upper_bound(ans.begin(), ans.end(), vals);
+            int numsLessThanVals=-1, numGreaterThanVals=-1;
+            if(it1!=ans.end()){
+                numsLessThanVals=it1-ans.begin();
             }
-            if (numsBThanIns>nums.size()-1){
-                numsBThanIns=nums.size()-1;
+            if(it2!=ans.end()){
+                numGreaterThanVals=ans.size()-(it2-ans.begin());
             }
-            ans+=min(numsLThanIns, numsBThanIns);
-            nums.push_back(ins);
+            if(numsLessThanVals!=-1&&numsLessThanVals!=-1){
+                fnans+=min(numsLessThanVals, numGreaterThanVals);
+            }
+            ans.push_back(vals);
         }
-        cout<<ans%mod;
-        return ans%mod;
+        return fnans%mod;
+    }
+};
+
+/*
+Use Binary Indexed Tree structure bit to store count of elements in instructions array so far.
+
+For each x in instructions:
+
+    left = bit.getSumRange(0, x - 1):
+
+        Get count of all numbers strictly less than x
+    
+    right = bit.getSumRange(x + 1, largest):
+
+        Get count of all numbers strictly greater than x
+
+    cost = (cost + min(left, right)) % 1_000_000_007
+    
+    bit.addValue(x, 1): Increase count of number x by one
+*/
+
+class BIT{
+    vector<int>bit;
+
+    public:
+    BIT(int size){
+        bit.assign(size+1, 0);
+    }
+
+    /*
+        Get sum in the range [0...idx], 1 based indexing
+    */
+    int getSum(int idx){
+        int sum=0;
+        for(; idx>0; idx-=idx&(-idx)){
+            sum+=bit[idx];
+        }
+        return sum;
+    }
+
+    /*
+        Get sum in a definite range [left, right] (left and right are inclusive  --> 1-based indexing)
+    */
+    int getSumRange(int left, int right){
+        return getSum(right)-getSum(left-1);
+    }
+
+    void addValue(int idx, int val){
+        for(; idx<bit.size(); idx+=idx&(-idx)){
+            bit[idx]+=val;
+        }
+    }
+
+};
+
+class Solution2{
+    public:
+    int createSortedArray(vector<int>&instructions){
+        int maxx=*max_element(instructions.begin(), instructions.end()), mod=1e9+7;
+        BIT bit(maxx);
+        int fnans=0;
+        for(auto &vals: instructions){
+            int left=bit.getSumRange(0, vals-1);
+            int right=bit.getSumRange(vals+1, maxx);
+            fnans+=min(left, right);
+            fnans%=mod;
+            bit.addValue(vals, 1);
+        }
+        return fnans;
     }
 };
 
 int main(){
-    Solution obj;
-    vector<int>instructions={1,2,3,6,5,4};
-    obj.createSortedArray(instructions);
+    Solution1 obj1;
+    Solution2 obj2;
+    vector<int>instructions{1,2,3,6,5,4};
+    vector<int>instructions1{1,2,3,6,5,4};
+    vector<int>instructions2{1,5,6,2};
+    int ans=obj2.createSortedArray(instructions);
+    int ans1=obj1.createSortedArray(instructions1);
+    int ans2=obj1.createSortedArray(instructions2);
+    cout<<ans<<endl;
+    cout<<ans1<<endl;
+    cout<<ans2<<endl;
 }
-*/
-/*
-Use Binary Indexed Tree structure bit to store count of elements in instructions array so far.
-For each x in instructions:
-
-left = bit.getSumRange(0, x - 1) : Get count of all numbers strickly less than x
-right = bit.getSumRange(x + 1, largest): Get count of all numbers strickly greater than x
-
-cost = (cost + min(left, right)) % 1_000_000_007
-bit.addValue(x, 1): Increase count of number x by one
-*/
-
-class BIT {
-    vector<int> bit;
-
-public:
-    BIT(int size) {
-        bit.assign(size + 1, 0);
-    }
-
-    int getSum(int idx) { // Get sum in range [0..idx], 1-based indexing
-        int sum = 0;
-        for (; idx > 0; idx -= idx & (-idx))
-            sum += bit[idx];
-        return sum;
-    }
-
-    int getSumRange(int left, int right) { // left, right inclusive, 1-based indexing
-        return getSum(right) - getSum(left - 1);
-    }
-    
-    void addValue(int idx, int val) { // 1-based indexing
-        for (; idx < bit.size(); idx += idx & (-idx))
-            bit[idx] += val;
-    }
-};
-
-class Solution {
-public:
-    int createSortedArray(vector<int>& instructions) {
-        int max = *max_element(instructions.begin(), instructions.end()), MOD = 1000000007;
-        BIT bit(max);
-        int cost = 0;
-        for (int x : instructions) {
-            int left = bit.getSumRange(0, x - 1);  // Get count of all numbers strictly less than x
-            int right = bit.getSumRange(x + 1, max);  // Get count of all numbers strictly greater than x
-            cost = (cost + min(left, right)) % MOD;
-            bit.addValue(x, 1);  // Increase count of number x by one
-        }
-        return cost;
-    }
-};

@@ -2,16 +2,18 @@
 /*
 This is the easy version of the problem. The only difference is maximum value of ai.
 
-Once in Kostomuksha Divan found an array a consisting of positive integers. 
+Once in Kostomuksha Divan found an array a consisting of positive integers.
+
 Now he wants to reorder the elements of a to maximize the value of the following function:
-∑i=1ngcd(a1,a2,…,ai),
-where gcd(x1,x2,…,xk) denotes the greatest common divisor of integers x1,x2,…,xk, 
-and gcd(x)=x for any integer x.
+    
+    ∑i=1ngcd(a1,a2,…,ai), where gcd(x1,x2,…,xk) denotes the greatest common divisor of 
+    integers x1,x2,…,xk, and gcd(x)=x for any integer x.
 
 Reordering elements of an array means changing the order of elements in the array arbitrary, 
 or leaving the initial order.
 
-Of course, Divan can solve this problem. However, he found it interesting, so he decided to share it with you.
+Of course, Divan can solve this problem. However, he found it interesting, so he decided to 
+share it with you.
 
 Examples
 input
@@ -20,7 +22,8 @@ input
 output
 14
 
-gcd(a1)+gcd(a1,a2)+gcd(a1,a2,a3)+gcd(a1,a2,a3,a4)+gcd(a1,a2,a3,a4,a5)+gcd(a1,a2,a3,a4,a5,a6)=6+2+2+2+1+1=14.
+gcd(a1)+gcd(a1,a2)+gcd(a1,a2,a3)+gcd(a1,a2,a3,a4)+gcd(a1,a2,a3,a4,a5)+gcd(a1,a2,a3,a4,a5,a6)=
+6+2+2+2+1+1=14.
 */
 
 // TLE

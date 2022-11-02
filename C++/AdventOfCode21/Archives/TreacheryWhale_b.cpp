@@ -21,7 +21,7 @@ long long total_fuel_spent(const std::vector<long long> &positions, const long l
 
 int main()
 {
-	std::string input = "1101,1,29"
+	std::string input = "1101,1,29";
 
 	std::vector<long long> crab_positions;
 
@@ -52,14 +52,11 @@ int main()
 			ll rnSm = (temp * (temp + 1)) / 2;
 			currans += rnSm;
 		}
-		// cout<<currans<<"\n";
-		// cout<<"-------\n";
 		if (currans < ans)
 		{
 			ans = currans;
 		}
 	}
-	// cout<<"fn Num "<<in[fnIdx]<<endl;
 	cout << ans << "\n";
 	return 0;
 }

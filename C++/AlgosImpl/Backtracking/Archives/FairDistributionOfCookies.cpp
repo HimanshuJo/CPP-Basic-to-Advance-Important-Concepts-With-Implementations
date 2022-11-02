@@ -1,7 +1,7 @@
 // 2305. Fair Distribution of Cookies
 /*
 You are given an integer array cookies, where cookies[i] 
-denotes the number of cookies in the ith bag. 
+denotes the number of cookies in the i'th bag. 
 
 You are also given an integer k that denotes the number of children to distribute 
 all the bags of cookies to. 
@@ -42,30 +42,42 @@ Constraints:
 */
 
 // Time complexity : O(k^n)
-class Solution {
-public:
-    
-    void dfs(vector<int>&cookies, vector<int>&temp, int idx, int sz, int k, int &ans){
-        if(idx>=sz){
-            int curmax=INT_MIN;
-            for(int i=0; i<k; ++i){
-                curmax=max(curmax, temp[i]);
-            }
-            ans=min(ans, curmax);
-            return;
-        }
+#include<iostream>
+#include<vector>
+using namespace std;
+
+void dfs(vector<int>&cookies, int k, int sz, int idx, vector<int>&subdivvec, int &ans){
+    if(idx>=sz){
+        int curmax=INT_MIN;
         for(int i=0; i<k; ++i){
-            temp[i]+=cookies[idx];
-            dfs(cookies, temp, idx+1, sz, k, ans);
-            temp[i]-=cookies[idx];
+            curmax=max(curmax, subdivvec[i]);
         }
+        ans=min(ans, curmax);
+        return;
     }
-    
-    int distributeCookies(vector<int>& cookies, int k) {
+    for(int i=0; i<k; ++i){
+        subdivvec[i]+=cookies[idx];
+        dfs(cookies, k, sz, idx+1, subdivvec, ans);
+        subdivvec[i]-=cookies[idx];
+    }
+}
+
+class Solution{
+    public:
+    int distributeCookies(vector<int>&cookies, int k){
         int sz=cookies.size();
-        vector<int>temp(k, 0);
+        int idx=0;
+        vector<int>subdivvec(k, 0);
         int ans=INT_MAX;
-        dfs(cookies, temp, 0, sz, k, ans);
+        dfs(cookies, k, sz, idx, subdivvec, ans);
         return ans;
     }
 };
+
+int main(){
+    Solution obj;
+    vector<int>cookies{8, 15, 10, 20, 8};
+    int k=2;
+    int ans=obj.distributeCookies(cookies, k);
+    cout<<ans<<endl;
+}

@@ -25,7 +25,7 @@ Explanation:
 For k = 1, the resultant array has to be non-decreasing.
 Some of the K-increasing arrays that can be formed are [5,6,7,8,9], [1,1,1,1,1], [2,2,3,4,4]. 
 All of them require 4 operations.
-It is suboptimal to change the array to, for example, [6,7,8,9,10] because it would take 5 operations.
+It is sub-optimal to change the array to, for example, [6,7,8,9,10] because it would take 5 operations.
 It can be shown that we cannot make the array K-increasing in less than 4 operations.
 */
 
@@ -64,6 +64,3 @@ public:
 		return ans;
     }
 };
-
-int main(){
-}

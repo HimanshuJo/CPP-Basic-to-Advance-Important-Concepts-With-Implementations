@@ -1,39 +1,56 @@
-#include <bits/stdc++.h>
+/*
+	Generate all the possible subsets of an array
+
+	Example: arr={1, 2, 3, 4}
+
+	         All subsets: (2^N) All proper subsets: (2^N-1)
+
+	         	{}
+	         	1
+	         	2
+	         	3
+	         	4
+	         	1 2
+	         	1 2 3
+				1 3 4
+				1 2 4
+				1 2 3 4
+				1 3
+				1 4
+				2 3
+				2 4
+				2 3 4
+				3 4
+*/
+
+#include<iostream>
+#include<vector>
 using namespace std;
 
-void subsetsUtil(vector<int> &A, vector<vector<int>> &res, vector<int> &subset, int index)
-{
-	res.push_back(subset);
-	for (int i = index; i < A.size(); ++i)
-	{
-		subset.push_back(A[i]);
-		subsetsUtil(A, res, subset, i + 1);
-		subset.pop_back();
-	}
-	return;
+void dfs(vector<int>&in, vector<vector<int>>&res, vector<int>&curr, int sz, int idx){
+    res.push_back(curr);
+    for(int i=idx; i<sz; ++i){
+        curr.push_back(in[i]);
+        dfs(in, res, curr, sz, i+1);
+        curr.pop_back();
+    }
 }
 
-
-vector<vector<int>> subsets(vector<int> &A)
-{
-	vector<int>subset;
-	vector<vector<int>>res;
-	int index = 0;
-	subsetsUtil(A, res, subset, index);
-	return res;
+vector<vector<int>> genAllSubsets(vector<int>&in){
+    vector<vector<int>>res;
+    vector<int>curr;
+    int sz=in.size();
+    dfs(in, res, curr, sz, 0);
+    return res;
 }
 
-int main()
-{
-	vector<int> array = {1, 2, 3, 4, 5, 6, 7, 8};
-	vector<vector<int>> res = subsets(array);
-	for (int i = 0; i < res.size(); ++i)
-	{
-		for (int j = 0; j < res[i].size(); ++j)
-		{
-			cout << res[i][j] << " ";
-		}
-		cout << "\n";
-	}
-	return 0;
+int main(){
+    vector<int>in{1, 2, 3, 4, 5};
+    vector<vector<int>>allSubsets=genAllSubsets(in);
+    for(auto &entries: allSubsets){
+        for(auto &vals: entries){
+            cout<<vals<<" ";
+        }
+        cout<<endl;
+    }
 }

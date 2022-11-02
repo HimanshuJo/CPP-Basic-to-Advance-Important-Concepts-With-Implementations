@@ -37,3 +37,65 @@ block inbound
 
 $fwp = New-Object -ComObject hnetcfg.fwpolicy2
 $fwp.BlockAllInboundTraffic(1) = 1
+
+-------
+
+stop all background jobs
+
+Get-Job | Stop-Job
+
+-------
+
+3128 - Proxy
+1723 - PPTP
+31337 - Trojan
+138 - NetBIOS-DGM, trojan
+443 - HTTPS
+3124 - Beacon-port
+445 - Microsoft-DS, trojan
+139 - NetBIOS-SSN, trojan
+1080 - Socks-proxy
+137 - NetBIOS-NS, trojan
+3389 - MS Terminal Services
+3127 - Proxy
+80 - HTTP
+22 - SSH
+5000 - Trojan
+8080 - Proxy
+135 - MSRPC, trojan
+
+-------
+
+netsh advfirewall firewall add rule dir=in action=block protocol=tcp localport=135 name=Block1_TCP-135
+
+netsh advfirewall firewall add rule dir=in action=block protocol=tcp localport=8080 name=Block1_TCP-135
+
+netsh advfirewall firewall add rule dir=in action=block protocol=tcp localport=5000 name=Block1_TCP-135
+
+netsh advfirewall firewall add rule dir=in action=block protocol=tcp localport=22 name=Block1_TCP-135
+
+netsh advfirewall firewall add rule dir=in action=block protocol=tcp localport=80 name=Block1_TCP-135
+
+netsh advfirewall firewall add rule dir=in action=block protocol=tcp localport=3127 name=Block1_TCP-135
+
+netsh advfirewall firewall add rule dir=in action=block protocol=tcp localport=3389 name=Block1_TCP-135
+
+netsh advfirewall firewall add rule dir=in action=block protocol=tcp localport=137 name=Block1_TCP-135
+
+netsh advfirewall firewall add rule dir=in action=block protocol=tcp localport=1080 name=Block1_TCP-135
+
+netsh advfirewall firewall add rule dir=in action=block protocol=tcp localport=139 name=Block1_TCP-135
+
+netsh advfirewall firewall add rule dir=in action=block protocol=tcp localport=445 name=Block1_TCP-135
+
+netsh advfirewall firewall add rule dir=in action=block protocol=tcp localport=3124 name=Block1_TCP-135
+
+netsh advfirewall firewall add rule dir=in action=block protocol=tcp localport=443 name=Block1_TCP-135
+
+netsh advfirewall firewall add rule dir=in action=block protocol=tcp localport=138 name=Block1_TCP-135
+
+netsh advfirewall firewall add rule dir=in action=block protocol=tcp localport=31337 name=Block1_TCP-135
+
+netsh advfirewall firewall add rule dir=in action=block protocol=tcp localport=1723 name=Block1_TCP-135
+
+netsh advfirewall firewall add rule dir=in action=block protocol=tcp localport=3128 name=Block1_TCP-135
