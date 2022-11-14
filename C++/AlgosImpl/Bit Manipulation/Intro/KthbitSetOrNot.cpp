@@ -29,8 +29,6 @@ Binary Representation of n = 0..01001011
 Since bitwise AND of n and temp is non-zero, result is SET.
 */
 
-// CPP program to check if k-th bit
-// of a given number is set or not
 #include <iostream>
 using namespace std;
 

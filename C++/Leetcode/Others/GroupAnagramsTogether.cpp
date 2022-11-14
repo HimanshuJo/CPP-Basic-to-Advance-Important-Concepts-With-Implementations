@@ -1,5 +1,4 @@
 /*
-
 Given an array of strings, group anagrams together.
 
 Example:
@@ -23,7 +22,7 @@ Note:
 using namespace std;
 
 class Solution {
-    public:
+public:
     vector<vector<string>> groupAnagrams(vector<string> &strs) {
         unordered_map<string, vector<string>> map;
         vector<vector<string>> res;
@@ -42,7 +41,6 @@ class Solution {
         }
         for (auto &entry : map) {
             vector<string> temp;
-            //cout << entry.first << " ";
             for (auto &vals : entry.second) {
                 cout << vals << " ";
                 temp.push_back(vals);

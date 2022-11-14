@@ -1,6 +1,4 @@
-
 /*
-
 Given two binary trees original and cloned and given a reference to a node target in the original tree.
 
 The cloned tree is a copy of the original tree.
@@ -9,10 +7,9 @@ Return a reference to the same node in the cloned tree.
 
 Note that you are not allowed to change any of the two trees or the target node and the 
 answer must be a reference to a node in the cloned tree.
-
 */
-#include <bits/stdc++.h>
 
+#include <bits/stdc++.h>
 using namespace std;
 
 struct TreeNode
@@ -31,7 +28,6 @@ public:
     {
         queue<pair<TreeNode *, TreeNode *>> q;
         q.push({original, cloned});
-
         while (!q.empty())
         {
             auto curr = q.front();
@@ -43,12 +39,13 @@ public:
             if (curr.first->right)
                 q.push({curr.first->right, curr.second->right});
         }
-
         return NULL;
     }
 };
 
-class Solution_2
+// -------*******-------
+
+class Solution2
 {
 
 public:
@@ -57,7 +54,6 @@ public:
         queue<TreeNode *> q;
         q.push(cloned);
         int val = target->val;
-
         while (!q.empty())
         {
             TreeNode *curr = q.front();
@@ -69,7 +65,6 @@ public:
             if (curr->right)
                 q.push(curr->right);
         }
-
         return NULL;
     }
 };

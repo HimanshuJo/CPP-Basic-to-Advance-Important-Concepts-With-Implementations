@@ -108,7 +108,7 @@ public:
 
 // -------*******-------
 
-class Solution{
+class Solution2{
 public:
 
     int ans=0;

@@ -1,89 +1,78 @@
-// Print all paths from a given source to a destination
 /*
-Given a directed graph, a source vertex ‘src’ and a 
-destination vertex ‘dst’, print all paths from given ‘src’ to ‘dst’.
-*/
-/*
-Algorithm :  
+	Given a directed path, print all the paths from the source to the destination
 
-create a queue which will store path(s) of type vector
-initialize the queue with first path starting from src
+	E.g. 
+	
+		Graph {{0, 3}, {0, 1}, {0, 2}, {1, 3}, {2, 0}, {2, 1}}
 
-Now run a loop till queue is not empty
-   Get the front-most path from queue
-   
-   Check if the last-node of this path is destination
-    	if true then print the path
-   
-   Run a loop for all the vertices connected to the
-   current vertex i.e. lastnode extracted from path
-      
-      if the vertex is not visited in current path
-      
-         a) create a new path from earlier path and append this vertex
-      
-         b) insert this new path to queue
+		Source = 2, Destination = 3
+
+		Output: {{2, 0, 3}, {2, 1, 3}, {2, 0, 1, 3}}
 */
 
+#include<iostream>
 #include<vector>
 #include<queue>
-#include<iostream>
+#include<set>
+#include<algorithm>
 using namespace std;
 
-void printPath(vector<int>&path){
-	int sz=path.size();
-	for(int i=0; i<sz; ++i){
-		cout<<path[i]<<" ";
-	}
-	cout<<endl;
+bool ifCurNodeAlreadyInPath(vector<int>&nwPath, int node){
+	auto it=find(nwPath.begin(), nwPath.end(), node);
+	return it==nwPath.end();
 }
 
-/*
-If current vertex is already present in the path
-*/
-int isNotVisited(int x, vector<int>&path){
-	int sz=path.size();
-	for(int i=0; i<sz; ++i){
-		if(path[i]==x) return 0;
-	}
-	return 1;
-}
-
-void findPaths(vector<vector<int>>&gr, int src, int dest, int v){
+void bfs(vector<vector<int>>&gr, int src, int dest, vector<vector<int>>&res, vector<int>&bgnPath){
 	queue<vector<int>>q;
-	vector<int>path;
-	path.push_back(src);
-	q.push(path);
+	bgnPath.push_back(src);
+	q.push(bgnPath);
 	while(!q.empty()){
-		path=q.front();
-		q.pop();
-		int last=path[path.size()-1];
-		if(last==dest){
-			printPath(path);
-		}
-		for(int i=0; i<gr[last].size(); ++i){
-			if(isNotVisited(gr[last][i], path)){
-				vector<int>newPath(path);
-				newPath.push_back(gr[last][i]);
-				q.push(newPath);
+		int sz=q.size();
+		while(sz--){
+			vector<int>curPath=q.front();
+			q.pop();
+			int curLastNode=curPath.back();
+			if(curLastNode==dest){
+				res.push_back(curPath);
+			}
+			for(auto &vals: gr[curLastNode]){
+				bool flag=ifCurNodeAlreadyInPath(curPath, vals);
+				if(flag){
+					vector<int>nwPath=curPath;
+					nwPath.push_back(vals);
+					q.push(nwPath);
+				}
 			}
 		}
 	}
 }
 
+vector<vector<int>> findAllPathsFromSrcToDestination(int maxNodes, vector<pair<int, int>>&edges, int src, int dest){
+	vector<vector<int>>gr(maxNodes);
+	for(auto &vals: edges){
+		gr[vals.first].push_back(vals.second);
+	}
+	vector<vector<int>>res;
+	vector<int>bgnPath;
+	bfs(gr, src, dest, res, bgnPath);
+	return res;
+}
+
 int main(){
-	vector<vector<int> > g;
- 	int v = 4;
-	g.resize(4);
-	g[0].push_back(3);
-	g[0].push_back(1);
-	g[0].push_back(2);
-	g[1].push_back(3);
-	g[2].push_back(0);
-	g[2].push_back(1);
-	int src = 2, dst = 3;
-	cout << "path from src " << src
-	     << " to dst " << dst << " are \n";
-	findPaths(g, src, dst, v);
-	return 0;
+	vector<pair<int, int>>edges;
+	int maxNodes=4;
+	edges.push_back({0, 3});
+	edges.push_back({0, 1});
+	edges.push_back({0, 2});
+	edges.push_back({1, 3});
+	edges.push_back({2, 0});
+	edges.push_back({2, 1});
+	int src=2, dest=3;
+	vector<vector<int>>allPathsFromSrcToDest=findAllPathsFromSrcToDestination(maxNodes, edges, src, dest);
+	for(auto &entries: allPathsFromSrcToDest){
+		for(auto &vals: entries){
+			cout<<vals<<" "; 
+		}
+		cout<<endl;
+	}
 }

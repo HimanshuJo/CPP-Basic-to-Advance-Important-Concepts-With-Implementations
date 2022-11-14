@@ -1,3 +1,8 @@
+/*
+	Given an un-directed graph and a source node, determine the shortest distance from 
+	source to all the nodes in the graph
+*/
+
 #include<iostream>
 #include<vector>
 #include<queue>
@@ -29,29 +34,22 @@ void bfs(vector<vector<int>>&gr, vector<bool>&seen, int src){
 		cout<<i<<" : "<<dist[i]<<endl;
 }
 
-
 int main(){
 	ios_base::sync_with_stdio(false);
 	cin.tie(nullptr);
 	vector<vector<int>>gr(9);
 	gr[4].push_back(7);
 	gr[7].push_back(4);
-
 	gr[2].push_back(5);
 	gr[5].push_back(2);
-
 	gr[1].push_back(6);
 	gr[6].push_back(1);
-
 	gr[3].push_back(6);
 	gr[6].push_back(3);
-
 	gr[7].push_back(2);
 	gr[2].push_back(7);
-
 	gr[1].push_back(7);
 	gr[7].push_back(1);
-
 	gr[6].push_back(8);
 	gr[8].push_back(6);
 	vector<bool>seen(9, false);

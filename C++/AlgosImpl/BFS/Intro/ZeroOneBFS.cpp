@@ -19,7 +19,7 @@ Shortest distance from 0 to 2 is 1
 In normal BFS of a graph all edges have equal weight but in 0-1 BFS some edges may have 0 weight 
 and some may have 1 weight. 
 
-In this we will not use bool array to mark visited nodes but at each step we will 
+In this we will not use boolean array to mark visited nodes but at each step we will 
 check for the optimal distance condition. 
 
 We use double ended queue to store the node.

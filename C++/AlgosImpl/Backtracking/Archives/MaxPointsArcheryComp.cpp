@@ -45,6 +45,7 @@ sum(aliceArrows[i]) == numArrows
 /*
 Time: O(2 ^ 12) in avg. But in the worst case it always update the bestScore, 
 so it does copy the whole bobArrows, so it takes O(12 * 2^12) in time complexity.
+
 Space: O(1)
 */
 

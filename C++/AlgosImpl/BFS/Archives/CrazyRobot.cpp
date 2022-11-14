@@ -5,11 +5,11 @@ One of the free cells contains a lab. All the cells beyond the borders of the gr
 
 A crazy robot has escaped from this lab. It is currently in some free cell of the grid. 
 You can send one of the following commands to the robot: "move right", "move down", "move left" or "move up". 
-Each command means moving to a neighbouring cell in the corresponding direction.
+Each command means moving to a neighboring cell in the corresponding direction.
 
 However, as the robot is crazy, it will do anything except following the command. Upon receiving a command, 
 it will choose a direction such that it differs from the one in command and the cell in that direction is not blocked. 
-If there is such a direction, then it will move to a neighbouring cell in that direction. Otherwise, it will do nothing.
+If there is such a direction, then it will move to a neighboring cell in that direction. Otherwise, it will do nothing.
 
 We want to get the robot to the lab to get it fixed. For each free cell, determine if the robot can be forced to reach the 
 lab starting in this cell. That is, after each step of the robot a command can be sent to a robot such that no matter 
@@ -18,7 +18,8 @@ what different directions the robot chooses, it will end up in a lab.
 Input
 The first line contains a single integer t (1≤t≤1000) — the number of testcases.
 
-The first line of each testcase contains two integers n and m (1≤n,m≤10^6; n⋅m≤10^6) — the number of rows and the number of columns in the grid.
+The first line of each testcase contains two integers n and m (1≤n,m≤10^6; n⋅m≤10^6) — 
+the number of rows and the number of columns in the grid.
 
 The i-th of the next n lines provides a description of the i-th row of the grid. It consists of m elements of one of three types:
 
@@ -62,7 +63,7 @@ L
 
 Note
 In the first testcase there is no free cell that the robot can be forced to reach the lab from. 
-Consider a corner cell. Given any direction, it will move to a neighbouring border grid that's not a corner. 
+Consider a corner cell. Given any direction, it will move to a neighboring border grid that's not a corner. 
 Now consider a non-corner free cell. No matter what direction you send to the robot, 
 it can choose a different direction such that it ends up in a corner.
 
@@ -102,20 +103,20 @@ What we basically need is a way to determine:
 	So (cell,−1) is winning if any of (cell,direction≠−1) are losing.
 
 Promote that one step further. The state is winning if there exists such a direction that all 
-neighbouring free cells except in this direction are winning states. 
+neighboring free cells except in this direction are winning states. 
 
-Rephrase it. The state is winning if it has at least one winning state neighbour and no more than 
-one non-winning state neighbour.
+Rephrase it. The state is winning if it has at least one winning state neighbor and no more than 
+one non-winning state neighbor.
 
-Let's store the number of non-winning neighbouring states for each cell. 
-Initially, it's the number of neighbouring free cells. 
+Let's store the number of non-winning neighboring states for each cell. 
+Initially, it's the number of neighboring free cells. 
 
-If some state becomes marked as winning, decrease the value for each of its neighbours by 1. 
+If some state becomes marked as winning, decrease the value for each of its neighbors by 1. 
 If some state's value reaches 0 or 1 after this operation, mark it as winning.
 
 Since what this does is basically a traversal of a grid, this can be done with a DFS/BFS, starting from the lab.
 
-Overall complexity: O(nm) per testcase.
+Overall complexity: O(n*m) per testcase.
 */
 
 #include<iostream>

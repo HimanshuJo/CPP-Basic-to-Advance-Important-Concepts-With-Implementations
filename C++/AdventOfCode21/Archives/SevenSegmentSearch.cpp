@@ -24,7 +24,6 @@ int main() {
 	for (int i = 0; i < n; ++i) {
 		char temp[500];
 		gets(temp);
-		//cout<<temp;
 		if (i & 1) {
 			in.push_back(temp);
 		}

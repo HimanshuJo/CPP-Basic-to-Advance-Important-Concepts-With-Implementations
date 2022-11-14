@@ -2,9 +2,9 @@
 /*
 You are given a string s that consists of only digits.
 
-Check if we can split s into two or more non-empty substrings such that the numerical
-values of the substrings are in descending order and the difference between numerical values
-of every two adjacent substrings is equal to 1.
+Check if we can split s into two or more non-empty sub-strings such that the numerical
+values of the sub-strings are in descending order and the difference between numerical values
+of every two adjacent sub-strings is equal to 1.
 
 For example, the string s = "0090089" can be split into ["0090", "089"] with numerical values [90,89].
 
@@ -15,7 +15,7 @@ However all the ways are invalid because they have numerical values [0,1], [0,1]
 respectively, all of which are not in descending order.
 Return true if it is possible to split s as described above, or false otherwise.
 
-A substring is a contiguous sequence of characters in a string.
+A sub-string is a contiguous sequence of characters in a string.
 
 Example 1:
 

@@ -4,7 +4,8 @@ You are given an integer array nums of length n and an integer numSlots such tha
 2 * numSlots >= n. There are numSlots slots numbered from 1 to numSlots.
 
 You have to place all n integers into the slots such that each slot contains at most two numbers. 
-The AND sum of a given placement is the sum of the bitwise AND of every number with its respective slot number.
+The AND sum of a given placement is the sum of the bitwise AND of every number with its 
+respective slot number.
 
 For example, the AND sum of placing the numbers [1, 3] into slot 1 and [4, 6] 
 into slot 2 is equal to (1 AND 1) + (3 AND 1) + (4 AND 2) + (6 AND 2) = 1 + 1 + 0 + 2 = 4.
@@ -36,46 +37,42 @@ n == nums.length
 1 <= nums[i] <= 15
 */
 
-class Solution {
-public:
-    
-    int dfs(vector<int>&nums, vector<int>&combs, int numSlots, int sz, int idx, map<vector<int>, int>&memo){
-        if(idx==sz){
-            return 0;
+#include<iostream>
+#include<vector>
+using namespace std;
+
+class Solution1{
+    public:
+
+    int dfs(vector<int>&nums, int numSlots, vector<int>&vecSlots, int sz, int idx){
+        if(idx>=sz) return 0;
+        int res=INT_MIN;
+        for(int curSlot=1; curSlot<=numSlots; ++curSlot){
+            if(vecSlots[curSlot]!=2){
+                vecSlots[curSlot]++;
+                int curres=(nums[idx]&curSlot)+dfs(nums, numSlots, vecSlots, sz, idx+1);
+                res=max(res, curres);
+                vecSlots[curSlot]--;
+            }
         }
-        int mx=-1;
-        if(memo.find(combs)!=memo.end()) return memo[combs];
-            for(int x=1; x<=numSlots; ++x){
-                if(combs[x]!=2){
-                    combs[x]++;
-                    int res=(nums[idx]&x)+dfs(nums, combs, numSlots, sz, idx+1, memo);
-                    mx=max(mx, res);
-                    combs[x]--;
-                }
-            }   
-        return memo[combs]=mx;
-    }
-    
-    int maximumANDSum(vector<int>& nums, int numSlots) {
-        int sz=nums.size();
-        vector<int>combs(numSlots+1, 0);
-        map<vector<int>, int>memo;
-        int res=dfs(nums, combs, numSlots, sz, 0, memo);
         return res;
+    }
+
+    int maximumAndSum(vector<int>&nums, int numSlots){
+        vector<int>vecSlots(numSlots+1, 0);
+        int sz=nums.size();
+        return dfs(nums, numSlots, vecSlots, sz, 0);
     }
 };
 
 // -------*******-------
 
-class Solution2 {
-public:
-    int maximumANDSum(vector<int>& nums, int numSlots) {
-        int n=nums.size();
-        vector<vector<vector<int>>>memo(n+1, vector<vector<int>>((1LL<<(numSlots+1))-1,
-                                             vector<int>((1LL<<(numSlots+1))-1, -1)));
-        auto solve=[&](int idx, int mask1, int mask2, auto &self)->int{
-            if(idx==n) return 0;
-            if(memo[idx][mask1][mask2]!=-1) return memo[idx][mask1][mask2];
+class Solution2{
+    public:
+    int maximumAndSum(vector<int>&nums, int numSlots){
+        int sz=nums.size();
+        auto solve=[&](int idx, int mask1, int mask2, auto &self)-> int{
+            if(idx>=sz) return 0;
             int res=0;
             for(int j=0; j<numSlots; ++j){
                 if((mask1>>j)&1) continue;
@@ -85,8 +82,56 @@ public:
                 if((mask2>>j)&1) continue;
                 res=max(res, (nums[idx]&(j+1))+self(idx+1, mask1, mask2|(1LL<<j), self));
             }
-            return memo[idx][mask1][mask2]=res;
+            return res;
         };
-        return (solve(0, 0, 0, solve));
+        return solve(0, 0, 0, solve);
     }
 };
+
+// -------*******-------
+
+class Solution3{
+    public:
+    int dfs(vector<int>&nums, int numSlots, int sz, int idx, int mask1, int mask2){
+        if(idx>=sz) return 0;
+        int res=0;
+        for(int j=0; j<numSlots; ++j){
+            /*
+                If current bit is set continue;
+                
+                Using right shift:
+                    
+                    if((mask1>>j)&1) continue;
+            */
+            if((1<<mask1)&j) continue;
+            // else cal res and set the bit
+            res=max(res, ((nums[idx]&(j+1))+dfs(nums, numSlots, sz, idx+1, mask1|(1LL<<j), mask2)));
+        }
+        for(int j=0; j<numSlots; ++j){
+            //if((mask2>>j)&1) continue;
+            if((1<<mask2)&j) continue;
+            res=max(res, ((nums[idx]&(j+1))+dfs(nums, numSlots, sz, idx+1, mask1, mask2|(1LL<<j))));
+        }
+        return res;
+    }
+
+    int maximumAndSum(vector<int>&nums, int numSlots){
+        int sz=nums.size();
+        int idx=0, mask1=0, mask2=0;
+        return dfs(nums, numSlots, sz, idx, mask1, mask2);
+    }
+};
+
+int main(){
+    Solution1 obj1;
+    Solution2 obj2;
+    Solution3 obj3;
+    vector<int>nums{1, 2, 3, 4, 5, 6};
+    int numSlots=3;
+    int ans1=obj1.maximumAndSum(nums, numSlots);
+    int ans2=obj2.maximumAndSum(nums, numSlots);
+    int ans3=obj3.maximumAndSum(nums, numSlots);
+    cout<<ans1<<endl;
+    cout<<ans2<<endl;
+    cout<<ans3<<endl;
+}

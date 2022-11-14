@@ -1,5 +1,4 @@
 /*
-
 Given an array of integers nums, you start with an initial positive value startValue.
 
 In each iteration, you calculate the step by step sum of startValue plus elements in nums (from left to right).
@@ -19,16 +18,14 @@ Explanation: If you choose startValue = 4, in the third iteration your step by s
                   (0 +4 ) = 4  | (1 +4 ) = 5    |   4
                   (4 +2 ) = 6  | (5 +2 ) = 7    |   2
 
-
-
-/**/
+*/
 
 #include<vector>
 using namespace std;
 
 class Solution {
 public:
-    
+
     vector<int> fillList(vector<int>& nums, int firstNum) {
         vector<int> list_;
         for (int x = 0; x < nums.size(); ++x) {
@@ -38,13 +35,13 @@ public:
         }
         return list_;
     }
-    
+
     bool isGoodList(vector<int> list) {
         for (int num : list)
             if (num < 1) return false;
         return true;
     }
-    
+
     int minStartValue(vector<int>& nums) {
         vector<int> toCheck;
         int firstNum = 1;

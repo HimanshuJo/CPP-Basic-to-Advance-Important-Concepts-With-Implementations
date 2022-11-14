@@ -93,13 +93,13 @@ public:
     pair<bool, int> dfs(TreeNode *root, int start, int &res){
         if(!root) return {false, 0};
         /*
-            return type pair states whether we came across start or not and maximum distance
+            Return type pair states whether we came across start or not and maximum distance
             in this call
         */
         pair<bool, int>p1=dfs(root->left, start, res);
         pair<bool, int>p2=dfs(root->right, start, res);
         /*
-            if we find the node then the maximum distance for now will be the maximum of 2 dfs
+            If we find the node then the maximum distance for now will be the maximum of 2 dfs
             calls and we will send the current distance as 0 to its parent(if exists)
         */
         if(root->val==start){

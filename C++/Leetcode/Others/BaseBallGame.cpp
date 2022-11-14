@@ -1,9 +1,8 @@
 /*
-
-You are keeping score for a baseball game with strange rules. 
+You are keeping score for a baseball game with strange rules.
 The game consists of several rounds, where the scores of past rounds may affect future rounds' scores.
 
-At the beginning of the game, you start with an empty record. You are given a list of strings ops, 
+At the beginning of the game, you start with an empty record. You are given a list of strings ops,
 where ops[i] is the ith operation you must apply to the record and is one of the following:
 
     An integer x - Record a new score of x.
@@ -13,7 +12,7 @@ where ops[i] is the ith operation you must apply to the record and is one of the
 
 Return the sum of all the scores on the record.
 
- 
+
 Example 1:
 
 Input: ops = ["5","2","C","D","+"]
@@ -25,31 +24,24 @@ Explanation:
 "D" - Add 2 * 5 = 10 to the record, record is now [5, 10].
 "+" - Add 5 + 10 = 15 to the record, record is now [5, 10, 15].
 The total sum is 5 + 10 + 15 = 30.
-
-
-/**/
+*/
 
 #include<vector>
 #include<string>
-
 using namespace std;
 
 class Solution {
 public:
     int calPoints(vector<string>& ops) {
         vector<int> res;
-
         for (int i = 0; i < ops.size(); ++i) {
             if ((ops.at(i)).compare("C") == 0) {
-                //cout << "found C" << endl;
                 res.pop_back();
             } else if ((ops.at(i)).compare("D") == 0) {
-                //cout << "found D" << endl;
                 int toChangeIndex = res.size() - 1;
                 int temp = res.at(toChangeIndex) * 2;
                 res.push_back(temp);
             } else if ((ops.at(i)).compare("+") == 0) {
-                //cout << "found +" << endl;
                 int finalIndex = res.size() - 1;
                 int preFinalIndex = res.size() - 2;
                 res.push_back(res.at(preFinalIndex) + res.at(finalIndex));
@@ -62,5 +54,5 @@ public:
         for (int num : res)
             res_ += num;
         return res_;
-    }   
+    }
 };
