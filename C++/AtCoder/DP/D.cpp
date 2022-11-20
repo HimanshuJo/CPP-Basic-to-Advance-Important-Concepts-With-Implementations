@@ -15,6 +15,17 @@ All values in input are integers.
  
 1<=wi<=W
 1<=vi<=10^9
+
+Sample Input 2 
+5 5
+1 1000000000
+1 1000000000
+1 1000000000
+1 1000000000
+1 1000000000
+
+Sample Output 2
+5000000000
 */
 
 #include<iostream>
@@ -49,4 +60,3 @@ int main(){
 	ll ans=dfs(in, N, W, 0, memo);
 	cout<<ans;
 }
-

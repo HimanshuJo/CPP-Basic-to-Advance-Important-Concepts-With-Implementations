@@ -20,6 +20,17 @@ All values in input are integers.
 
 All pairs (xi,yi) are distinct.
 G does not contain directed cycles.
+
+Sample Input 1
+4 5
+1 2
+1 3
+3 2
+2 4
+3 4
+
+Sample Output 1 
+2
 */
 
 #include<iostream>

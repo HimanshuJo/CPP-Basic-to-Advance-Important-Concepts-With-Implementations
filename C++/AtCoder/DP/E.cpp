@@ -15,16 +15,24 @@ All values in input are integers.
  
 1≤wi≤W
 1≤vi≤10^3
+
+Sample Input 1 
+3 8
+3 30
+4 50
+5 60
+
+Sample Output 1
+90
 */
 
 #include<iostream>
+#define ll long long
 using namespace std;
-
-typedef long long ll
 
 const int MAXV=1e5+10;
 const int MAXN=1e3+10;
-cont ll INF=1e13;
+const ll INF=1e13;
 
 ll dp[MAXV];
 int N, W, V, wi[MAXN], val[MAXN];
@@ -32,7 +40,7 @@ int N, W, V, wi[MAXN], val[MAXN];
 int main(){
 	cin>>N>>W;
 	for(int i=1; i<=N; ++i){
-		cin>>w[i]>>val[i];
+		cin>>wi[i]>>val[i];
 		V+=val[i];
 	}
 	for(int i=1; i<=V; ++i){
