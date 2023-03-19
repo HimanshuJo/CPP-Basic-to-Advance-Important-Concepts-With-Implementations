@@ -65,14 +65,14 @@ void SamplePriorityQueueStoreObject()
 
     priority_queue<Person, vector<Person>, less<vector<Person>::value_type>> pqueue_less;
 
-    //fill pqueue_less
+    // fill pqueue_less
     // push less to end
     for (auto it = personVector.cbegin(); it != personVector.cend(); it++)
     {
         pqueue_less.push(*it);
     }
 
-    //iterate,display and pop
+    // iterate,display and pop
     while (!pqueue_less.empty())
     {
         Person value = pqueue_less.top();
@@ -87,7 +87,7 @@ void SamplePriorityQueueStoreObject()
     cout << "======== Greater Priority Queue ======= " << endl;
 
     priority_queue<Person, vector<Person>, greater<vector<Person>::value_type>> pqueue_greater;
-    //fill pqueue_greater
+    // fill pqueue_greater
     // push greater to end
     for (auto it = personVector.cbegin(); it != personVector.cend(); it++)
     {

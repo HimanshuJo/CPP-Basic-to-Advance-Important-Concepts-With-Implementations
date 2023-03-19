@@ -2,8 +2,7 @@ Queues are a type of container adaptors which operate in a first in first out (F
 
 Elements are inserted at the back (end) and are deleted from the front. 
 
-Queues use an encapsulated object of deque or list (sequential container class) as its underlying container, 
-	providing a specific set of member functions to access its elements.
+Queues use an encapsulated object of deque or list (sequential container class) as its underlying container, providing a specific set of member functions to access its elements.
 
 -------
 

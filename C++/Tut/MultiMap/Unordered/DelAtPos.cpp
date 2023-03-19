@@ -6,7 +6,6 @@ key-value until we get our specific value, if we get our specific value in the u
 erase(position) method to delete that specific value from unordered_multimap. 
 */
 
-// C++ program to erase particular value.
 #include <bits/stdc++.h>
 using namespace std;
 

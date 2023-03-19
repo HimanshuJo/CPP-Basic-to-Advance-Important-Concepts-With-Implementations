@@ -1,4 +1,3 @@
-
 Unsigned Integers:
 
 	Can hold a larger positive value and no negative value.

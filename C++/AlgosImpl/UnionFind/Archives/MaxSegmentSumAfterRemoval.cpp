@@ -23,6 +23,7 @@ Query 3: Remove the 2nd element, nums becomes [0,2,0,0,1] and the maximum segmen
 Query 4: Remove the 4th element, nums becomes [0,2,0,0,0] and the maximum segment sum is 2 for segment [2]. 
 Query 5: Remove the 1st element, nums becomes [0,0,0,0,0] and the maximum segment sum is 0, since there are no segments.
 Finally, we return [14,7,2,2,0].
+
 Example 2:
 
 Input: nums = [3,2,11,1], removeQueries = [3,2,1,0]
@@ -33,7 +34,6 @@ Query 2: Remove the 2nd element, nums becomes [3,2,0,0] and the maximum segment 
 Query 3: Remove the 1st element, nums becomes [3,0,0,0] and the maximum segment sum is 3 for segment [3].
 Query 4: Remove the 0th element, nums becomes [0,0,0,0] and the maximum segment sum is 0, since there are no segments.
 Finally, we return [16,5,3,0].
- 
 
 Constraints:
 

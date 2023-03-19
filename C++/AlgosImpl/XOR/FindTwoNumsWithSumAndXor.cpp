@@ -27,6 +27,7 @@ X[i] ==> Value of i-th bit in X
 S[i] ==> Value of i-th bit in S
 
 A simple solution is to generate all possible pairs with given XOR.
+
 To generate all pairs, we can follow below rules.
 
 If X[i] is 1, then both a[i] and b[i] should be different, we have two cases.
@@ -40,6 +41,7 @@ S = X + 2*A
 where A = a AND b
 
 We can verify above fact using the sum process.
+
 In sum, whenever we see both bits 1 (i.e., AND is 1), we make resultant bit 0 and add 1 as carry,
 which means every bit in AND is left shifted by 1 OR value of AND is multiplied by 2 and added.
 
@@ -53,7 +55,6 @@ If X[i] = 1 and A[i] = 0, then (a[i] = 1 and b[i] = 0) or (a[i] = 0 and b[i] = 1
 we can pick any of the two.
 If X[i] = 1 and A[i] = 1, result not possible (Note X[i] = 1 means different bits)
 Let the summation be S and XOR be X.
-
 */
 
 // CPP program to find two numbers with
@@ -62,16 +63,10 @@ Let the summation be S and XOR be X.
 #include <iostream>
 using namespace std;
 
-// Function that takes in the sum and XOR
-// of two numbers and generates the two
-// numbers such that the value of X is
-// minimized
 void compute(unsigned long int S, unsigned long int X)
 {
 	unsigned long int A = (S - X) / 2;
-
 	int a = 0, b = 0;
-
 	// Traverse through all bits
 	for (int i = 0; i < 8 * sizeof(S); i++)
 	{
@@ -79,7 +74,6 @@ void compute(unsigned long int S, unsigned long int X)
 		unsigned long int Ai = (A & (1 << i));
 		if (Xi == 0 && Ai == 0)
 		{
-			// Let us leave bits as 0.
 		}
 		else if (Xi == 0 && Ai > 0)
 		{
@@ -89,7 +83,6 @@ void compute(unsigned long int S, unsigned long int X)
 		else if (Xi > 0 && Ai == 0)
 		{
 			a = ((1 << i) | a);
-
 			// We leave i-th bit of b as 0.
 		}
 		else // (Xi == 1 && Ai == 1)
@@ -98,7 +91,6 @@ void compute(unsigned long int S, unsigned long int X)
 			return;
 		}
 	}
-
 	cout << "a = " << a << endl << "b = " << b;
 }
 

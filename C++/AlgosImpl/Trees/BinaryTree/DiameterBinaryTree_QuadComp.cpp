@@ -20,7 +20,6 @@ but no path longer than nine nodes).
                             'L'
 
 Diameter 9 nodes through root
-
 */
 /*
 The diameter of a tree T is the largest of the following quantities:

@@ -14,7 +14,7 @@ int main()
 	int x = 10;
 
 	// ref is a reference to x.
-	int& ref = x;
+	int &ref = x;
 
 	// Value of x is now changed to 20
 	ref = 20;
@@ -49,7 +49,7 @@ Applications :
 			#include<iostream>
 			using namespace std;
 
-			void swap (int& first, int& second)
+			void swap(int &first, int &second)
 			{
 				int temp = first;
 				first = second;
@@ -159,8 +159,7 @@ References vs Pointers:
 
 	Both references and pointers can be used to change local variables of one function inside another function. 
 
-	Both of them can also be used to save copying of big objects when passed as arguments to functions or 
-		returned from functions, to get efficiency gain. 
+	Both of them can also be used to save copying of big objects when passed as arguments to functions or returned from functions, to get efficiency gain. 
 
 	Despite the above similarities, there are the following differences between references and pointers.
 
@@ -171,7 +170,7 @@ References vs Pointers:
 		For example
 
 			int a = 10;
-			void* aa = &a;. //it is valid
+			void *aa = &a;. //it is valid
 			void &ar = a; //it is not valid
 
 	2. The pointer variable has n-levels/multiple levels of indirection 
@@ -197,7 +196,7 @@ References vs Pointers:
 				int &S0=S;
 				int &S1=S0;
 				cout << "a=" << a << "\t" << "S=" << S << "\t"
-					<< "S0=" << S0 << "\t" << "S1=" << S1 << "\n";
+					 << "S0=" << S0 << "\t" << "S1=" << S1 << "\n";
 				// All the above references do not differ in their values
 				// as they all refer to the same variable.
 			}
@@ -351,7 +350,7 @@ When do we pass arguments by reference or pointer?
 			#include <bits/stdc++.h>
 			using namespace std;
 
-			void fun(int& x) { x = 20; }
+			void fun(int &x) { x = 20; }
 
 			int main()
 			{

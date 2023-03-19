@@ -1,4 +1,3 @@
-
 Map is a container, as name suggests used to store a key-value pair. 
 
 	Map has an advantage over other containers by the fact that searching in map, 

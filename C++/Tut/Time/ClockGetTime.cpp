@@ -23,18 +23,20 @@ void fun()
 int main()
 {
     /* 
-    int clock_gettime( clockid_t clock_id, struct
-    timespec *tp ); The clock_gettime() function gets
+    int clock_gettime( clockid_t clock_id, struct timespec *tp );
+
+    The clock_gettime() function gets
     the current time of the clock specified by clock_id,
     and puts it into the buffer pointed to by tp.tp
     parameter points to a structure containing
     atleast the following members:
+
     struct timespec {
-            time_t tv_sec;   // seconds
-            long     tv_nsec;    // nanoseconds
-        };
-    clock id = CLOCK_REALTIME, CLOCK_PROCESS_CPUTIME_ID,
-            CLOCK_MONOTONIC ...etc
+        time_t tv_sec;   // seconds
+        long tv_nsec;    // nanoseconds
+    };
+
+    clock id = CLOCK_REALTIME, CLOCK_PROCESS_CPUTIME_ID, CLOCK_MONOTONIC ... etc
     CLOCK_REALTIME : clock that measures real (i.e., wall-clock) time.
     CLOCK_PROCESS_CPUTIME_ID : High-resolution per-process timer
                             from the CPU.

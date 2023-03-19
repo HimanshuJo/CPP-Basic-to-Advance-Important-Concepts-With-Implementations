@@ -39,7 +39,6 @@ void inorderTraversal(struct Node* root){
 	}
 }
 
-
 int main(){
 	vector<int>arr{1, 2, 3, 4, 5, 6, 7};
 	struct Node* res=createMinimalBST(arr);

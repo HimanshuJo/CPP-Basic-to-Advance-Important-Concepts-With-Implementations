@@ -5,7 +5,7 @@ Type1:
 using namespace std;
 
 template<class T>
-void printQueue(T& q)
+void printQueue(T &q)
 {
     while (!q.empty())
     {
@@ -16,7 +16,7 @@ void printQueue(T& q)
 
 struct CustomCompare
 {
-    bool operator()(const int& lhs, const int& rhs)
+    bool operator()(const int &lhs, const int &rhs)
     {
         return lhs > rhs;
     }

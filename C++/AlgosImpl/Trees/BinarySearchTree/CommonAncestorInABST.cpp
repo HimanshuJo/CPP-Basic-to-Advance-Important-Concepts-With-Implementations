@@ -30,7 +30,6 @@ which is a ancestor of both the nodes.
 */
 
 /*
-	
 	Let T be a rooted tree. 
 
 	The lowest common ancestor between two nodes n1 and n2 is defined as the lowest node in 

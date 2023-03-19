@@ -1,14 +1,15 @@
 /*
-Priority queues are a type of container adapters, specifically designed such that the first element of the queue 
-	is the greatest of all elements in the queue and elements are in non increasing order 
-	(hence we can see that each element of the queue has a priority {fixed order}).
+Priority queues are a type of container adapters, specifically designed such that 
+the first element of the queue is the greatest of all elements in the queue and elements 
+are in non increasing order (hence we can see that each element of the queue has a 
+priority {fixed order}).
 
 -------
 
 How to create a min heap for priority queue? 
 
-    // Syntax to create a min heap for priority queue 
-    priority_queue <int, vector<int>, greater<int>> g = gq; 
+// Syntax to create a min heap for priority queue 
+priority_queue <int, vector<int>, greater<int>> g = gq; 
 */
 /*
 // C++ program to demonstrate min heap

@@ -41,7 +41,6 @@ The elements in set are: 1 2 3 4 5
 */
 
 /*
-
 Syntax 2: 
  
 	iterator set_name.insert(iterator position, element)

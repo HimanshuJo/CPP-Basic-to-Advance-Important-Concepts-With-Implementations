@@ -16,7 +16,6 @@ and false otherwise.
 
 boolean startsWith(String prefix) Returns true if there is a previously inserted string word that has 
 the prefix prefix, and false otherwise.
- 
 
 Example 1:
 

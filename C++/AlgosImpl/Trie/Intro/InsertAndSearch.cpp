@@ -171,10 +171,8 @@ int main()
 		insert(root, keys[i]);
 
 	// Search for different keys
-	search(root, "the") ? cout << "Yes\n" :
-	                           cout << "No\n";
-	search(root, "these") ? cout << "Yes\n" :
-	                             cout << "No\n";
+	search(root, "the") ? cout << "Yes\n" : cout << "No\n";
+	search(root, "these") ? cout << "Yes\n" : cout << "No\n";
 	return 0;
 }
 

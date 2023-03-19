@@ -3,6 +3,7 @@ Assigning a character to an std::string at an index will produce the correct res
 for example:
 
 	#include <iostream>
+
 	int main() {
 	    std::string s = "abc";
 	    s[1] = 'a';
@@ -11,8 +12,9 @@ for example:
 
 	which prints aac. 
 
-	The drawback is you risk accidentally writing to un-assigned memory if string s is blankstring or you write too far. 
-		C++ will gladly write off the end of the string, and that causes undefined behavior.
+	The drawback is you risk accidentally writing to un-assigned memory if string s is blank-string or you write too far. 
+	
+	C++ will gladly write off the end of the string, and that causes undefined behavior.
 
 -------
 
@@ -21,6 +23,7 @@ A safer way to do this would be to use string::replace
 For example
 
 	#include <iostream> 
+	
 	int main() { 
 	    std::string s = "What kind of king do you think you'll be?"; 
 	    std::string s2 = "A good king?"; 

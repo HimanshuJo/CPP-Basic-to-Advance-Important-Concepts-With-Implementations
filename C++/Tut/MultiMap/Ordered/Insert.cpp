@@ -65,7 +65,6 @@ int main ()
 }
 
 /*
-
 Output:
     mymultimap contains:
     a => 100
@@ -83,5 +82,4 @@ Complexity
 
     If a single element is inserted, logarithmic in size in general, but amortized constant if a hint is given
         and the position given is the optimal.
-
 */

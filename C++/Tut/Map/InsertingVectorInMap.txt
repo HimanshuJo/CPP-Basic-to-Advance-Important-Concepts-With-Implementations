@@ -1,4 +1,3 @@
-
 Entering an empty vector into map:
 
 	map<int, vector<int>> map;

@@ -7,7 +7,6 @@ such that encoded[i] = perm[i] XOR perm[i + 1]. For example, if perm = [1,3,2], 
 
 Given the encoded array, return the original array perm. It is guaranteed that the answer exists and is unique.
 
-
 Example 1:
 
 Input: encoded = [3,1]
@@ -18,7 +17,6 @@ Example 2:
 Input: encoded = [6,5,4,6]
 Output: [2,4,1,5,3]
  
-
 Constraints:
 
 3 <= n < 10^5
@@ -90,27 +88,26 @@ public:
         }
     }
 };
-
 */
 
 /*
 Explanation:
 
-We make good use of the condition "n is odd" as follow
-a1,(a2,a3),(a4,a5).....,
-making the decoded into pairs.
+We make good use of the condition "n is odd" as follow a1,(a2,a3),(a4,a5)....., making the decoded into pairs.
+
 a2^a3 = A[1]
 a4^a5 = A[3]
 a6^a7 = A[5]
+
 ...
+
 so we can have the result of a2^a3^a4...^an.
+
 And a1,a2,a3... is a permuatation of 1,2,3,4..n
 
-so we can have
-a1 = 1^2^3...^n^a2^a2^a3...^an
+so we can have a1 = 1^2^3...^n^a2^a2^a3...^an
 
 Then we can deduct the whole decoded array.
-
 
 Complexity
 Time O(n)

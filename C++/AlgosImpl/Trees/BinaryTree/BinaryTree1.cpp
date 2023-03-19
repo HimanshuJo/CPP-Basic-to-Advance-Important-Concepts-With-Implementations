@@ -139,7 +139,6 @@ int sumSubTreesBtreeDFS(struct Node* head, multimap<struct Node*, int>&mp){
 	return sum;
 }
 
-
 int sumBtreeDFS(struct Node* head){
 	int sum=0;
 	if(head==NULL) return sum;
@@ -210,7 +209,6 @@ bool isFoundDFS2(struct Node* head, int val){
 	return false;
 }
 
-
 void dispTreeBFS(struct Node* head){
 	if(head==NULL) cout<<"NULL\n";
 	queue<struct Node*>q;
@@ -251,7 +249,6 @@ void dispTreeDFS2(struct Node* head){
 		}
 	}
 }
-
 
 int main(){
 	struct Node* head=newNode(1123);

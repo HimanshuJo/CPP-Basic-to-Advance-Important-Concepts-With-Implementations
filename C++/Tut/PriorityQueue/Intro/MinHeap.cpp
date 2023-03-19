@@ -35,7 +35,7 @@ How to implement Min Heap?
 		priority_queue <Type, vector<Type>, ComparisonType > min_heap;
 
 The third parameter, ‘Comparison Type’ can either be a function or factor (aka function object)
-	that must have bool as return-type and must have 2 arguments.
+that must have bool as return-type and must have 2 arguments.
 */
 /*
 // use of priority_queue to implement min heap
@@ -69,7 +69,8 @@ Another method for making min-heap using default priority_queue:
 	We first multiply all elements with (-1). 
 		Then we create a max heap (max heap is the default for priority queue). 
 
-		When we access the data and want to print it we simply multiply those elements with (-1) again.
+		When we access the data and want to print it we simply multiply those elements 
+		with (-1) again.
 */
 /*
 // C++ Program to implement min heap

@@ -162,15 +162,13 @@ void preprocess(Node * node, struct subset subsets[])
 	{
 		/* Note that the below two lines can also be this-
 		subsets[node->data].child = node->right->data;
-		subsets[node->right->data].sibling =
-										node->left->data;
+		subsets[node->right->data].sibling = node->left->data;
 
 		This is because if both left and right children of
 		node-'i' are present then we can store any of them
 		in subsets[i].child and correspondingly its sibling*/
 		subsets[node->data].child = node->left->data;
-		subsets[node->left->data].sibling =
-		    node->right->data;
+		subsets[node->left->data].sibling = node->right->data;
 
 	}
 	else if ((node->left != NULL && node->right == NULL)
@@ -218,16 +216,15 @@ void printLCAs(Node *root, Query q[], int m)
 	lcaWalk(root->data , q, m, subsets);
 }
 
-// Driver program to test above functions
 int main()
 {
 	/*
 	We construct a binary tree :-
-			1
+		 1
 		/ \
 		2 3
-	/ \
-	4 5		 */
+	    / \
+	    4 5		 */
 
 	Node *root = newNode(1);
 	root->left	 = newNode(2);

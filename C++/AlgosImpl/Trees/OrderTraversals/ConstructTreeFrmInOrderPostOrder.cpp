@@ -45,10 +45,8 @@ input parameters and returns the root node of the newly constructed Binary Tree.
 
 The generated output contains the preorder traversal of the constructed tree.
 
-
 Expected Time Complexity: O(N^2)
 Expected Auxiliary Space: O(N)
-
 
 Constraints:
 1 <= N <= 10^3

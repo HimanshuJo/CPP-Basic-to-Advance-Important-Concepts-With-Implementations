@@ -1,0 +1,164 @@
+/*
+string (1)	
+
+	string& replace (size_t pos, size_t len, const string& str);
+
+	string& replace (const_iterator i1, const_iterator i2, const string& str);
+
+substring (2)	
+
+	string& replace (size_t pos, size_t len, const string& str, size_t subpos, size_t sublen = npos);
+
+c-string (3)	
+
+	string& replace (size_t pos, size_t len, const char* s);
+	
+	string& replace (const_iterator i1, const_iterator i2, const char* s);
+
+buffer (4)	
+
+	string& replace (size_t pos, size_t len, const char* s, size_t n);
+
+	string& replace (const_iterator i1, const_iterator i2, const char* s, size_t n);
+
+fill (5)	
+
+	string& replace (size_t pos, size_t len, size_t n, char c);
+
+	string& replace (const_iterator i1, const_iterator i2, size_t n, char c);
+
+range (6)	
+
+template <class InputIterator>
+	
+	string& replace (const_iterator i1, const_iterator i2, InputIterator first, InputIterator last);
+
+initializer list (7)	
+
+	string& replace (const_iterator i1, const_iterator i2, initializer_list<char> il);
+
+-------
+
+Replace portion of string
+
+	Replaces the portion of the string that begins at character pos and spans len characters 
+		(or the part of the string in the range between [i1,i2)) by new contents:
+
+	(1) string
+	    
+	    Copies str.
+
+	(2) substring
+	    
+	    Copies the portion of str that begins at the character position subpos and spans sublen characters 
+	    	(or until the end of str, if either str is too short or if sublen is string::npos).
+
+	(3) c-string
+	    
+	    Copies the null-terminated character sequence (C-string) pointed by s.
+
+	(4) buffer
+	    
+	    Copies the first n characters from the array of characters pointed by s.
+
+	(5) fill
+	    
+	    Replaces the portion of the string by n consecutive copies of character c.
+
+	(6) range
+	    
+	    Copies the sequence of characters in the range [first,last), in the same order.
+
+	(7) initializer list
+	    
+	    Copies each of the characters in il, in the same order.
+
+-------
+
+Parameters
+
+	str
+	    
+	    Another string object, whose value is copied.
+	
+	pos
+	    
+	    Position of the first character to be replaced.
+	    
+	    If this is greater than the string length, it throws out_of_range.
+
+	len
+	    Number of characters to replace (if the string is shorter, as many characters as possible are replaced).
+
+	    A value of string::npos indicates all characters until the end of the string.
+
+	subpos
+	    
+	    Position of the first character in str that is copied to the object as replacement.
+
+	    If this is greater than str's length, it throws out_of_range.
+
+	sublen
+	    
+	    Length of the substring to be copied (if the string is shorter, as many characters as possible are copied).
+
+	    A value of string::npos indicates all characters until the end of str.
+
+	s
+	    
+	    Pointer to an array of characters (such as a c-string).
+
+	n
+	    
+	    Number of characters to copy.
+
+	c
+	    Character value, repeated n times.
+
+	first, last
+	    
+	    Input iterators to the initial and final positions in a range. 
+	    	The range used is [first,last), which includes all the characters between first and last, including the character 
+	    	pointed by first but not the character pointed by last.
+
+	    The function template argument InputIterator shall be an input iterator type that points to elements of a type convertible to char.
+	il
+	    
+	    An initializer_list object.
+	    
+	    These objects are automatically constructed from initializer list declarators.
+
+
+	size_t is an unsigned integral type (the same as member type string::size_type).
+*/
+
+// replacing in a string
+#include <iostream>
+#include <string>
+
+int main ()
+{
+  std::string base="this is a test string.";
+  std::string str2="n example";
+  std::string str3="sample phrase";
+  std::string str4="useful.";
+
+  // replace signatures used in the same order as described above:
+
+  // Using positions:                 0123456789*123456789*12345
+  std::string str=base;           // "this is a test string."
+  str.replace(9,5,str2);          // "this is an example string." (1)
+  str.replace(19,6,str3,7,6);     // "this is an example phrase." (2)
+  str.replace(8,10,"just a");     // "this is just a phrase."     (3)
+  str.replace(8,6,"a shorty",7);  // "this is a short phrase."    (4)
+  str.replace(22,1,3,'!');        // "this is a short phrase!!!"  (5)
+
+  // Using iterators:                                               0123456789*123456789*
+  str.replace(str.begin(),str.end()-3,str3);                    // "sample phrase!!!"      (1)
+  str.replace(str.begin(),str.begin()+6,"replace");             // "replace phrase!!!"     (3)
+  str.replace(str.begin()+8,str.begin()+14,"is coolness",7);    // "replace is cool!!!"    (4)
+  str.replace(str.begin()+12,str.end()-4,4,'o');                // "replace is cooool!!!"  (5)
+  str.replace(str.begin()+11,str.end(),str4.begin(),str4.end());// "replace is useful."    (6)
+  std::cout << str << '\n';
+  return 0;
+}

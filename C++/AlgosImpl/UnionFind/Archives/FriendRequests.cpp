@@ -41,6 +41,7 @@ Request 2: Person 3 and person 1 can be friends, so they become direct friends.
 Request 3: Person 3 and person 4 cannot be friends since person 0 and person
            1 would be indirect friends (0--4--3--1).
 */
+
 #include<bits/stdc++.h>
 using namespace std;
 

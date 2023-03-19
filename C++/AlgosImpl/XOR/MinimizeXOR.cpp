@@ -10,8 +10,6 @@ Return the integer x. The test cases are generated such that x is uniquely deter
 
 The number of set bits of an integer is the number of 1's in its binary representation.
 
- 
-
 Example 1:
 
 Input: num1 = 3, num2 = 5
@@ -19,6 +17,7 @@ Output: 3
 Explanation:
 The binary representations of num1 and num2 are 0011 and 0101, respectively.
 The integer 3 has the same number of set bits as num2, and the value 3 XOR 3 = 0 is minimal.
+
 Example 2:
 
 Input: num1 = 1, num2 = 12
@@ -26,7 +25,6 @@ Output: 3
 Explanation:
 The binary representations of num1 and num2 are 0001 and 1100, respectively.
 The integer 3 has the same number of set bits as num2, and the value 3 XOR 1 = 2 is minimal.
- 
 
 Constraints:
 
@@ -47,7 +45,7 @@ public:
         return val;
     }
     
-    string to_binary(int num){
+    string toBinary(int num){
         string bn="";
         while(num>1){
             int quo=num%2;
@@ -65,8 +63,8 @@ public:
     int minimizeXor(int num1, int num2) {
         string ans="";
         int count=0;
-        string num2tostr=to_binary(num2);
-        string num1tostr=to_binary(num1);
+        string num2tostr=toBinary(num2);
+        string num1tostr=toBinary(num1);
         for(int i=0; i<num2tostr.size(); ++i){
             if(num2tostr[i]=='1'){
                 count++;

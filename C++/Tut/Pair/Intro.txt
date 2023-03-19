@@ -14,7 +14,6 @@ The pair container is a simple container defined in <utility> header consisting 
 
 -------
 
-// CPP program to illustrate pair STL
 #include <iostream>
 #include <utility>
 using namespace std;
@@ -58,12 +57,10 @@ Another way to initialize a pair is by using the make_pair() function.
 	
 	Another valid syntax to declare pair is:
 
-		g2 = {1, 'a'};
+	g2 = {1, 'a'};
 
 -------
 
-// CPP program to illustrate
-// Initializing of pair STL
 #include <iostream>
 #include <utility>
 using namespace std;
@@ -83,38 +80,38 @@ GeeksForGeeks 1.23
 
 * Note: If not initialized, the first value of the pair gets automatically initialized.
 
-	// CPP program to illustrate
-	// auto-initializing of pair STL
-	#include <iostream>
-	#include <utility>
+-------
 
-	using namespace std;
+#include <iostream>
+#include <utility>
 
-	int main()
-	{
-		pair<int, double> PAIR1;
-		pair<string, char> PAIR2;
+using namespace std;
 
-		// it is initialised to 0
-		cout << PAIR1.first;
+int main()
+{
+	pair<int, double> PAIR1;
+	pair<string, char> PAIR2;
 
-		// it is initialised to 0
-		cout << PAIR1.second;
+	// it is initialised to 0
+	cout << PAIR1.first;
 
-		cout << " ";
+	// it is initialised to 0
+	cout << PAIR1.second;
 
-		// // it prints nothing i.e NULL
-		cout << PAIR2.first;
-		
-		// it prints nothing i.e NULL
-		cout << PAIR2.second;
+	cout << " ";
 
-		return 0;
-	}
+	// it prints nothing i.e NULL
+	cout << PAIR2.first;
+	
+	// it prints nothing i.e NULL
+	cout << PAIR2.second;
 
-	Output: 
+	return 0;
+}
 
-	00
+Output: 
+
+00
 
 -------
 
@@ -214,16 +211,16 @@ int main()
 
 	cout << "Before swapping:\n " ;
 	cout << "Contents of pair1 = "
-		<< pair1.first << " " << pair1.second ;
+		 << pair1.first << " " << pair1.second ;
 	cout << "Contents of pair2 = "
-		<< pair2.first << " " << pair2.second ;
+		 << pair2.first << " " << pair2.second ;
 	pair1.swap(pair2);
 
 	cout << "\nAfter swapping:\n ";
 	cout << "Contents of pair1 = "
-		<< pair1.first << " " << pair1.second ;
+		 << pair1.first << " " << pair1.second ;
 	cout << "Contents of pair2 = "
-		<< pair2.first << " " << pair2.second ;
+		 << pair2.first << " " << pair2.second ;
 
 	return 0;
 }
@@ -254,7 +251,8 @@ tie():
 
 		tie(int &, int &) = pair1;
 
-// CPP code to illustrate tie() in pairs
+-------
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -293,7 +291,6 @@ Output :
 
 -------
 
-//CPP program to illustrate pair in STL
 #include <iostream>
 #include <utility>
 #include <string>

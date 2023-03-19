@@ -150,7 +150,6 @@ void findUniqueRows(int (*Matrix)[COL])
 			printRow(Matrix, i);
 }
 
-// Driver Code
 int main()
 {
 	int Matrix[ROW][COL] = {{0, 1, 0, 0, 1},

@@ -14,8 +14,6 @@ Return Value: The function returns 1 if the key element is found in the map else
 
 -------
 
-// C++ program to illustrate
-// map::erase(key)
 #include <bits/stdc++.h>
 using namespace std;
 

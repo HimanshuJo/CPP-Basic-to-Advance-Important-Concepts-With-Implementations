@@ -1,0 +1,18 @@
+// Retrieve the greatest key lower or equals to the specified key
+#include<iostream>
+#include<map>
+using namespace std;
+
+int main(){
+    map<int, int>mp;
+    for(int i=1; i<=10; i+=2)
+    	mp[i]=i;
+    auto it=mp.upper_bound(60);
+    if(it==mp.end()){
+        if(mp.rbegin()!=mp.rend())
+	        cout<<mp.rbegin()->first<<endl;
+    } else{
+        --it;
+        cout<<it->first<<endl;
+    }
+}
