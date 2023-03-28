@@ -37,6 +37,7 @@ int main()
 	return 0;
 }
 
+/*
 Output:
 
 The first element is: {1, 40}
@@ -53,3 +54,4 @@ The new map is :
 KEY     ELEMENT
 2       30
 4       20
+*/

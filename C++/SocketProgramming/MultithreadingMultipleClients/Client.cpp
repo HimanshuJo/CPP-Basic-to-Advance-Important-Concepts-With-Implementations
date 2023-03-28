@@ -143,7 +143,6 @@ void* clienthread(void* args)
 	return 0;
 }
 
-// Driver Code
 int main()
 {
 	printf("1. Read\n");

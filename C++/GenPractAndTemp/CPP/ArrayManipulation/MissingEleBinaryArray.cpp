@@ -8,7 +8,6 @@ Input consists of an array of strings where array elements are represented in bi
 
 Examples: 
  
-
 Input: arr[] = {“0000”, “0001”, “0010”, “0100”} 
 Output: 3
 Input: arr[] = {“0000”, “0001”, “0010”, “0011”, “0100”, “0110”, “0111”, “1000”} 

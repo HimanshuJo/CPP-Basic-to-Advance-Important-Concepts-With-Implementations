@@ -1,0 +1,120 @@
+/*
+The idea is to use iterators to iterate the vector and call the
+vector::erase function if the current element matches the predicate. 
+
+Since calling the erase() function on the vector element invalidates 
+the iterator, special care needs to be taken while erasing an element. 
+
+We can do that in many ways:
+*/
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+// If found the value the delete then delete, else increment the iterator
+void eraseVariant1(std::vector<int>&v){
+    auto it = v.begin();
+    while (it != v.end())
+    {
+        if (*it & 1)
+        {
+            it = v.erase(it);
+        }
+        else {
+            ++it;
+        }
+    }
+ 
+    for (int const &i: v) {
+        std::cout << i << ' ';
+    }
+}
+
+// Decrement the iterator after it is passed to the erase() 
+// but before erase() is executed.
+void eraseVariant2(std::vector<int>&v){
+    for (auto it = v.begin(); it != v.end(); it++)
+    {
+        if (*it & 1)
+        {
+            // Notice that the iterator is decremented after it is passed
+            // to `erase()` but before `erase()` is executed
+            v.erase(it--);
+        }
+    }
+ 
+    for (int const &i: v) {
+        std::cout << i << ' ';
+    }
+}
+
+void eraseVariant3(std::vector<int>&v){
+    auto it = v.begin();
+    while (it != v.end())
+    {
+        auto curr = it++;
+        if (*curr & 1) {
+            v.erase(curr);
+        }
+    }
+ 
+    for (int const &i: v) {
+        std::cout << i << ' ';
+    }
+}
+
+/*
+Another solution is to use the std::remove_if with vector::erase.
+This solution is valid as std::remove_if uses the loop behind 
+the scenes.
+
+Notice that the std::remove_if algorithm has no knowledge of the 
+underlying container.
+
+It does not actually remove elements from the container but move 
+all safe elements to the front and returns an iterator pointing to 
+where the end should be, so they can be deleted using a single call 
+to std::erase. 
+
+This technique is commonly known as the Erase-remove idiom.
+*/
+void eraseVariant4(std::vector<int>&v){
+    std::vector<int> vec = { 1, 2, 3, 4, 5, 6 };
+ 
+    auto it_end = std::remove_if(vec.begin(), vec.end(), [](int const &i) { return i & 1; });
+ 
+    vec.erase(it_end, vec.end());
+ 
+    for (int const &i: vec) {
+        std::cout << i << ' ';
+    }
+}
+ 
+int main()
+{
+    std::vector<int> v1 = { 1, 2, 3, 4, 5, 6 };
+    eraseVariant1(v1);
+    std::cout<<"\n-------\n";
+    std::vector<int> v2 = { 1, 2, 3, 4, 5, 6 };
+    eraseVariant2(v2);
+    std::cout<<"\n-------\n";
+    std::vector<int> v3 = { 1, 2, 3, 4, 5, 6 };
+    eraseVariant3(v3);
+    std::cout<<"\n-------\n";
+    std::vector<int> v4 = { 1, 2, 3, 4, 5, 6 };
+    eraseVariant4(v4);
+    return 0;
+}
+
+/*
+Output:
+
+2 4 6 
+-------
+2 4 6 
+-------
+2 4 6
+-------
+2 4 6
+*/

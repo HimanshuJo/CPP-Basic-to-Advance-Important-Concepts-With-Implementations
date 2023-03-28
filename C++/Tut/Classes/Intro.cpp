@@ -1,8 +1,10 @@
+/*
 C++ Classes/Objects
 
 C++ is an object-oriented programming language.
 
-  Everything in C++ is associated with classes and objects, along with its attributes and methods. 
+  Everything in C++ is associated with classes and objects, along with its 
+  attributes and methods. 
 
   For example: in real life, a car is an object. 
 
@@ -14,43 +16,31 @@ C++ is an object-oriented programming language.
 
   A class is a user-defined data type that we can use in our program, and it works as an 
   object constructor, or a "blueprint" for creating objects.
+*/
 
--------
+#include<iostream>
+#include<string>
+using namespace std;
 
-Create a Class
-
-To create a class, use the class keyword:
-Example
-
-Create a class called "MyClass":
 class MyClass {       // The class
   public:             // Access specifier
     int myNum;        // Attribute (int variable)
     string myString;  // Attribute (string variable)
 };
 
--------
-
+/*
 Create an Object
 
   In C++, an object is created from a class. 
 
-  We have already created the class named MyClass, so now we can use this to create objects.
+  We have already created the class named MyClass, so now we can use this to 
+  create objects.
 
   To create an object of MyClass, specify the class name, followed by the object name.
 
-  To access the class attributes (myNum and myString), use the dot syntax (.) on the object:
-
--------
-
-Example
-
-Create an object called "myObj" and access the attributes:
-class MyClass {       // The class
-  public:             // Access specifier
-    int myNum;        // Attribute (int variable)
-    string myString;  // Attribute (string variable)
-};
+  To access the class attributes (myNum and myString), use the dot syntax (.) 
+  on the object:
+*/
 
 int main() {
   MyClass myObj;  // Create an object of MyClass

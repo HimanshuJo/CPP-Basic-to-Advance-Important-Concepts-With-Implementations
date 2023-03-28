@@ -1,12 +1,14 @@
-In C++, all containers (vector, stack, queue, set, map, etc) support both insert and emplace operations.
+/*
+In C++, all containers (vector, stack, queue, set, map, etc) support both 
+insert and emplace operations.
 
-The advantage of emplace is, it does in-place insertion and avoids an unnecessary copy of object. 
+The advantage of emplace is, it does in-place insertion and avoids an 
+copy of object. 
 
 For primitive data types, it does not matter which one we use. 
 
 	But for objects, use of emplace() is preferred for efficiency reasons.
-
--------
+*/
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -33,7 +35,9 @@ int main()
 	return 0;
 }
 
+/*
 Output:
 
 	a 24
 	b 25
+*/

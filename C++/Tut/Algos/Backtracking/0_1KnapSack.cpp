@@ -23,7 +23,6 @@ Input : val[] = {40, 100, 50, 60};
         W = 60;
 Output : 200
          30 20 10
-
 */
 
 #include<bits/stdc++.h>

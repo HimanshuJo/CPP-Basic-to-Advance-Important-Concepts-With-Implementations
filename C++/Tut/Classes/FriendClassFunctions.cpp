@@ -57,6 +57,7 @@ separate classes in object-oriented programming.
 */
 
 #include <iostream>
+
 class A {
 private:
 	int a;
