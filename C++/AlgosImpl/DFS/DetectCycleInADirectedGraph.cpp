@@ -32,7 +32,7 @@ bool dfs(int n, vector<vector<int>>&adj, vector<int>&seen, vector<int>&seenInClS
     return ans;
 }
 
-int detectCycleInDirectedGraph(int n, vector < pair < int, int >> & edges) {
+int detectCycleInDirectedGraph(int n, vector<pair<int, int>>&edges) {
     vector<vector<int>>adj(n+1);
     for(auto &vals: edges){
         adj[vals.first].push_back(vals.second);
